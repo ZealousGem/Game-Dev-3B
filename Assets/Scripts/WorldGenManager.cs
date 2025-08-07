@@ -26,17 +26,57 @@ public class WorldGenManager : MonoBehaviour
 
     int zSize = 20;
 
+  
+    public float Xoffset = 100f;
+    public float Yoffset = 100f;
+
 
     void Start()
     {
+
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+
+        Xoffset = Random.Range(0f, 9999f);
+        Yoffset = Random.Range(0f, 9999f);
+        
         CreateShape();
         UpdateMesh();
 
     }
 
-   
+
+    void Update()
+    {
+
+
+        Xoffset += Time.deltaTime * 1f;
+        Yoffset += Time.deltaTime * 1f;
+
+        Xoffset %= 10000;
+        Yoffset %= 10000;
+
+        UpdateVert();
+       
+    }
+
+    void UpdateVert()
+    {
+        for (int i = 0, z = 0; z <= zSize; z++)
+        {
+            for (int x = 0; x <= xSize; x++)
+            {
+                float y = CalHeight(z, x);
+                vertcies[i].y = y;
+                i++;
+            }
+
+        }
+
+        mesh.vertices = vertcies;
+        mesh.RecalculateNormals();
+    }
+
 
     void CreateShape()
     {
@@ -47,7 +87,7 @@ public class WorldGenManager : MonoBehaviour
             for (int x = 0; x <= xSize; x++)
             {
 
-                float y = Mathf.PerlinNoise(x * .3f, z * .3f) * 2f;
+                float y = CalHeight(z, x);
                 vertcies[i] = new Vector3(x, y, z);
 
                 i++;
@@ -87,6 +127,14 @@ public class WorldGenManager : MonoBehaviour
 
     }
 
+    float CalHeight(int x, int y)
+    {
+        float xC = (float)x / zSize * 10f + Xoffset;
+        float yC =(float)y / xSize * 10f + Yoffset;
+
+        return Mathf.PerlinNoise(xC, yC);
+    }
+
     void UpdateMesh()
     {
         mesh.Clear();
@@ -96,15 +144,15 @@ public class WorldGenManager : MonoBehaviour
         mesh.RecalculateNormals();
 
     }
-    void OnDrawGizmos()
-    {
+    // void OnDrawGizmos()
+    // {
 
-        if (vertcies == null) return;
-        for (int i = 0; i < vertcies.Length; i++)
-        {
-            Gizmos.DrawSphere(vertcies[i], .1f);
-        }
-    }
+    //     if (vertcies == null) return;
+    //     for (int i = 0; i < vertcies.Length; i++)
+    //     {
+    //         Gizmos.DrawSphere(vertcies[i], .1f);
+    //     }
+    // }
 
     // Update is called once per frame
 

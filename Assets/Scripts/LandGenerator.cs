@@ -181,17 +181,53 @@ public class LandGenerator : MonoBehaviour
 
         for (int i = 0; i < points.Length; i++)
         {
+
             if (points[i].state == States.Land)
             {
+                int NeighboursLand = 0;
+                int z = i / (xSize + 1);
+                int x = i % (xSize + 1);
+                for (int nZ = z - 1; nZ <= z + 1; nZ++)
+                {
+                    for (int nX = x - 1; nX <= x + 1; nX++)
+                    {
+                        if (nX == x && nZ == z || nX < 0 || nX > xSize || nZ < 0 || nZ > zSize)
+                        {
 
-              //  float y = Mathf.PerlinNoise(points[i].coord.x * 0.3f, points[i].coord.x * 0.1f) * 2f;
-                Vector3 landVert = new Vector3(points[i].coord.x, 0, points[i].coord.z);
+                            continue;
+                        }
+                        int curNeighbours = nZ * (xSize + 1) + nX;
+                        if (points[curNeighbours].state == States.Land)
+                        {
+                            NeighboursLand++;
+                        }
+
+
+                    }
+                }
+                float height = 1f;
+
+                if (NeighboursLand >= 7)
+                {
+                    height = 4f;
+                }
+
+                else if (NeighboursLand >= 4)
+                {
+                    height = 2f;
+                }
+                float y = Mathf.PerlinNoise(points[i].coord.x * 0.1f, points[i].coord.z * 0.1f) * height;
+                Vector3 landVert = new Vector3(points[i].coord.x, y, points[i].coord.z);
                 meshVerts.Add(landVert);
                 landMap.Add(i, meshVerts.Count - 1);
+
+                //  float y = Mathf.PerlinNoise(points[i].coord.x * 0.3f, points[i].coord.x * 0.1f) * 2f;
+
 
             }
 
         }
+
 
         for (int z = 0; z < zSize; z++)
         {
@@ -229,6 +265,16 @@ public class LandGenerator : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
+    // void OnDrawGizmos()
+    // {
 
-    
+    //     if (points == null) return;
+    //     for (int i = 0; i < points.Length; i++)
+    //     {
+    //         Gizmos.DrawSphere(points[i].coord, .1f);
+    //     }
+    // }
+
 }
+
+
