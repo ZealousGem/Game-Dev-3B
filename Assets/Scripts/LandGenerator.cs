@@ -61,7 +61,7 @@ public class LandGenerator : MonoBehaviour
 
     }
 
-    PointState[] GenerateGrid()
+    public PointState[] GenerateGrid()
     {
         points = new PointState[(xSize + 1) * (zSize + 1)];
         for (int z = 0; z <= zSize; z++)
@@ -94,7 +94,7 @@ public class LandGenerator : MonoBehaviour
 
     }
 
-    PointState[] DetermineState()
+    public PointState[] DetermineState()
     {
         PointState[] newPoints = new PointState[points.Length];
         Array.Copy(points, newPoints, points.Length);
@@ -169,7 +169,7 @@ public class LandGenerator : MonoBehaviour
         return points;
     }
 
-    void CreateMesh()
+    public void CreateMesh()
     {
 
         mesh = new Mesh();
@@ -276,5 +276,28 @@ public class LandGenerator : MonoBehaviour
     // }
 
 }
+
+
+
+[CustomEditor(typeof(LandGenerator))]
+
+public class Button : Editor
+{
+    
+    public override void OnInspectorGUI()
+    {
+        LandGenerator land = (LandGenerator)target;
+
+        DrawDefaultInspector();
+        if (GUILayout.Button("Generate"))
+        {
+            land.GenerateGrid();
+            land.DetermineState();
+            land.CreateMesh();
+        }
+    }
+}
+
+
 
 
