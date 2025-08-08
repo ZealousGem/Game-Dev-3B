@@ -43,6 +43,8 @@ public class LandGenerator : MonoBehaviour
 
     PointState[] points;
 
+   
+
     [SerializeField]
 
     int xSize = 20;
@@ -77,7 +79,7 @@ public class LandGenerator : MonoBehaviour
 
                 States temp = (States)randomIndex;
 
-                Vector3 vertcie = new Vector3(x, 0, z);
+                Vector3 vertcie = new Vector3(x, gameObject.transform.position.y, z);
 
                 PointState tempPoint = new PointState(vertcie, temp);
                 points[i] = tempPoint;
@@ -169,6 +171,8 @@ public class LandGenerator : MonoBehaviour
         return points;
     }
 
+   
+
     public void CreateMesh()
     {
 
@@ -209,12 +213,12 @@ public class LandGenerator : MonoBehaviour
 
                 if (NeighboursLand >= 7)
                 {
-                    height = 4f;
+                    height = 0f;
                 }
 
                 else if (NeighboursLand >= 4)
                 {
-                    height = 2f;
+                    height = 0f;
                 }
                 float y = Mathf.PerlinNoise(points[i].coord.x * 0.1f, points[i].coord.z * 0.1f) * height;
                 Vector3 landVert = new Vector3(points[i].coord.x, y, points[i].coord.z);
@@ -228,7 +232,7 @@ public class LandGenerator : MonoBehaviour
 
         }
 
-
+      
         for (int z = 0; z < zSize; z++)
         {
 
@@ -265,15 +269,15 @@ public class LandGenerator : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
-    // void OnDrawGizmos()
-    // {
+     void OnDrawGizmos()
+     {
 
-    //     if (points == null) return;
-    //     for (int i = 0; i < points.Length; i++)
-    //     {
-    //         Gizmos.DrawSphere(points[i].coord, .1f);
-    //     }
-    // }
+         if (points == null) return;
+         for (int i = 0; i < points.Length; i++)
+         {
+             Gizmos.DrawSphere(points[i].coord, .1f);
+         }
+     }
 
 }
 
