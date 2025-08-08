@@ -5,6 +5,11 @@ using UnityEditor.TerrainTools;
 using System.Collections.Generic;
 using UnityEditor.Timeline;
 using UnityEditor;
+using System.Data;
+using Mono.Cecil.Cil;
+using NUnit.Framework.Internal;
+using System.IO;
+using System.Globalization;
 
 
 public struct PointState
@@ -24,13 +29,29 @@ public struct PointState
 
 }
 
-  public enum States
+public class AStarNode
+{
+    public int index;
+    public AStarNode parent;
+    public int gCost; 
+    public int hCost; 
+    public int fCost => gCost + hCost; 
+
+    public AStarNode(int index)
+    {
+        this.index = index;
+    }
+}
+
+public enum States
 {
     Water,
 
-    Land, 
-    
- 
+    Land,
+
+    Enemy,
+
+
 }
 
 
@@ -43,7 +64,7 @@ public class LandGenerator : MonoBehaviour
 
     PointState[] points;
 
-   
+    public int scale = 0;
 
     [SerializeField]
 
@@ -54,17 +75,25 @@ public class LandGenerator : MonoBehaviour
 
     Mesh mesh;
 
+    public int num;
+
+     System.Random random = new System.Random();
+
     void Start()
     {
 
         GenerateGrid();
         DetermineState();
+         EnemyPath();
+        MakePaths(num);
+        ThicPath(num);
         CreateMesh();
 
     }
 
     public PointState[] GenerateGrid()
     {
+       
         points = new PointState[(xSize + 1) * (zSize + 1)];
         for (int z = 0; z <= zSize; z++)
         {
@@ -72,12 +101,12 @@ public class LandGenerator : MonoBehaviour
             for (int x = 0; x <= xSize; x++)
             {
                 int i = z * (xSize + 1) + x;
-                int numberOfStates = Enum.GetValues(typeof(States)).Length;
 
+                States[] specificStates = { States.Water, States.Land };
+             
+               
 
-                int randomIndex = UnityEngine.Random.Range(0, numberOfStates);
-
-                States temp = (States)randomIndex;
+               States temp = specificStates[random.Next(specificStates.Length)];
 
                 Vector3 vertcie = new Vector3(x, gameObject.transform.position.y, z);
 
@@ -92,9 +121,105 @@ public class LandGenerator : MonoBehaviour
 
         }
 
+        
+
+
+
         return points;
 
     }
+
+   public PointState[] EnemyPath()
+    {
+        int Xcenter = xSize / 2;
+        int Zcenter = zSize / 2;
+
+        int IndexCenter = Zcenter * (xSize + 1) + Xcenter;
+
+        if (IndexCenter >= 0 && IndexCenter < points.Length)
+        {
+            points[IndexCenter].state = States.Enemy;
+
+            for (int zOff = -3; zOff <= 3; zOff++)
+            {
+                for (int xOff = -3; xOff <= 3; xOff++)
+                {
+
+                    if (zOff == 0 && xOff == 0) continue;
+
+                    int Nx = Xcenter + xOff;
+                    int Nz = Zcenter + zOff;
+
+                    if (Nx >= 0 && Nx <= xSize && Nz >= 0 && Nz <= zSize)
+                    {
+                        int NeighbourIndex = Nz * (xSize + 1) + Nx;
+                        points[NeighbourIndex].state = States.Enemy;
+                    }
+
+                }
+
+                
+            }
+            
+        }
+
+
+
+
+         
+
+        return points;
+    }
+
+    public void ThicPath(int pathWidth)
+    {
+         var pointsToWiden = new HashSet<int>();
+
+        // First, find all existing enemy path tiles
+        var existingEnemyPath = new List<int>();
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (points[i].state == States.Enemy)
+            {
+                existingEnemyPath.Add(i);
+            }
+        }
+
+        // Now, iterate through the existing enemy path to find neighbors to widen
+        foreach (int index in existingEnemyPath)
+        {
+            int x = index % (xSize + 1);
+            int z = index / (xSize + 1);
+
+            // Check all neighbors within the specified pathWidth
+            for (int zOff = -pathWidth; zOff <= pathWidth; zOff++)
+            {
+                for (int xOff = -pathWidth; xOff <= pathWidth; xOff++)
+                {
+                    if (xOff == 0 && zOff == 0) continue;
+
+                    int neighborX = x + xOff;
+                    int neighborZ = z + zOff;
+
+                    if (neighborX >= 0 && neighborX <= xSize && neighborZ >= 0 && neighborZ <= zSize)
+                    {
+                        int neighborIndex = neighborZ * (xSize + 1) + neighborX;
+                        // Only widen into Land tiles, not water or other enemy tiles
+                        if (points[neighborIndex].state == States.Land)
+                        {
+                            pointsToWiden.Add(neighborIndex);
+                        }
+                    }
+                }
+            }
+        }
+
+        
+            
+
+    }
+    
+
 
     public PointState[] DetermineState()
     {
@@ -111,6 +236,14 @@ public class LandGenerator : MonoBehaviour
 
                     int i = z * (xSize + 1) + x;
                     if (points[i].state == States.Land)
+                    {
+
+
+                        continue;
+
+                    }
+
+                    if (points[i].state == States.Enemy)
                     {
 
 
@@ -152,9 +285,9 @@ public class LandGenerator : MonoBehaviour
 
                     }
 
-                    else
+                    else if (points[i].state == States.Water)
                     {
-                        if (landNeighbours > 4)
+                        if (landNeighbours > scale)
                         {
                             newPoints[i].state = States.Land;
                         }
@@ -171,7 +304,159 @@ public class LandGenerator : MonoBehaviour
         return points;
     }
 
-   
+   public void MakePaths(int paths)
+    {
+        for (int i = 0; i < paths; i++)
+        {
+            AStarEnemyPathfiding();
+        }
+    }
+
+    public void AStarEnemyPathfiding()
+    {  
+        
+            int BeginX, BeginZ;
+            int IndexCenter = (zSize / 2) * (xSize + 1) + (xSize / 2);
+
+            int border = random.Next(0, 4);
+
+            switch (border)
+            {
+                case 0:
+                    BeginX = random.Next(0, xSize + 1);
+                     BeginZ = 0;
+                    break;
+                case 1:
+                    BeginX = xSize;
+                    BeginZ = random.Next(0, zSize + 1);
+                    break;
+                case 2:
+                    BeginX = random.Next(0, xSize + 1); BeginZ = zSize;
+                    break;
+                case 3:
+                    BeginZ = 0; BeginX = random.Next(0, zSize + 1);
+                    break;
+                default:
+                    BeginX = xSize / 2;
+                    BeginZ = 0;
+                    break;
+
+            }
+
+            int StartInd = BeginZ * (xSize + 1) + BeginX;
+
+            var open = new List<AStarNode>();
+            var close = new HashSet<int>();
+            var allNodes = new Dictionary<int, AStarNode>();
+
+            var NodeStart = new AStarNode(StartInd);
+            NodeStart.gCost = 0;
+            NodeStart.hCost = CalH(StartInd, IndexCenter);
+            open.Add(NodeStart);
+            allNodes.Add(StartInd, NodeStart);
+
+            while (open.Count > 0)
+            {
+
+                AStarNode curNode = open[0];
+                for (int l = 1; l < open.Count; l++)
+                {
+                    if (open[l].fCost < curNode.fCost || (open[l].fCost == curNode.fCost && open[l].hCost < curNode.hCost))
+                    {
+                        curNode = open[l];
+                    }
+                }
+
+                open.Remove(curNode);
+                close.Add(curNode.index);
+
+                if (curNode.index == IndexCenter)
+                {
+                    ReconstructPath(curNode);
+                    return;
+                }
+
+                int x = curNode.index % (xSize + 1);
+                int z = curNode.index / (xSize + 1);
+
+                for (int zOff = -1; zOff <= 1; zOff++)
+                {
+                    for (int xOff = -1; xOff <= 1; xOff++)
+                    {
+
+                        if (xOff == 0 && zOff == 0) continue;
+
+                        int neighborX = x + xOff;
+                        int neighborZ = z + zOff;
+
+                        if (neighborX >= 0 && neighborX <= xSize && neighborZ >= 0 && neighborZ <= zSize)
+                        {
+                            int neighborIndex = neighborZ * (xSize + 1) + neighborX;
+
+                            // Check if the neighbor is valid (e.g., not water) and not in the closed set
+                            if (points[neighborIndex].state == States.Water || close.Contains(neighborIndex))
+                            {
+                                continue;
+                            }
+
+                            // Calculate the cost to move to the neighbor
+                            int newGCost = curNode.gCost + ((xOff != 0 && zOff != 0) ? 14 : 10); // 14 for diagonal, 10 for cardinal
+
+                            AStarNode neighborNode;
+                            if (!allNodes.TryGetValue(neighborIndex, out neighborNode))
+                            {
+                                neighborNode = new AStarNode(neighborIndex);
+                                allNodes.Add(neighborIndex, neighborNode);
+                            }
+
+                            // If a better path is found, update the neighbor's costs
+                            if (newGCost < neighborNode.gCost || !open.Contains(neighborNode))
+                            {
+                                neighborNode.gCost = newGCost;
+                                neighborNode.hCost = CalH(neighborIndex, IndexCenter);
+                                neighborNode.parent = curNode;
+
+                                if (!open.Contains(neighborNode))
+                                {
+                                    open.Add(neighborNode);
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            }
+
+
+
+        
+
+
+    }
+
+    int CalH(int startId, int endId) {
+        int stX = startId % (xSize + 1);
+        int stZ = startId / (xSize + 1);
+        int endX = endId % (xSize + 1);
+        int endZ = endId / (xSize + 1);
+
+        return Mathf.Abs(stX - endX) + Mathf.Abs(stZ - endZ);
+    }
+
+    private void ReconstructPath(AStarNode endNode)
+    {
+        
+        AStarNode currentNode = endNode;
+        while (currentNode != null)
+        {
+            points[currentNode.index].state = States.Enemy;
+            currentNode = currentNode.parent;
+        }
+
+       
+    }
 
     public void CreateMesh()
     {
@@ -232,7 +517,7 @@ public class LandGenerator : MonoBehaviour
 
         }
 
-      
+
         for (int z = 0; z < zSize; z++)
         {
 
@@ -291,12 +576,16 @@ public class Button : Editor
     public override void OnInspectorGUI()
     {
         LandGenerator land = (LandGenerator)target;
+        int numb = land.num;
 
         DrawDefaultInspector();
         if (GUILayout.Button("Generate"))
         {
             land.GenerateGrid();
             land.DetermineState();
+            land.EnemyPath();
+             land.MakePaths(numb);
+            land.ThicPath(numb);
             land.CreateMesh();
         }
     }
