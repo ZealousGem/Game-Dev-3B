@@ -1,0 +1,34 @@
+{
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "CamerPan",
+            "id": "c9673cb0-3207-4035-922d-90697137da24",
+            "actions": [
+                {
+                    "name": "Pressthis",
+                    "type": "Button",
+                    "id": "5bce54b0-c930-4057-8299-60e25b2593ad",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bcfa98e0-e90a-4e51-89e4-4c4b94cee585",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pressthis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

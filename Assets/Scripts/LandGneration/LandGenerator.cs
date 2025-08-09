@@ -61,10 +61,10 @@ public class LandGenerator : MonoBehaviour
 
     [SerializeField]
 
-    int xSize = 20;
+   public int xSize = 20;
     [SerializeField]
 
-    int zSize = 20;
+   public  int zSize = 20;
 
     Mesh mesh;
 
@@ -73,6 +73,11 @@ public class LandGenerator : MonoBehaviour
     public int Wide;
 
      System.Random random = new System.Random();
+
+    public PointState[] getPointState()
+    {
+        return points;
+     }
 
     void Start()
     {
