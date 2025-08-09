@@ -1,15 +1,8 @@
 using UnityEngine;
 using System;
-using System.Drawing;
-using UnityEditor.TerrainTools;
 using System.Collections.Generic;
-using UnityEditor.Timeline;
 using UnityEditor;
-using System.Data;
-using Mono.Cecil.Cil;
-using NUnit.Framework.Internal;
-using System.IO;
-using System.Globalization;
+
 
 
 public struct PointState
@@ -77,6 +70,8 @@ public class LandGenerator : MonoBehaviour
 
     public int num;
 
+    public int Wide;
+
      System.Random random = new System.Random();
 
     void Start()
@@ -84,9 +79,9 @@ public class LandGenerator : MonoBehaviour
 
         GenerateGrid();
         DetermineState();
-         EnemyPath();
+        EnemyPath();
         MakePaths(num);
-        ThicPath(num);
+        ThicPath(Wide);
         CreateMesh();
 
     }
@@ -175,7 +170,7 @@ public class LandGenerator : MonoBehaviour
     {
          var pointsToWiden = new HashSet<int>();
 
-        // First, find all existing enemy path tiles
+       
         var existingEnemyPath = new List<int>();
         for (int i = 0; i < points.Length; i++)
         {
@@ -185,13 +180,13 @@ public class LandGenerator : MonoBehaviour
             }
         }
 
-        // Now, iterate through the existing enemy path to find neighbors to widen
+        
         foreach (int index in existingEnemyPath)
         {
             int x = index % (xSize + 1);
             int z = index / (xSize + 1);
 
-            // Check all neighbors within the specified pathWidth
+            
             for (int zOff = -pathWidth; zOff <= pathWidth; zOff++)
             {
                 for (int xOff = -pathWidth; xOff <= pathWidth; xOff++)
@@ -204,7 +199,7 @@ public class LandGenerator : MonoBehaviour
                     if (neighborX >= 0 && neighborX <= xSize && neighborZ >= 0 && neighborZ <= zSize)
                     {
                         int neighborIndex = neighborZ * (xSize + 1) + neighborX;
-                        // Only widen into Land tiles, not water or other enemy tiles
+                        
                         if (points[neighborIndex].state == States.Land)
                         {
                             pointsToWiden.Add(neighborIndex);
@@ -214,7 +209,11 @@ public class LandGenerator : MonoBehaviour
             }
         }
 
-        
+        foreach (int ind in pointsToWiden)
+        {
+
+            points[ind].state = States.Water;
+        }
             
 
     }
@@ -494,7 +493,7 @@ public class LandGenerator : MonoBehaviour
 
                     }
                 }
-                float height = 1f;
+                float height = 0f;
 
                 if (NeighboursLand >= 7)
                 {
@@ -558,9 +557,31 @@ public class LandGenerator : MonoBehaviour
      {
 
          if (points == null) return;
-         for (int i = 0; i < points.Length; i++)
-         {
-             Gizmos.DrawSphere(points[i].coord, .1f);
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (points[i].state == States.Enemy)
+            {
+                Color gizmoColour = Color.red;
+                Gizmos.color = gizmoColour;
+                Gizmos.DrawSphere(points[i].coord, .1f);
+
+            }
+
+            else if (points[i].state == States.Land)
+            {
+                Color gizmoColour = Color.green;
+                Gizmos.color = gizmoColour;
+                Gizmos.DrawSphere(points[i].coord, .1f);
+            }
+
+            else
+            {
+                 Color gizmoColour = Color.gray;
+                Gizmos.color = gizmoColour;
+                 Gizmos.DrawSphere(points[i].coord, .1f);
+            }
+           
+             
          }
      }
 
@@ -577,6 +598,7 @@ public class Button : Editor
     {
         LandGenerator land = (LandGenerator)target;
         int numb = land.num;
+        int wd = land.Wide;
 
         DrawDefaultInspector();
         if (GUILayout.Button("Generate"))
@@ -585,7 +607,7 @@ public class Button : Editor
             land.DetermineState();
             land.EnemyPath();
              land.MakePaths(numb);
-            land.ThicPath(numb);
+            land.ThicPath(wd);
             land.CreateMesh();
         }
     }

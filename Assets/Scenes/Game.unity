@@ -271,10 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ec19389d6219e418cbdab4dde34024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 4
+  scale: 1
   xSize: 70
   zSize: 40
   num: 10
+  Wide: 1
 --- !u!23 &1118968008
 MeshRenderer:
   m_ObjectHideFlags: 0
