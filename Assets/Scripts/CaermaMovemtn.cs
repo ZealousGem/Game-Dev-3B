@@ -9,7 +9,7 @@ public class CaermaMovemtn : MonoBehaviour
 
     float MaxZoom = 8.07f;
 
-    float MinZoom = 19.5f;
+    float MinZoom = 13.73183f;
 
     Vector3 origin;
 

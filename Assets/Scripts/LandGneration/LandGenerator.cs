@@ -73,11 +73,12 @@ public class LandGenerator : MonoBehaviour
     public int Wide;
 
      System.Random random = new System.Random();
+    
 
     public PointState[] getPointState()
     {
         return points;
-     }
+    }
 
     void Start()
     {
@@ -602,6 +603,7 @@ public class Button : Editor
     public override void OnInspectorGUI()
     {
         LandGenerator land = (LandGenerator)target;
+        BuildingsGenerator build = GameObject.FindGameObjectWithTag("Respawn").GetComponent<BuildingsGenerator>();
         int numb = land.num;
         int wd = land.Wide;
 
@@ -611,9 +613,12 @@ public class Button : Editor
             land.GenerateGrid();
             land.DetermineState();
             land.EnemyPath();
-             land.MakePaths(numb);
+            land.MakePaths(numb);
             land.ThicPath(wd);
             land.CreateMesh();
+
+            
+            build.Spawn();
         }
     }
 }
