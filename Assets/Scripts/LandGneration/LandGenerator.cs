@@ -72,12 +72,19 @@ public class LandGenerator : MonoBehaviour
 
     public int Wide;
 
+    Vector3 middle;
+
      System.Random random = new System.Random();
     
 
     public PointState[] getPointState()
     {
         return points;
+    }
+
+    public Vector3 getMiddle()
+    {
+        return middle;
     }
 
     void Start()
@@ -107,7 +114,7 @@ public class LandGenerator : MonoBehaviour
              
                
 
-               States temp = specificStates[random.Next(specificStates.Length)];
+                States temp = specificStates[random.Next(specificStates.Length)];
 
                 Vector3 vertcie = new Vector3(x, gameObject.transform.position.y, z);
 
@@ -140,6 +147,8 @@ public class LandGenerator : MonoBehaviour
         if (IndexCenter >= 0 && IndexCenter < points.Length)
         {
             points[IndexCenter].state = States.Enemy;
+            middle = points[IndexCenter].coord;
+            
 
             for (int zOff = -3; zOff <= 3; zOff++)
             {
@@ -159,7 +168,7 @@ public class LandGenerator : MonoBehaviour
 
                 }
 
-                
+
             }
             
         }

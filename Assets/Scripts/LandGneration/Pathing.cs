@@ -43,6 +43,8 @@ public class Pathing : MonoBehaviour
     {
         this.points = points;
         this.Tower = Tower;
+        // Debug.Log(Tower);
+        // Debug.Log(curPos);
         this.curPos = curPos;
         speed = spe;
         MakePath();
@@ -60,83 +62,86 @@ public class Pathing : MonoBehaviour
 
         PointState[] tempPoint = points;
 
-        if (points == null)
-        {
+    if (points == null)
+    {
+        Debug.Log("where the fuck is it bitch");
+    }
 
-            Debug.Log("where the fuck is it bitch");
+   
+    Dictionary<Vector3, PointState> map = new Dictionary<Vector3, PointState>();
+    foreach (PointState dot in tempPoint)
+    {
+        Vector3 key = new Vector3(Mathf.Round(dot.coord.x), Mathf.Round(dot.coord.y), Mathf.Round(dot.coord.z));
+        map[key] = dot;
+    }
+
+    Dictionary<Vector3, CoNode> nodes = new Dictionary<Vector3, CoNode>();
+    List<CoNode> open = new List<CoNode>();
+    HashSet<Vector3> closed = new HashSet<Vector3>();
+    
+    
+    Vector3 startKey = new Vector3(Mathf.Round(curPos.x), Mathf.Round(curPos.y), Mathf.Round(curPos.z));
+    CoNode firstN = new CoNode(startKey);
+    firstN.gCost = 0;
+    firstN.hCost = calDistOfTower(startKey, Tower);
+    nodes[startKey] = firstN;
+    open.Add(firstN);
+
+    CoNode goalN = null;
+    Vector3 roundedTower = new Vector3(Mathf.Round(Tower.x), Mathf.Round(Tower.y), Mathf.Round(Tower.z));
+
+    while (open.Count > 0)
+    {
+        Debug.Log(open.Count);
+        CoNode cur = open.OrderBy(n => n.fCost).First();
+
+        open.Remove(cur);
+        closed.Add(cur.coord);
+
+        if (cur.coord == roundedTower)
+        {
+            goalN = cur;
+          //  Debug.Log("path is there");
+            break;
+        }
+
+        foreach (Vector3 Npos in getNeightbours(cur.coord))
+        {
            
-        }
-
-        Dictionary<Vector3, PointState> map = new Dictionary<Vector3, PointState>();
-        foreach (PointState dot in tempPoint)
-        {
-            map[dot.coord] = dot;
-        }
-
-        Dictionary<Vector3, CoNode> nodes = new Dictionary<Vector3, CoNode>();
-        List<CoNode> open = new List<CoNode>();
-        HashSet<Vector3> closed = new HashSet<Vector3>();
-
-        CoNode firstN = new CoNode(curPos);
-        firstN.gCost = 0;
-        firstN.hCost = calDistOfTower(curPos, Tower);
-        nodes[curPos] = firstN;
-        open.Add(firstN);
-
-        CoNode goalN = null;
-
-        while (open.Count > 0)
-        {
-            CoNode cur = open.OrderBy(n => n.fCost).First();
-
-            open.Remove(cur);
-            closed.Add(cur.coord);
-
-
-            if (cur.coord == Tower)
+            if (!map.TryGetValue(Npos, out PointState neighborPoint))
             {
-                goalN = cur;
-                break;
+               // Debug.Log("nope"); 
+                continue;
             }
 
-            foreach (Vector3 Npos in getNeightbours(cur.coord))
+            if (closed.Contains(Npos) || (neighborPoint.state != States.Enemy && Npos != roundedTower))
             {
-                if (!map.TryGetValue(Npos, out PointState neighborPoint))
-                {
-                    continue;
-                }
+              //  Debug.Log("no states");
+                continue;
+            }
+            
+            int tentG = cur.gCost + 1;
+            CoNode neight;
 
-                if (closed.Contains(Npos) || (neighborPoint.state != States.Enemy && Npos != Tower))
-                {
-                    continue;
-                }
-                int tentG = cur.gCost + 1;
-                CoNode neight;
-
-                if (!nodes.TryGetValue(Npos, out neight))
-                {
-                    neight = new CoNode(Npos);
-                    nodes[Npos] = neight;
-                    neight.gCost = tentG;
-                    neight.hCost = calDistOfTower(Npos, Tower);
-                    neight.parent = cur;
-                    open.Add(neight);
-
-                }
-
-                else if (tentG < neight.gCost)
-                {
-                    neight.gCost = tentG;
-                    neight.hCost = calDistOfTower(Npos, Tower);
-                    neight.parent = cur;
-                }
-
+            if (!nodes.TryGetValue(Npos, out neight))
+            {
+                neight = new CoNode(Npos);
+                nodes[Npos] = neight;
+                neight.gCost = tentG;
+                neight.hCost = calDistOfTower(Npos, Tower);
+                neight.parent = cur;
+                open.Add(neight);
 
             }
 
-
+            else if (tentG < neight.gCost)
+            {
+                neight.gCost = tentG;
+                neight.hCost = calDistOfTower(Npos, Tower);
+                neight.parent = cur;
+            }
         }
-
+    }
         if (goalN != null)
         {
 
@@ -178,13 +183,14 @@ public class Pathing : MonoBehaviour
     List<Vector3> getNeightbours(Vector3 pos) {
 
 
-        return new List<Vector3>
-        {
-            new Vector3(pos.x +1, pos.y, pos.z),
-            new Vector3(pos.x - 1, pos.y, pos.z),
-            new Vector3(pos.x, pos.y, pos.z + 1),
-            new Vector3(pos.x, pos.y, pos.z-1)
-        };
+       List<Vector3> neighbors = new List<Vector3>();
+    for (int zOff = -1; zOff <= 1; zOff++) {
+        for (int xOff = -1; xOff <= 1; xOff++) {
+            if (xOff == 0 && zOff == 0) continue;
+            neighbors.Add(new Vector3(pos.x + xOff, pos.y, pos.z + zOff));
+        }
+    }
+    return neighbors;
     }
 
     int calDistOfTower(Vector3 Start, Vector3 end)
@@ -209,6 +215,7 @@ public class Pathing : MonoBehaviour
 
                 else
                 {
+                    Destroy(gameObject);
                     Debug.Log("tower Reached");
                 }
                 
@@ -229,7 +236,7 @@ public class Pathing : MonoBehaviour
 
         else
         {
-            Debug.Log("no path");
+            // Debug.Log("no path");
         }
 
     }
