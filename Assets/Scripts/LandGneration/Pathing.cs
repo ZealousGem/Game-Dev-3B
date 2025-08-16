@@ -92,7 +92,7 @@ public class Pathing : MonoBehaviour
 
     while (open.Count > 0)
     {
-        Debug.Log(open.Count);
+       // Debug.Log(open.Count);
         CoNode cur = open.OrderBy(n => n.fCost).First();
 
         open.Remove(cur);
@@ -169,7 +169,7 @@ public class Pathing : MonoBehaviour
 
         else
         {
-            Debug.Log("Path not Found");
+          //  Debug.Log("Path not Found");
             hasPath = false;
 
 
@@ -216,7 +216,7 @@ public class Pathing : MonoBehaviour
                 else
                 {
                     Destroy(gameObject);
-                    Debug.Log("tower Reached");
+                  //  Debug.Log("tower Reached");
                 }
                 
             }

@@ -74,6 +74,8 @@ public class LandGenerator : MonoBehaviour
 
     Vector3 middle;
 
+    MeshCollider collider;
+
      System.Random random = new System.Random();
     
 
@@ -89,7 +91,7 @@ public class LandGenerator : MonoBehaviour
 
     void Start()
     {
-
+        collider = GetComponent<MeshCollider>();
         GenerateGrid();
         DetermineState();
         EnemyPath();
@@ -564,7 +566,7 @@ public class LandGenerator : MonoBehaviour
         mesh.Clear();
         mesh.vertices = meshVerts.ToArray();
         mesh.triangles = meshTriangles.ToArray();
-
+        collider.sharedMesh = mesh;
         mesh.RecalculateNormals();
     }
 

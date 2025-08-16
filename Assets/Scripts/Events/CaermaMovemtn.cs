@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class CaermaMovemtn : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class CaermaMovemtn : MonoBehaviour
     float plain;
 
     Vector3 diff;
+
+   
 
     public float speed = 10;
 
@@ -34,22 +37,26 @@ public class CaermaMovemtn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-    }
-
-   public void MoveCam(InputAction.CallbackContext t)
-    {
-        if (t.started)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            origin = FindWorldPosition(Mouse.current.position.ReadValue());
-            dragging = true;
+            if (Mouse.current.leftButton.wasPressedThisFrame)
+            {
+                origin = FindWorldPosition(Mouse.current.position.ReadValue());
+                dragging = true;
+            }
+            else if (Mouse.current.leftButton.wasReleasedThisFrame)
+            {
+                dragging = false;
+            }
         }
 
-        else if (t.canceled) {
-            dragging = false; 
+        else
+        {
+            dragging = false;
         }
-       
     }
+
+
 
     void LateUpdate()
     {
