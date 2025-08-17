@@ -90,14 +90,14 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                     tempTower = ob.GetComponent<Image>();
                     it = ori[i];
                     newTower = Towers[i];
-                    Debug.Log(it);
+                   
                     tempTower.raycastTarget = false;
                     
                     break;
                 }
             }
 
-           
+           // Debug.Log(it);
 
 
         }
@@ -108,6 +108,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     {
         if (tempTower != null)
         {
+            Vector3 temp = it;
             // Cast a ray from the camera to the mouse position in the 3D world
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -126,7 +127,19 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
             }
 
             tempTower.color = Color.white;
-            tempTower.transform.position = it;
+            if (it != temp)
+            {
+                tempTower.transform.position = temp;
+                Debug.Log("not good");
+            }
+
+            else
+            {
+                tempTower.transform.position = it;
+                  Debug.Log("good");
+            }
+          
+          //  Debug.Log(it);
             tempTower.raycastTarget = true;
             tempTower = null;
 
