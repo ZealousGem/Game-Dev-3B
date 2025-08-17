@@ -113,17 +113,16 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
             RaycastHit hit;
 
             // Check if the ray hits a collider
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("island"))
             {
                 // If the ray hits, check if the object has the "island" tag
-                if (hit.transform.CompareTag("island"))
-                {
-                   
+                
+
                     // Instantiate the tower prefab at the hit position
                     GameObject tempObj = newTower.Prefab;
                     Vector3 coord = new Vector3(hit.point.x, islandHeight, hit.point.z);
                     Instantiate(tempObj, coord, quaternion.identity);
-                }
+                
             }
 
             tempTower.color = Color.white;
