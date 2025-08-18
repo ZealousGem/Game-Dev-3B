@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 1118968008}
   - component: {fileID: 1118968007}
   - component: {fileID: 1118968011}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: islandGrid
   m_TagString: island
   m_Icon: {fileID: 0}

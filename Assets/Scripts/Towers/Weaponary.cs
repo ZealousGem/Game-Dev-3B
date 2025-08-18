@@ -17,11 +17,7 @@ public class Weaponary : MonoBehaviour
 
     public List<Transform> locations;
 
-    bool foundTarget;
-
-    GameObject target;
-
-    Rigidbody r;
+    List<GameObject> targets = new List<GameObject>();
 
    
 
@@ -30,8 +26,9 @@ public class Weaponary : MonoBehaviour
 
         if (other.CompareTag("Enemy"))
         {
-            foundTarget = true;
-            target = other.gameObject;
+         
+           GameObject target = other.gameObject;
+            targets.Add(target);
             Debug.Log("Enemy Found");
         }
        
@@ -41,36 +38,49 @@ public class Weaponary : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         { 
-        foundTarget = false;
+         
          Debug.Log("Enemy lost");
-        target = null;
+        targets.Remove(other.gameObject);
         }
         
     }
 
     void ShootEnemy()
     {
-        if (target != null)
+         if (targets.Count > 0)
         {
-            transform.LookAt(target.transform.position);
+            
+            GameObject currentTarget = targets[0];
+
+            
+            if (currentTarget == null)
+            {
+                targets.RemoveAt(0);
+                return; 
+            }
+
+            transform.LookAt(currentTarget.transform.position);
+
             if (coolDown >= MaxcoolDown)
             {
                 for (int i = 0; i < locations.Count; i++)
                 {
                     GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation);
-                    r = temp.GetComponent<Rigidbody>();
-                    r.AddForce((target.transform.position - locations[i].position).normalized * Speed, ForceMode.Impulse);
+                    Rigidbody r = temp.GetComponent<Rigidbody>();
+
+                   
+                    Vector3 direction = (currentTarget.transform.position - locations[i].position).normalized;
+                    r.AddForce(direction * Speed, ForceMode.Impulse);
                 }
 
                 coolDown = 0f;
-                
             }
         }
     }
 
     void Update()
     {
-        if (foundTarget)
+        if (targets.Count > 0)
         {
             coolDown += Time.deltaTime;
             ShootEnemy();

@@ -7,11 +7,12 @@ TagManager:
   - Enemy
   - Tower
   - island
+  - DefenceTower
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - islands
   - Water
   - UI
   - 

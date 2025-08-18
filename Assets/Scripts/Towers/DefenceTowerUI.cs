@@ -32,7 +32,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
         {
 
             TowerUI[i].sprite = Towers[i].TowerUI;
-            ori.Add(TowerUI[i].transform.position);
+            ori.Add(TowerUI[i].rectTransform.anchoredPosition);
 
         }
     }
@@ -76,12 +76,14 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             GameObject ob = eventData.pointerCurrentRaycast.gameObject;
+            tempTower = null;
             //  CaermaMovemtn.NoInv = true;
             //  List<GameObject> tempIamge = new List<GameObject>(); 
-            
+
             for (int i = 0; i < Towers.Length; i++)
             {
                 if (ob == TowerUI[i].gameObject)
@@ -90,14 +92,14 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                     tempTower = ob.GetComponent<Image>();
                     it = ori[i];
                     newTower = Towers[i];
-                   
+                     Debug.Log(it);
                     tempTower.raycastTarget = false;
-                    
+
                     break;
                 }
             }
 
-           // Debug.Log(it);
+            // Debug.Log(it);
 
 
         }
@@ -108,7 +110,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     {
         if (tempTower != null)
         {
-            Vector3 temp = it;
+          
             // Cast a ray from the camera to the mouse position in the 3D world
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -117,28 +119,18 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
             if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("island"))
             {
                 // If the ray hits, check if the object has the "island" tag
-                
 
-                    // Instantiate the tower prefab at the hit position
-                    GameObject tempObj = newTower.Prefab;
-                    Vector3 coord = new Vector3(hit.point.x, islandHeight, hit.point.z);
-                    Instantiate(tempObj, coord, quaternion.identity);
+
+                // Instantiate the tower prefab at the hit position
+                GameObject tempObj = newTower.Prefab;
+                Vector3 coord = new Vector3(hit.point.x, islandHeight, hit.point.z);
+                Instantiate(tempObj, coord, quaternion.identity);
+               
                 
             }
 
             tempTower.color = Color.white;
-            if (it != temp)
-            {
-                tempTower.transform.position = temp;
-                Debug.Log("not good");
-            }
-
-            else
-            {
-                tempTower.transform.position = it;
-                  Debug.Log("good");
-            }
-          
+            tempTower.rectTransform.anchoredPosition = it;
           //  Debug.Log(it);
             tempTower.raycastTarget = true;
             tempTower = null;
