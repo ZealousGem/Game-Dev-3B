@@ -65,7 +65,7 @@ public class Weaponary : MonoBehaviour
             {
                 for (int i = 0; i < locations.Count; i++)
                 {
-                    GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation);
+                    GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation, gameObject.transform);
                     Rigidbody r = temp.GetComponent<Rigidbody>();
 
                    

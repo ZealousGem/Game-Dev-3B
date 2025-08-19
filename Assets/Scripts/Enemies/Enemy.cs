@@ -11,12 +11,20 @@ public class Enemy : MonoBehaviour
 
     public float Damage;
 
-     [HideInInspector]
-    public Pathing moving;
+    public float TowerDamage = 20f;
 
-    EnemyStates enemyStates;
 
-    MoveState moveState = new MoveState();
+ [HideInInspector]
+
+   public EnemyStates enemyStates;
+
+ [HideInInspector]
+
+  public MoveState moveState = new MoveState();
+
+   [HideInInspector]
+
+  public AttackTowerState TowerState = new AttackTowerState();
 
     // AttackState attackState;
 
@@ -28,6 +36,20 @@ public class Enemy : MonoBehaviour
         enemyStates = moveState;
         enemyStates.EnterState(this);    
        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Tower"))
+        {
+            enemyStates.ChangeState(this, TowerState);
+            enemyStates.EnterState(this);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        
     }
 
     // Update is called once per frame

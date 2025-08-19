@@ -16,7 +16,12 @@ public class MoveState : EnemyStates
     public override void ChangeState(Enemy change, EnemyStates state)
     {
         // throw new System.NotImplementedException();
-        change.enabled = false;
+        if (change.GetComponent<Pathing>())
+        {
+            Pathing path = change.GetComponent<Pathing>();
+            path.StopMoving();
+            change.enemyStates = state;
+        }
 
     }
 
@@ -58,13 +63,17 @@ public class AttackTowerState : EnemyStates
     public override void ChangeState(Enemy change, EnemyStates state)
     {
         // throw new System.NotImplementedException();
-          change.enabled = false;
+          //change.enabled = false;
     }
 
     public override void EnterState(Enemy change)
     {
         //  throw new System.NotImplementedException();
-         change.enabled = true;
+        if (change.GetComponent<AttackTower>())
+        {
+            AttackTower sucide = change.GetComponent<AttackTower>();
+            sucide.BlowUpTower(change.TowerDamage);
+        }
     }
 }
 
