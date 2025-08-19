@@ -14,21 +14,33 @@ public class Enemy : MonoBehaviour
     public float TowerDamage = 20f;
 
 
- [HideInInspector]
+  [HideInInspector]
 
-   public EnemyStates enemyStates;
+    public EnemyStates enemyStates;
 
- [HideInInspector]
+    MoveState moveState = new MoveState();
 
-  public MoveState moveState = new MoveState();
+    AttackTowerState TowerState = new AttackTowerState();
 
-   [HideInInspector]
+    DeathState Death = new DeathState();
 
-  public AttackTowerState TowerState = new AttackTowerState();
+    void OnEnable()
+    {
+        EventBus.Subscribe<DamageObjectEvent>(getDamage);
+    }
 
-    // AttackState attackState;
+    void OnDisable()
+    {
+          EventBus.Unsubscribe<DamageObjectEvent>(getDamage);
+    }
 
-    // AttackTowerState towerState;
+    void getDamage(DamageObjectEvent data)
+    {
+        if (data.name == gameObject.GetInstanceID())
+        {
+            DecreaseHealth(data.Damage);  
+        }
+    }
 
 
     void Start()
@@ -47,14 +59,32 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void DecreaseHealth(float dam)
+    {
+        if (Health > 0)
+        {
+            Health -= dam;
+            if (Health <= 0)
+            {
+            enemyStates.ChangeState(this, Death);
+            enemyStates.EnterState(this);
+            }
+        }
+
+      
+       
+    }
+
+    public void KillEnemy()
+    {
+        Destroy(this.gameObject);
+        Debug.Log("death"); 
+    }
+
     void OnTriggerExit(Collider other)
     {
         
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

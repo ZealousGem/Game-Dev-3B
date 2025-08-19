@@ -29,7 +29,7 @@ public class Weaponary : MonoBehaviour
          
            GameObject target = other.gameObject;
             targets.Add(target);
-            Debug.Log("Enemy Found");
+           // Debug.Log("Enemy Found");
         }
        
     }
@@ -39,7 +39,7 @@ public class Weaponary : MonoBehaviour
         if (other.CompareTag("Enemy"))
         { 
          
-         Debug.Log("Enemy lost");
+      //   Debug.Log("Enemy lost");
         targets.Remove(other.gameObject);
         }
         

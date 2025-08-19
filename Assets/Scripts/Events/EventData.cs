@@ -1,16 +1,30 @@
 using UnityEngine;
 
-public class EventData : MonoBehaviour
+public class EventData
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public float cooled { get; private set; }
+
+    public EventData(float _cooled = 0)
     {
-        
+        cooled = _cooled;
     }
 
-    // Update is called once per frame
-    void Update()
+
+}
+
+
+public class DamageObjectEvent : EventData
+{
+
+    public int name;
+
+    public float Damage;
+
+    public DamageObjectEvent(int _name, float _Damage)
     {
-        
+        name = _name;
+        Damage = _Damage;
     }
+
 }

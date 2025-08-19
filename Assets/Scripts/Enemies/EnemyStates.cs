@@ -58,12 +58,32 @@ public class AttackState : EnemyStates
     }
 }
 
+public class DeathState : EnemyStates
+{
+    public override void ChangeState(Enemy change, EnemyStates state)
+    {
+        // throw new System.NotImplementedException();
+           //change.enabled = false;
+    }
+
+    public override void EnterState(Enemy change)
+    {
+        if (change != null)
+        {
+            change.KillEnemy();
+            Debug.Log("death");  
+        }
+        //  throw new System.NotImplementedException();
+        // change.enabled = true;
+    }
+}
+
 public class AttackTowerState : EnemyStates
 {
     public override void ChangeState(Enemy change, EnemyStates state)
     {
         // throw new System.NotImplementedException();
-          //change.enabled = false;
+        //change.enabled = false;
     }
 
     public override void EnterState(Enemy change)

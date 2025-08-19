@@ -8,6 +8,7 @@ TagManager:
   - Tower
   - island
   - DefenceTower
+  - Bomb
   layers:
   - Default
   - TransparentFX
