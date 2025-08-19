@@ -16,7 +16,7 @@ public class EnemyHealth : MonoBehaviour
             {
             DamageObjectEvent dam = new DamageObjectEvent(Parent.GetInstanceID(), bombs.Damage);
             EventBus.Act(dam); 
-            Destroy(other); 
+            Destroy(other.gameObject); 
             }
            
         }
