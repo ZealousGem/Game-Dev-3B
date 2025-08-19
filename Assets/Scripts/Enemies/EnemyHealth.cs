@@ -15,7 +15,10 @@ public class EnemyHealth : MonoBehaviour
             if (bombs != null && Parent != null)
             {
             DamageObjectEvent dam = new DamageObjectEvent(Parent.GetInstanceID(), bombs.Damage);
-            EventBus.Act(dam); 
+            
+            EventBus.Act(dam);
+            
+            
             Destroy(other.gameObject); 
             }
            

@@ -18,6 +18,11 @@ public static class EventBus
             ActionExists.DynamicInvoke(data);
         }
 
+        else
+        {
+            Debug.Log("event type: " + newType.Name + " not found");
+        }
+
     }
 
     public static void Subscribe<T>(Action<T> act) where T : EventData
@@ -41,8 +46,20 @@ public static class EventBus
 
         if (SubbedActions.ContainsKey(type))
         {
+            Delegate curDel = SubbedActions[type];
+            Delegate newDel = Delegate.Remove(curDel, act);
 
-            SubbedActions[type] = Delegate.Remove(SubbedActions[type], act);
+            if (newDel == null)
+            {
+
+                SubbedActions.Remove(type);
+
+            }
+
+            else
+            {
+                SubbedActions[type] = newDel; 
+           }
 
         }
 

@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
 
     DeathState Death = new DeathState();
 
-    void OnEnable()
+    void Awake()
     {
         EventBus.Subscribe<DamageObjectEvent>(getDamage);
     }
