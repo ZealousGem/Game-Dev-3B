@@ -82,7 +82,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 10
   m_CollisionDetection: 0
 --- !u!114 &1138926308172975255
 MonoBehaviour:
@@ -210,6 +210,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 92d0501a4e159dc44b77c0afa77ba343, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5066426438328370592}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 92d0501a4e159dc44b77c0afa77ba343, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2645476868299678531}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 92d0501a4e159dc44b77c0afa77ba343, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 834014204604847890}
   m_SourcePrefab: {fileID: 100100000, guid: 92d0501a4e159dc44b77c0afa77ba343, type: 3}
 --- !u!4 &1471395761697031714 stripped
 Transform:
@@ -236,9 +242,49 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 6.256215, y: 4.043184, z: 4.7393007}
   m_Center: {x: -0.10302901, y: 1.5215912, z: -0.8055934}
+--- !u!54 &2645476868299678531
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242970781909245080}
+  serializedVersion: 4
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 8
+  m_CollisionDetection: 0
+--- !u!114 &834014204604847890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242970781909245080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00771f2ad30eb68478d1e0960e765463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Parent: {fileID: 5465178552371521783}

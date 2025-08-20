@@ -48,13 +48,23 @@ public class AttackState : EnemyStates
     public override void ChangeState(Enemy change, EnemyStates state)
     {
         // throw new System.NotImplementedException();
-           change.enabled = false;
+
+        change.enemyStates = state;
+
+        
+          
     }
 
     public override void EnterState(Enemy change)
     {
         //  throw new System.NotImplementedException();
-           change.enabled = true;
+        if (change.GetComponent<AttackDefenceTowers>())
+        {
+
+            AttackDefenceTowers attackTowers = change.GetComponent<AttackDefenceTowers>();
+            attackTowers.getEnemies(change.Towers);
+            
+           }
     }
 }
 
@@ -71,7 +81,7 @@ public class DeathState : EnemyStates
         if (change != null)
         {
             change.KillEnemy();
-            Debug.Log("death");  
+           // Debug.Log("death");  
         }
         //  throw new System.NotImplementedException();
         // change.enabled = true;

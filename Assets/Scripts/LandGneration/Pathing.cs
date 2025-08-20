@@ -55,6 +55,7 @@ public class Pathing : MonoBehaviour
     public void StopMoving()
     {
         hasPath = false;
+        
     }
 
     void MakePath()
@@ -236,7 +237,7 @@ public class Pathing : MonoBehaviour
 
         else
         {
-            // Debug.Log("no path");
+           Debug.Log("no path");
         }
 
     }

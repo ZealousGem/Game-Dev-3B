@@ -9,6 +9,7 @@ TagManager:
   - island
   - DefenceTower
   - Bomb
+  - EnemyBomb
   layers:
   - Default
   - TransparentFX

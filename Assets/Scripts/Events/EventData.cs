@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EventData
@@ -25,6 +26,22 @@ public class DamageObjectEvent : EventData
     {
         name = _name;
         Damage = _Damage;
+    }
+
+}
+
+public class ChangeStateEvent : EventData
+{
+
+    public int name;
+
+    public List<GameObject> obj;
+
+    public ChangeStateEvent(int _name, List<GameObject> _obj)
+    {
+        name = _name;
+        obj = _obj;
+
     }
 
 }

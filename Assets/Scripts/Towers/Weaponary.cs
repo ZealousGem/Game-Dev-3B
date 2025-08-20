@@ -19,44 +19,60 @@ public class Weaponary : MonoBehaviour
 
     List<GameObject> targets = new List<GameObject>();
 
-   
+    void Awake()
+    {
+        EventBus.Subscribe<DamageObjectEvent>(getDamage);
+    }
+
+    void OnDisable()
+    {
+          EventBus.Unsubscribe<DamageObjectEvent>(getDamage);
+    }
+
+     void getDamage(DamageObjectEvent data)
+    {
+        if (data.name == gameObject.GetInstanceID())
+        {
+            DecreaseHealth(data.Damage);  
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
 
         if (other.CompareTag("Enemy"))
         {
-         
-           GameObject target = other.gameObject;
+
+            GameObject target = other.gameObject;
             targets.Add(target);
-           // Debug.Log("Enemy Found");
+            // Debug.Log("Enemy Found");
         }
-       
+
     }
 
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Enemy"))
-        { 
-         
-      //   Debug.Log("Enemy lost");
-        targets.Remove(other.gameObject);
+        {
+
+            //   Debug.Log("Enemy lost");
+            targets.Remove(other.gameObject);
         }
-        
+
     }
 
     void ShootEnemy()
     {
-         if (targets.Count > 0)
+        if (targets.Count > 0)
         {
-            
+
             GameObject currentTarget = targets[0];
 
-            
+
             if (currentTarget == null)
             {
                 targets.RemoveAt(0);
-                return; 
+                return;
             }
 
             transform.LookAt(currentTarget.transform.position);
@@ -68,7 +84,7 @@ public class Weaponary : MonoBehaviour
                     GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation, gameObject.transform);
                     Rigidbody r = temp.GetComponent<Rigidbody>();
 
-                   
+
                     Vector3 direction = (currentTarget.transform.position - locations[i].position).normalized;
                     r.AddForce(direction * Speed, ForceMode.Impulse);
                 }
@@ -85,5 +101,26 @@ public class Weaponary : MonoBehaviour
             coolDown += Time.deltaTime;
             ShootEnemy();
         }
+    }
+    
+    void DecreaseHealth(float dam)
+    {
+        if (Health > 0)
+        {
+            Health -= dam;
+            if (Health <= 0)
+            {
+                KillTower();
+            }
+        }
+
+      
+       
+    }
+
+    public void KillTower()
+    {
+        Destroy(this.gameObject);
+        Debug.Log("death"); 
     }
 }

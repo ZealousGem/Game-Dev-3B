@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -14,24 +15,47 @@ public class Enemy : MonoBehaviour
     public float TowerDamage = 20f;
 
 
-  [HideInInspector]
+    [HideInInspector]
 
     public EnemyStates enemyStates;
+
+     [HideInInspector]
+
+    public List<GameObject> Towers = new List<GameObject>();
 
     MoveState moveState = new MoveState();
 
     AttackTowerState TowerState = new AttackTowerState();
+
+    AttackState AttackState = new AttackState();
 
     DeathState Death = new DeathState();
 
     void Awake()
     {
         EventBus.Subscribe<DamageObjectEvent>(getDamage);
+        EventBus.Subscribe<ChangeStateEvent>(ChangeState);
     }
 
     void OnDisable()
     {
-          EventBus.Unsubscribe<DamageObjectEvent>(getDamage);
+        EventBus.Unsubscribe<DamageObjectEvent>(getDamage);
+        EventBus.Unsubscribe<ChangeStateEvent>(ChangeState);
+    }
+
+    void ChangeState(ChangeStateEvent data)
+    {
+        if (data.name == gameObject.GetInstanceID())
+        {
+            MoveState(data.obj);
+        }
+    }
+
+    void MoveState(List<GameObject> noTargets)
+    {
+         Towers = noTargets;
+         enemyStates.ChangeState(this, moveState);
+         enemyStates.EnterState(this);
     }
 
     void getDamage(DamageObjectEvent data)
@@ -57,7 +81,15 @@ public class Enemy : MonoBehaviour
             enemyStates.ChangeState(this, TowerState);
             enemyStates.EnterState(this);
         }
+
+        else if (other.CompareTag("DefenceTower"))
+        {
+            enemyStates.ChangeState(this, AttackState);
+            enemyStates.EnterState(this);
+            Towers.Add(other.gameObject);
+        }
     }
+
 
     void DecreaseHealth(float dam)
     {
@@ -81,10 +113,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("death"); 
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        
-    }
+    
 
     // Update is called once per frame
 }
