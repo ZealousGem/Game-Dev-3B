@@ -11,6 +11,8 @@ public class Weaponary : MonoBehaviour
 
     public float MaxcoolDown = 3f;
 
+    public float Damage = 20f;
+
     float coolDown = 0f;
 
     public GameObject Projectile;
@@ -83,7 +85,11 @@ public class Weaponary : MonoBehaviour
                 {
                     GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation, gameObject.transform);
                     Rigidbody r = temp.GetComponent<Rigidbody>();
-
+                     if (temp.GetComponent<Bombs>())
+                    {
+                        Bombs b = temp.GetComponent<Bombs>();
+                        b.Damage = Damage; 
+                    }
 
                     Vector3 direction = (currentTarget.transform.position - locations[i].position).normalized;
                     r.AddForce(direction * Speed, ForceMode.Impulse);

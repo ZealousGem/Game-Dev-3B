@@ -27,6 +27,13 @@ public class WaveManager : MonoBehaviour
        
     }
 
+    public void RegenSpawners()
+    {
+        isFound = false;
+        StartCoroutine(FindSpawerns());
+
+    }
+
     IEnumerator FindSpawerns()
     {
         yield return new WaitForSeconds(0.002f);

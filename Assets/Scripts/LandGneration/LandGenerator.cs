@@ -74,7 +74,7 @@ public class LandGenerator : MonoBehaviour
 
     Vector3 middle;
 
-    MeshCollider collider;
+    MeshCollider Landcollider;
 
      System.Random random = new System.Random();
     
@@ -91,7 +91,7 @@ public class LandGenerator : MonoBehaviour
 
     void Start()
     {
-        collider = GetComponent<MeshCollider>();
+        Landcollider = GetComponent<MeshCollider>();
         GenerateGrid();
         DetermineState();
         EnemyPath();
@@ -566,7 +566,7 @@ public class LandGenerator : MonoBehaviour
         mesh.Clear();
         mesh.vertices = meshVerts.ToArray();
         mesh.triangles = meshTriangles.ToArray();
-        collider.sharedMesh = mesh;
+        Landcollider.sharedMesh = mesh;
         mesh.RecalculateNormals();
     }
 
@@ -615,6 +615,7 @@ public class Button : Editor
     {
         LandGenerator land = (LandGenerator)target;
         BuildingsGenerator build = GameObject.FindGameObjectWithTag("Respawn").GetComponent<BuildingsGenerator>();
+        WaveManager Spawners = GameObject.FindGameObjectWithTag("Respawn").GetComponent<WaveManager>();
         int numb = land.num;
         int wd = land.Wide;
 
@@ -627,9 +628,8 @@ public class Button : Editor
             land.MakePaths(numb);
             land.ThicPath(wd);
             land.CreateMesh();
-
-            
             build.Spawn();
+            Spawners.RegenSpawners();
         }
     }
 }

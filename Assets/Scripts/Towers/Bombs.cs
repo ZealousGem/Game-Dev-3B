@@ -4,6 +4,7 @@ public class Bombs : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+     [HideInInspector]
     public float Damage = 30f;
 
     public float MaxCounter;

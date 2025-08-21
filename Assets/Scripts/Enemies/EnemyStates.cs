@@ -62,7 +62,7 @@ public class AttackState : EnemyStates
         {
 
             AttackDefenceTowers attackTowers = change.GetComponent<AttackDefenceTowers>();
-            attackTowers.getEnemies(change.Towers);
+            attackTowers.getEnemies(change.Towers, change.Damage);
             
            }
     }

@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
 
     public float Speed;
 
-    public float Damage;
+    public float Damage = 10f;
 
     public float TowerDamage = 20f;
 

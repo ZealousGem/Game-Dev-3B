@@ -53,7 +53,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                 if (hit.transform.CompareTag("island"))
                 {
                     tempTower.color = Color.green;
-                    Debug.Log("hit");
+                   
                 }
 
                 else if (!hit.transform.CompareTag("island"))
@@ -92,7 +92,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                     tempTower = ob.GetComponent<Image>();
                     it = ori[i];
                     newTower = Towers[i];
-                     Debug.Log(it);
+                   //  Debug.Log(it);
                     tempTower.raycastTarget = false;
 
                     break;

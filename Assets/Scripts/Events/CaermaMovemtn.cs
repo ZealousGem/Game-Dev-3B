@@ -16,8 +16,6 @@ public class CaermaMovemtn : MonoBehaviour
 
     float plain;
 
-    Vector3 diff;
-
    
 
     public float speed = 10;

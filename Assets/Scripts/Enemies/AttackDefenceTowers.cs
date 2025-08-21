@@ -12,6 +12,8 @@ public class AttackDefenceTowers : MonoBehaviour
 
     float coolDown = 0f;
 
+    float Damage;
+
     public GameObject Projectile;
 
     public List<Transform> locations;
@@ -21,10 +23,11 @@ public class AttackDefenceTowers : MonoBehaviour
     bool foundEnemy = false;
 
 
-    public void getEnemies(List<GameObject> towers)
+    public void getEnemies(List<GameObject> towers, float _Damage)
     {
         targets = towers;
-        foundEnemy = true; 
+        foundEnemy = true;
+        Damage = _Damage;
     }
 
     void NoMoreEnemies()
@@ -57,9 +60,14 @@ public class AttackDefenceTowers : MonoBehaviour
                 for (int i = 0; i < locations.Count; i++)
                 {
 
+                    
                     GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation, gameObject.transform);
                     Rigidbody r = temp.GetComponent<Rigidbody>();
-
+                    if (temp.GetComponent<Bombs>())
+                    {
+                        Bombs b = temp.GetComponent<Bombs>();
+                        b.Damage = Damage; 
+                    }
                     Vector3 Cannon = new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 1, currentTarget.transform.position.z);
                     Vector3 direction = (Cannon - locations[i].position).normalized;
                     r.AddForce(direction * Speed, ForceMode.Impulse);

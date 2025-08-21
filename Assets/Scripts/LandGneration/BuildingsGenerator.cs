@@ -16,7 +16,7 @@ public class BuildingsGenerator : MonoBehaviour
 
     HashSet<Vector3> EnemySpawnerPos = new HashSet<Vector3>();
 
-    public List<GameObject> obj;
+    List<GameObject> obj;
 
     GameObject towerobj;
 
@@ -34,7 +34,7 @@ public class BuildingsGenerator : MonoBehaviour
 
     public void Spawn()
     {
-       string[] tags = { "Tower", "Enemy" };
+       string[] tags = { "Tower", "Enemy", "DefenceTower" };
        obj = new List<GameObject>();
 
         foreach (string t in tags)
@@ -99,7 +99,7 @@ public class BuildingsGenerator : MonoBehaviour
                     int ind = i * (land.xSize + 1) + j;
                     if (j > 0)
                     {
-                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy && points[ind - 1].state != States.Enemy)
+                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy)
                         {
                             EnemySpawnerPos.Add(points[ind].coord);
                         }
@@ -109,7 +109,7 @@ public class BuildingsGenerator : MonoBehaviour
 
                      if ( j < land.xSize)
                     {
-                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy && points[ind + 1].state != States.Enemy)
+                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy)
                         {
                             EnemySpawnerPos.Add(points[ind].coord);
                         }

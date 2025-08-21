@@ -64,7 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Speed: 2
-  Damage: 20
+  Damage: 10
   TowerDamage: 40
   Towers: []
 --- !u!54 &6291972275038400921
