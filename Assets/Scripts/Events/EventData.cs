@@ -45,3 +45,19 @@ public class ChangeStateEvent : EventData
     }
 
 }
+
+public class GameManagerEvent : EventData
+{
+
+    public float changed;
+
+    public StatsChange type;
+
+    public GameManagerEvent(float _changed, StatsChange _type)
+    {
+        changed = _changed;
+        type = _type;
+
+    }
+
+}

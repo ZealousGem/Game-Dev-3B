@@ -9,7 +9,8 @@ public class AttackTower : MonoBehaviour
     public void BlowUpTower(float Damage)
     {
 
-        
+        GameManagerEvent decreaseHealth = new GameManagerEvent(Damage, StatsChange.Health);
+        EventBus.Act(decreaseHealth);
         Destroy(this.gameObject);
 
     }
