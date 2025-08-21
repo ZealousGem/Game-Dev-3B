@@ -127,6 +127,6 @@ public class Weaponary : MonoBehaviour
     public void KillTower()
     {
         Destroy(this.gameObject);
-        Debug.Log("death"); 
+        //Debug.Log("death"); 
     }
 }

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerUI: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   Prefab: {fileID: 5465178552371521783, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
-  reqAmount: 10
+  reqAmount: 30

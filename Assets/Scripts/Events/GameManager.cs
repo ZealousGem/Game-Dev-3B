@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum StatsChange
@@ -16,17 +17,20 @@ public class GameManager : MonoBehaviour
 
     public float MainTowerHealth = 200f;
 
-    public float Money = 100f;
+    public int Money = 50;
 
     void OnEnable()
     {
-       EventBus.Subscribe<GameManagerEvent>(getData);
+        EventBus.Subscribe<GameManagerEvent>(getData);
+        AmountEvent money = new AmountEvent(Money);
+        EventBus.Act(money);
     }
 
     void OnDisable()
     {
-        EventBus.Unsubscribe<GameManagerEvent>(getData);
+      EventBus.Unsubscribe<GameManagerEvent>(getData);
     }
+
 
     void getData(GameManagerEvent data)
     {
@@ -58,18 +62,27 @@ public class GameManager : MonoBehaviour
     {
         if (Money > 0)
         {
-            Money -= newAmount;
+            Money -= (int)newAmount;
+            AmountEvent money = new AmountEvent(Money);
+            EventBus.Act(money);
         }
 
         else if (Money <= 0)
         {
-            Money = 0f;
+            Money = 0;
+            AmountEvent money = new AmountEvent(Money);
+            EventBus.Act(money);
         }
+
+         //Debug.Log(Money);
     }
 
     void IncreaseMoney(float newAmount)
     {
-        Money += newAmount;
+        Money += (int)newAmount;
+        AmountEvent money = new AmountEvent(Money);
+        EventBus.Act(money);
+       // Debug.Log(Money);
     }
 
     void EndGame()

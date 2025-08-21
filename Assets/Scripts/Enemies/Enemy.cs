@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Enemy : MonoBehaviour
     public float Damage = 10f;
 
     public float TowerDamage = 20f;
+
+    public int Money = 10;
 
 
     [HideInInspector]
@@ -109,8 +112,11 @@ public class Enemy : MonoBehaviour
 
     public void KillEnemy()
     {
+        float money = Money;
+        GameManagerEvent giveMoney = new GameManagerEvent(money, StatsChange.MonenyGained);
+        EventBus.Act(giveMoney);
         Destroy(this.gameObject);
-        Debug.Log("death"); 
+       // Debug.Log("death"); 
     }
 
     

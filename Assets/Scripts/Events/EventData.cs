@@ -61,3 +61,18 @@ public class GameManagerEvent : EventData
     }
 
 }
+
+public class AmountEvent : EventData
+{
+
+    public float changed;
+
+
+    public AmountEvent(float _changed)
+    {
+        changed = _changed;
+        
+
+    }
+
+}
