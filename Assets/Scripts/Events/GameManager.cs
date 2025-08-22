@@ -7,7 +7,9 @@ public enum StatsChange
     Health,
     MonenyGained,
 
-    MoneyLost
+    MoneyLost,
+
+    HealthUI
 
 }
 
@@ -50,6 +52,8 @@ public class GameManager : MonoBehaviour
         if (MainTowerHealth > 0)
         {
             MainTowerHealth -= Damage;
+            GameManagerEvent HealthUI = new GameManagerEvent(MainTowerHealth, StatsChange.HealthUI);
+            EventBus.Act(HealthUI);
             if (MainTowerHealth <= 0)
             {
                 EndGame();
