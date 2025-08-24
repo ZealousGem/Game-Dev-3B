@@ -66,6 +66,7 @@ MonoBehaviour:
   Speed: 2
   Damage: 10
   TowerDamage: 40
+  Money: 10
   Towers: []
 --- !u!54 &6291972275038400921
 Rigidbody:
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c22993e3d7910e45a743624563356c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 4084799107439287626, guid: 5a00e25a087d543489b1176a3d7ef9bf, type: 3}
 --- !u!114 &7497172248157792621
 MonoBehaviour:
   m_ObjectHideFlags: 0
