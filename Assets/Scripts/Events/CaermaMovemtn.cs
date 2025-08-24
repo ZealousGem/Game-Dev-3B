@@ -16,13 +16,13 @@ public class CaermaMovemtn : MonoBehaviour
 
     float plain;
 
-   
-
     public float speed = 10;
 
-  public float minX = 0, minZ = 0, MaxX = 70, MaxZ = 40;
+    public float minX = 0, minZ = 0, MaxX = 70, MaxZ = 40;
     
     bool dragging = false;
+
+    bool isGameEnd = false;
 
     void Start()
     {
@@ -32,10 +32,34 @@ public class CaermaMovemtn : MonoBehaviour
 
     }
 
+    void OnEnable()
+    {
+         EventBus.Subscribe<EndGameEvent>(getEndDate);
+    }
+
+    void OnDisable()
+    {
+        EventBus.Unsubscribe<EndGameEvent>(getEndDate);
+    }
+
+    void getEndDate(EndGameEvent data)
+    {
+        if (data.type == StatsChange.EndGame)
+        {
+            EndGame();
+        }
+            
+    }
+
+    void EndGame()
+    {
+        isGameEnd = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (!EventSystem.current.IsPointerOverGameObject() && !isGameEnd)
         {
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {

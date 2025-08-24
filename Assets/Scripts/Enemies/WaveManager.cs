@@ -27,6 +27,30 @@ public class WaveManager : MonoBehaviour
        
     }
 
+    void OnEnable()
+    {
+         EventBus.Subscribe<EndGameEvent>(getEndDate);
+    }
+
+    void OnDisable()
+    {
+        EventBus.Unsubscribe<EndGameEvent>(getEndDate);
+    }
+
+    void getEndDate(EndGameEvent data)
+    {
+        if (data.type == StatsChange.EndGame)
+        {
+            EndGame();
+        }
+            
+    }
+
+    void EndGame()
+    {
+        isFound = false;
+    }
+
     public void RegenSpawners()
     {
         isFound = false;

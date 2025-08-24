@@ -71,7 +71,20 @@ public class AmountEvent : EventData
     public AmountEvent(float _changed)
     {
         changed = _changed;
-        
+
+
+    }
+
+}
+
+public class EndGameEvent : EventData
+{
+
+    public StatsChange type;
+
+    public EndGameEvent(StatsChange _type)
+    {
+        type = _type;
 
     }
 

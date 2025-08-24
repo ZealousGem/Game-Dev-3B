@@ -19,16 +19,28 @@ public class Weaponary : MonoBehaviour
 
     public List<Transform> locations;
 
+    bool IsOver = false;
+
     List<GameObject> targets = new List<GameObject>();
 
     void Awake()
     {
         EventBus.Subscribe<DamageObjectEvent>(getDamage);
+         EventBus.Subscribe<EndGameEvent>(getEndDate);
     }
 
     void OnDisable()
     {
-          EventBus.Unsubscribe<DamageObjectEvent>(getDamage);
+        EventBus.Unsubscribe<DamageObjectEvent>(getDamage);
+        EventBus.Unsubscribe<EndGameEvent>(getEndDate);
+    }
+
+    void getEndDate(EndGameEvent data)
+    {
+         if (data.type == StatsChange.EndGame)
+        {
+            EndTurret();
+        }
     }
 
      void getDamage(DamageObjectEvent data)
@@ -99,10 +111,14 @@ public class Weaponary : MonoBehaviour
             }
         }
     }
+    void EndTurret()
+    {
+        IsOver = true;
+    }
 
     void Update()
     {
-        if (targets.Count > 0)
+        if (targets.Count > 0 && !IsOver)
         {
             coolDown += Time.deltaTime;
             ShootEnemy();

@@ -9,7 +9,9 @@ public enum StatsChange
 
     MoneyLost,
 
-    HealthUI
+    HealthUI,
+
+    EndGame
 
 }
 
@@ -92,6 +94,8 @@ public class GameManager : MonoBehaviour
     void EndGame()
     {
         Debug.Log("Game Over");
+        EndGameEvent end = new EndGameEvent(StatsChange.EndGame);
+        EventBus.Act(end);
     }
 
 

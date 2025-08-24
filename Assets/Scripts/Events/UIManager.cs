@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class UIManager : MonoBehaviour
@@ -15,6 +16,10 @@ public class UIManager : MonoBehaviour
 
     public Image TowerHealth;
 
+    public GameObject inGameUI;
+
+    public GameObject GameOverUI; 
+
     float MaxTowerHealth = 200f;
 
 
@@ -22,12 +27,33 @@ public class UIManager : MonoBehaviour
     {
         EventBus.Subscribe<AmountEvent>(getData);
         EventBus.Subscribe<GameManagerEvent>(getDataUI);
+        EventBus.Subscribe<EndGameEvent>(getEndDate);
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<AmountEvent>(getData);
         EventBus.Unsubscribe<GameManagerEvent>(getDataUI); 
+        EventBus.Unsubscribe<EndGameEvent>(getEndDate);
+    }
+
+    void getEndDate(EndGameEvent data)
+    {
+         if (data.type == StatsChange.EndGame)
+        {
+            EndGame();
+        }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    void EndGame()
+    {
+        inGameUI.SetActive(false);
+        GameOverUI.SetActive(true);
     }
 
     void getData(AmountEvent data)
@@ -46,12 +72,13 @@ public class UIManager : MonoBehaviour
     void UpdateHealthUI(float health)
     {
         TowerHealth.fillAmount = health / MaxTowerHealth;
-        Debug.Log("UI Health" + TowerHealth.fillAmount);
+       // Debug.Log("UI Health" + TowerHealth.fillAmount);
     }
 
     void Start()
     {
         TowerUI.SetActive(false);
+        GameOverUI.SetActive(false);
         TowerHealth.fillAmount = 1f;
         
     }

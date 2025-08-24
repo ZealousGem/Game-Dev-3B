@@ -107,3 +107,19 @@ public class AttackTowerState : EnemyStates
     }
 }
 
+public class StopState : EnemyStates
+{
+    public override void ChangeState(Enemy change, EnemyStates state)
+    {
+        // throw new System.NotImplementedException();
+        //change.enabled = false;
+    }
+
+    public override void EnterState(Enemy change)
+    {
+        //  throw new System.NotImplementedException();
+        Debug.Log("stopped");
+       
+    }
+}
+

@@ -34,16 +34,36 @@ public class Enemy : MonoBehaviour
 
     DeathState Death = new DeathState();
 
+    StopState Stop = new StopState();
+
     void Awake()
     {
         EventBus.Subscribe<DamageObjectEvent>(getDamage);
         EventBus.Subscribe<ChangeStateEvent>(ChangeState);
+        EventBus.Subscribe<EndGameEvent>(getEndDate);
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<DamageObjectEvent>(getDamage);
         EventBus.Unsubscribe<ChangeStateEvent>(ChangeState);
+        EventBus.Unsubscribe<EndGameEvent>(getEndDate);
+    }
+
+    void getEndDate(EndGameEvent data)
+    {
+        if (data.type == StatsChange.EndGame)
+        {
+            setStopState();
+        }
+    }
+
+    void setStopState()
+    {
+        Towers.RemoveAll(Towers.Contains);
+        enemyStates.ChangeState(this, Stop);
+        enemyStates.EnterState(this);
+         
     }
 
     void ChangeState(ChangeStateEvent data)
@@ -51,6 +71,7 @@ public class Enemy : MonoBehaviour
         if (data.name == gameObject.GetInstanceID())
         {
             MoveState(data.obj);
+           
         }
     }
 
