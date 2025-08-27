@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -108,10 +109,16 @@ public class Enemy : MonoBehaviour
 
         else if (other.CompareTag("DefenceTower"))
         {
-            enemyStates.ChangeState(this, AttackState);
-            enemyStates.EnterState(this);
-            Towers.Add(other.gameObject);
+            StartCoroutine(SeesEnemy(other.gameObject));
         }
+    }
+
+    IEnumerator SeesEnemy(GameObject obj)
+    {
+        yield return new WaitForSeconds(0.5f);
+        enemyStates.ChangeState(this, AttackState);
+        enemyStates.EnterState(this);
+        Towers.Add(obj);
     }
 
 
