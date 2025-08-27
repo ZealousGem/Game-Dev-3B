@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fef87b9b42acf1a47ba75ef85e34417a, type: 3}
   m_Name: DefualtTower
   m_EditorClassIdentifier: 
-  TowerUI: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  TowerUI: {fileID: 21300000, guid: 0a399692ac9d71647a7667849345d50d, type: 3}
   Prefab: {fileID: 5465178552371521783, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
   reqAmount: 30
