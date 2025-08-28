@@ -145,8 +145,9 @@ public class Weaponary : MonoBehaviour
         if (Health > 0)
         {
             
-            StartCoroutine(TowerUI());
+         
             Health -= dam;
+            StartCoroutine(TowerUI());
            
             if (Health <= 0)
             {

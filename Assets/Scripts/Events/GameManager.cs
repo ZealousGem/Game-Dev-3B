@@ -11,6 +11,8 @@ public enum StatsChange
 
     HealthUI,
 
+    EnemyDead,
+
     EndGame
 
 }
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
             case StatsChange.Health: DecreaseTowerHealth(data.changed); break;
             case StatsChange.MonenyGained: IncreaseMoney(data.changed); break;
             case StatsChange.MoneyLost: DecreaseMoney(data.changed); break;
-            default: Debug.Log("no enum found"); break;
+            
 
 
         }

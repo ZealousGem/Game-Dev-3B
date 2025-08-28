@@ -13,6 +13,10 @@ public class WaveManager : MonoBehaviour
 
     float counter = 0;
 
+    int botskilled = 0;
+
+    int maxbotKilled = 10;
+
     public float maxCout = 1f;
 
     bool Spawned = false;
@@ -28,12 +32,22 @@ public class WaveManager : MonoBehaviour
 
     void OnEnable()
     {
+         EventBus.Subscribe<GameManagerEvent>(getData);
          EventBus.Subscribe<EndGameEvent>(getEndDate);
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<EndGameEvent>(getEndDate);
+        EventBus.Unsubscribe<GameManagerEvent>(getData);
+    }
+
+    void getData(GameManagerEvent data)
+    {
+        if (StatsChange.EnemyDead == data.type)
+         {
+            IncreaseBotKilledCount((int)data.changed);     
+         }
     }
 
     void getEndDate(EndGameEvent data)
@@ -48,6 +62,38 @@ public class WaveManager : MonoBehaviour
     void EndGame()
     {
         isFound = false;
+    }
+
+    void IncreaseBotKilledCount(int num)
+    {
+        botskilled += num;
+        if (botskilled >= maxbotKilled)
+        {
+            botskilled = 0;
+            maxbotKilled += 2;
+            StartCoroutine(ChangeWave());
+        }
+
+        Debug.Log(botskilled);
+    }
+
+    IEnumerator ChangeWave()
+    {
+        isFound = false;
+
+        if (maxCout > 0.2)
+        {
+            maxCout -= Mathf.Round(0.4f);
+        }
+
+        else
+        {
+            maxCout = 0.2f;
+        }
+        
+        Debug.Log("changed Wave" + maxCout);
+        yield return new WaitForSeconds(4f);
+        isFound = true; 
     }
 
     public void RegenSpawners()

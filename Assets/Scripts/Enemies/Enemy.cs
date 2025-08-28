@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -27,6 +28,12 @@ public class Enemy : MonoBehaviour
 
     public List<GameObject> Towers = new List<GameObject>();
 
+    public Image HealthUI;
+
+    public GameObject HealthCanvas;
+
+    float maxHealth = 0;
+
     MoveState moveState = new MoveState();
 
     AttackTowerState TowerState = new AttackTowerState();
@@ -42,6 +49,8 @@ public class Enemy : MonoBehaviour
         EventBus.Subscribe<DamageObjectEvent>(getDamage);
         EventBus.Subscribe<ChangeStateEvent>(ChangeState);
         EventBus.Subscribe<EndGameEvent>(getEndDate);
+        maxHealth = Health;
+        HealthCanvas.SetActive(false);
     }
 
     void OnDisable()
@@ -126,25 +135,37 @@ public class Enemy : MonoBehaviour
     {
         if (Health > 0)
         {
+            
             Health -= dam;
+            StartCoroutine(EnemyUI());
             if (Health <= 0)
             {
-            enemyStates.ChangeState(this, Death);
-            enemyStates.EnterState(this);
+                enemyStates.ChangeState(this, Death);
+                enemyStates.EnterState(this);
             }
         }
 
       
        
     }
+    
+    IEnumerator EnemyUI()
+    {
+        HealthCanvas.SetActive(true);
+        HealthUI.fillAmount = Health / maxHealth;
+        yield return new WaitForSeconds(1f);
+        HealthCanvas.SetActive(false);
+    }
 
     public void KillEnemy()
     {
         float money = Money;
         GameManagerEvent giveMoney = new GameManagerEvent(money, StatsChange.MonenyGained);
+        GameManagerEvent EnemyKilled = new GameManagerEvent(1, StatsChange.EnemyDead);
         EventBus.Act(giveMoney);
+        EventBus.Act(EnemyKilled);
         Destroy(this.gameObject);
-       // Debug.Log("death"); 
+        // Debug.Log("death"); 
     }
 
     
