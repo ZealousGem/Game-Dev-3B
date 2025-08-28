@@ -24,7 +24,6 @@ public class WaveManager : MonoBehaviour
     {
         StartCoroutine(FindSpawerns());
        
-       
     }
 
     void OnEnable()
