@@ -13,6 +13,8 @@ public enum StatsChange
 
     EnemyDead,
 
+    ChangeWave,
+
     EndGame
 
 }

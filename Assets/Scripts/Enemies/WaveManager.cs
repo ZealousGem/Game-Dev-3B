@@ -70,11 +70,13 @@ public class WaveManager : MonoBehaviour
         if (botskilled >= maxbotKilled)
         {
             botskilled = 0;
-            maxbotKilled += 2;
+            maxbotKilled += 4;
+            EndGameEvent WaveChange = new EndGameEvent(StatsChange.ChangeWave);
+            EventBus.Act(WaveChange);
             StartCoroutine(ChangeWave());
         }
 
-        Debug.Log(botskilled);
+       // Debug.Log(botskilled);
     }
 
     IEnumerator ChangeWave()
@@ -83,7 +85,7 @@ public class WaveManager : MonoBehaviour
 
         if (maxCout > 0.2)
         {
-            maxCout -= Mathf.Round(0.4f);
+            maxCout -= 0.4f;
         }
 
         else
@@ -92,7 +94,7 @@ public class WaveManager : MonoBehaviour
         }
         
         Debug.Log("changed Wave" + maxCout);
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(10f);
         isFound = true; 
     }
 

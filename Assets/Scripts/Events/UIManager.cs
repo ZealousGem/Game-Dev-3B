@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 
 public class UIManager : MonoBehaviour
@@ -18,7 +19,11 @@ public class UIManager : MonoBehaviour
 
     public GameObject inGameUI;
 
-    public GameObject GameOverUI; 
+    public GameObject GameOverUI;
+
+    public TMP_Text waveUI;
+
+    int WaveCounter = 1;
 
     float MaxTowerHealth = 200f;
 
@@ -39,10 +44,19 @@ public class UIManager : MonoBehaviour
 
     void getEndDate(EndGameEvent data)
     {
-         if (data.type == StatsChange.EndGame)
+
+        switch (data.type)
         {
-            EndGame();
+            case StatsChange.EndGame: EndGame(); break;
+            case StatsChange.ChangeWave: ChangeWaveCounter(); break;    
         }
+        
+    }
+
+    void ChangeWaveCounter()
+    {
+        WaveCounter += 1;
+        waveUI.text = WaveCounter.ToString();
     }
 
     public void RestartGame()
