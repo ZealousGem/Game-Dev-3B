@@ -1,11 +1,17 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weaponary : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float Health = 100f;
+
+    float maxHealth = 0f; 
+
+    float currentHealth;
 
     public float Speed = 10f;
 
@@ -19,14 +25,22 @@ public class Weaponary : MonoBehaviour
 
     public List<Transform> locations;
 
+    public Image HealthUI;
+
+    public GameObject HealthCanvas;
+
     bool IsOver = false;
+
+    
 
     List<GameObject> targets = new List<GameObject>();
 
     void Awake()
     {
         EventBus.Subscribe<DamageObjectEvent>(getDamage);
-         EventBus.Subscribe<EndGameEvent>(getEndDate);
+        EventBus.Subscribe<EndGameEvent>(getEndDate);
+        maxHealth = Health;
+        HealthCanvas.SetActive(false);
     }
 
     void OnDisable()
@@ -127,9 +141,13 @@ public class Weaponary : MonoBehaviour
     
     void DecreaseHealth(float dam)
     {
+
         if (Health > 0)
         {
+            
+            StartCoroutine(TowerUI());
             Health -= dam;
+           
             if (Health <= 0)
             {
                 KillTower();
@@ -139,6 +157,16 @@ public class Weaponary : MonoBehaviour
       
        
     }
+
+    IEnumerator TowerUI()
+    {
+        HealthCanvas.SetActive(true);
+        HealthUI.fillAmount = Health / maxHealth;
+        yield return new WaitForSeconds(1f);
+        HealthCanvas.SetActive(false);
+    }
+
+    
 
     public void KillTower()
     {

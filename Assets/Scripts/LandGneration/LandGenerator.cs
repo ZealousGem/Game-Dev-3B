@@ -570,10 +570,10 @@ public class LandGenerator : MonoBehaviour
         mesh.RecalculateNormals();
     }
 
-     void OnDrawGizmos()
-     {
+    void OnDrawGizmos()
+    {
 
-         if (points == null) return;
+        if (points == null) return;
         for (int i = 0; i < points.Length; i++)
         {
             if (points[i].state == States.Enemy)
@@ -593,14 +593,14 @@ public class LandGenerator : MonoBehaviour
 
             else
             {
-                 Color gizmoColour = Color.gray;
+                Color gizmoColour = Color.gray;
                 Gizmos.color = gizmoColour;
-                 Gizmos.DrawSphere(points[i].coord, .1f);
+                Gizmos.DrawSphere(points[i].coord, .1f);
             }
-           
-             
-         }
-     }
+
+
+        }
+    }
 
 }
 

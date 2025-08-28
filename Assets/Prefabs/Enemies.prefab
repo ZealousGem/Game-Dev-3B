@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 25
-  MaxcoolDown: 2
+  MaxcoolDown: 1
   Projectile: {fileID: 4979482060260821086, guid: 88de23f90fb7a7e4e974716448bb428d, type: 3}
   locations:
   - {fileID: 7964288573063456414}
