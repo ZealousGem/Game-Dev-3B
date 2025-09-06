@@ -83,8 +83,13 @@ public class GameManager : MonoBehaviour
             AmountEvent money = new AmountEvent(Money);
             EventBus.Act(money);
         }
-
+        ShowMoney();
          //Debug.Log(Money);
+    }
+
+    void ShowMoney()
+    {
+        Debug.Log(Money);
     }
 
     void IncreaseMoney(float newAmount)
@@ -92,6 +97,7 @@ public class GameManager : MonoBehaviour
         Money += (int)newAmount;
         AmountEvent money = new AmountEvent(Money);
         EventBus.Act(money);
+         ShowMoney();
        // Debug.Log(Money);
     }
 

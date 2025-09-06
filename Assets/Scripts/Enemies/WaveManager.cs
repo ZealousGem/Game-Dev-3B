@@ -107,7 +107,7 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator FindSpawerns()
     {
-        yield return new WaitForSeconds(0.002f);
+        yield return new WaitForSeconds(5f);
         string tag = "Enemy";
         Spawners = new List<GameObject>();
         Spawners.AddRange(GameObject.FindGameObjectsWithTag(tag));

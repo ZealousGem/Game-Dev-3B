@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using Unity.Mathematics;
+using System.Collections;
 
 
 public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
@@ -112,16 +113,27 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
             {
                 if (ob == TowerUI[i].gameObject)
                 {
-                    // tempIamge.Add(item[i].gameObject);
-                    tempTower = ob.GetComponent<Image>();
-                    it = ori[i];
-                    newTower = Towers[i];
-                    //  Debug.Log(it);
-                    tempTower.raycastTarget = false;
-                    Amount = Towers[i].reqAmount;
+                    if (currentAmount >= Towers[i].reqAmount)
+                    {
+                        tempTower = ob.GetComponent<Image>();
+                        it = ori[i];
+                        newTower = Towers[i];
+                        //  Debug.Log(it);
+                        tempTower.raycastTarget = false;
+                        Amount = Towers[i].reqAmount;
+                        break;
+                    }
 
-                    break;
+                    else
+                    {
+                        StartCoroutine(NotEnoughMoney(TowerUI[i]));
+                    }
+                    // tempIamge.Add(item[i].gameObject);
+
+
+
                 }
+      
             }
 
             // Debug.Log(it);
@@ -131,11 +143,18 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
         //  throw new System.NotImplementedException();
     }
 
+    IEnumerator NotEnoughMoney(Image tower)
+    {
+        tower.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        tower.color = Color.white;
+    }
+
     public void OnPointerUp(PointerEventData eventData)
     {
         if (tempTower != null)
         {
-          
+
             // Cast a ray from the camera to the mouse position in the 3D world
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
@@ -152,18 +171,18 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                 Instantiate(tempObj, coord, quaternion.identity);
                 GameManagerEvent loseMoney = new GameManagerEvent(Amount, StatsChange.MoneyLost);
                 EventBus.Act(loseMoney);
-               
-                
+
+
             }
 
             tempTower.color = Color.white;
             tempTower.rectTransform.anchoredPosition = it;
             Amount = 0;
-          //  Debug.Log(it);
+            //  Debug.Log(it);
             tempTower.raycastTarget = true;
             tempTower = null;
 
-          
+
         }
 
     }
