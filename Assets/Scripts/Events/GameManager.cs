@@ -73,18 +73,17 @@ public class GameManager : MonoBehaviour
         if (Money > 0)
         {
             Money -= (int)newAmount;
-            AmountEvent money = new AmountEvent(Money);
-            EventBus.Act(money);
         }
 
         else if (Money <= 0)
         {
             Money = 0;
-            AmountEvent money = new AmountEvent(Money);
-            EventBus.Act(money);
         }
-        ShowMoney();
-         //Debug.Log(Money);
+        
+         AmountEvent money = new AmountEvent(Money);
+         EventBus.Act(money);
+        //ShowMoney();
+        //Debug.Log(Money);
     }
 
     void ShowMoney()
@@ -97,7 +96,7 @@ public class GameManager : MonoBehaviour
         Money += (int)newAmount;
         AmountEvent money = new AmountEvent(Money);
         EventBus.Act(money);
-         ShowMoney();
+        // ShowMoney();
        // Debug.Log(Money);
     }
 

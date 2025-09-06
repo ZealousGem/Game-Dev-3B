@@ -602,7 +602,7 @@ public class LandGenerator : MonoBehaviour
                                         int NeighbourIndex = nZ * (xSize + 1) + nX;
                                         if (points[NeighbourIndex].state == States.Water)
                                         {
-                                            Debug.Log("through");
+                                        //    Debug.Log("through");
                                             isBeachVert = true;
                                             break;
                                         }

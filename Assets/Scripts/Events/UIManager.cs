@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
 
     int WaveCounter = 1;
 
+    int amountUI;
+
     float MaxTowerHealth = 200f;
 
 
@@ -106,19 +108,22 @@ public class UIManager : MonoBehaviour
 
             TowerUI.SetActive(false);
             Displayed = false;
-
         }
 
         else
         {
             TowerUI.SetActive(true);
             Displayed = true;
+            AmountEvent money = new AmountEvent(amountUI);
+            EventBus.Act(money);
+
         }
     }
 
     void ChangeGoldUI(int amount)
     {
         GoldUI.text = amount.ToString();
+        amountUI = amount;
     }
     
 }
