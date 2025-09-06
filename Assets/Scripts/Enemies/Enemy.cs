@@ -4,6 +4,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.UI;
+using Unity.Mathematics;
 
 public class Enemy : MonoBehaviour
 {
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour
     public Image HealthUI;
 
     public GameObject HealthCanvas;
+
+    public GameObject Explosion;
 
     float maxHealth = 0;
 
@@ -164,7 +167,9 @@ public class Enemy : MonoBehaviour
         GameManagerEvent EnemyKilled = new GameManagerEvent(1, StatsChange.EnemyDead);
         EventBus.Act(giveMoney);
         EventBus.Act(EnemyKilled);
+        Instantiate(Explosion, this.gameObject.transform.position, quaternion.identity);
         Destroy(this.gameObject);
+       
         // Debug.Log("death"); 
     }
 

@@ -637,7 +637,7 @@ public class LandGenerator : MonoBehaviour
 
                         else
                         {
-                            int num2 = UnityEngine.Random.Range(0, 70);
+                            int num2 = UnityEngine.Random.Range(0, 50);
                             // Debug.Log(num2);
                             if (num2 == 39 && !isBeachVert)
                             {
@@ -648,19 +648,7 @@ public class LandGenerator : MonoBehaviour
 
                             }
 
-                            else
-                            {
-                               int num3 = UnityEngine.Random.Range(0, 30);
-                            // Debug.Log(num2);
-                            if (num3 == 29 && !isBeachVert)
-                            {
-                                curjungleobjects = jungleobjects[2];
-                                Vector3 pos = new Vector3(points[i].coord.x, islandHeight, points[i].coord.z);
-                                Instantiate(curjungleobjects, pos, quaternion.identity, gameObject.transform);
-
-
-                            }
-                            }
+                            
                         }
 
                        

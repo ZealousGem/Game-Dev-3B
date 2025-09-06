@@ -208,6 +208,7 @@ MonoBehaviour:
   - {fileID: 8612354718209100655}
   HealthUI: {fileID: 2544043843481692181}
   HealthCanvas: {fileID: 416739163281117575}
+  Explosion: {fileID: 4084799107439287626, guid: 9ee90419511414542bc1485c26789b18, type: 3}
 --- !u!1 &7320640786377548663
 GameObject:
   m_ObjectHideFlags: 0

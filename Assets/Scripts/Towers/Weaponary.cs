@@ -29,6 +29,8 @@ public class Weaponary : MonoBehaviour
 
     public GameObject HealthCanvas;
 
+    public GameObject Explosion;
+
     bool IsOver = false;
 
     
@@ -171,6 +173,7 @@ public class Weaponary : MonoBehaviour
 
     public void KillTower()
     {
+        Instantiate(Explosion, this.gameObject.transform.position, quaternion.identity);
         Destroy(this.gameObject);
         //Debug.Log("death"); 
     }

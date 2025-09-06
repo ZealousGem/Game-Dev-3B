@@ -173,6 +173,7 @@ MonoBehaviour:
   Towers: []
   HealthUI: {fileID: 2052239381712186121}
   HealthCanvas: {fileID: 4936946462975125503}
+  Explosion: {fileID: 4084799107439287626, guid: a98df970376c5ae4c845435d825dcbe6, type: 3}
 --- !u!54 &6291972275038400921
 Rigidbody:
   m_ObjectHideFlags: 0
