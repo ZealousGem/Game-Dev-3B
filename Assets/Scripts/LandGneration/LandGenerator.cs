@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
+using Unity.Mathematics;
 
 
 
@@ -11,6 +12,7 @@ public struct PointState
 
     public States state;
 
+  
 
     public PointState(Vector3 n, States s)
     {
@@ -71,6 +73,11 @@ public class LandGenerator : MonoBehaviour
     public int num;
 
     public int Wide;
+
+    public List<GameObject> jungleobjects;
+
+     GameObject curjungleobjects;
+
 
     Vector3 middle;
 
@@ -476,13 +483,30 @@ public class LandGenerator : MonoBehaviour
 
     public void CreateMesh()
     {
+        
+        string[] tags = { "Jungle" };
+        List<GameObject> obj = new List<GameObject>();
 
+        foreach (string t in tags)
+        {
+
+            obj.AddRange(GameObject.FindGameObjectsWithTag(t));
+           
+
+        }
+
+        for (int i = 0; i < obj.Count; i++)
+        {
+            DestroyImmediate(obj[i]);
+        }
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
         List<Vector3> meshVerts = new List<Vector3>();
         List<int> meshTriangles = new List<int>();
+        List<int> BeachTriangles = new List<int>();
         Dictionary<int, int> landMap = new Dictionary<int, int>();
+        float islandHeight = 1.1f;
 
         for (int i = 0; i < points.Length; i++)
         {
@@ -556,6 +580,60 @@ public class LandGenerator : MonoBehaviour
                         meshTriangles.Add(landMap[i + 1]);
                         meshTriangles.Add(landMap[i + xSize + 1]);
                         meshTriangles.Add(landMap[i + xSize + 2]);
+
+                        bool isBeachVert = false;
+
+                        int[] quadCornerInd = { i, i + 1, i + xSize + 1, i + xSize + 2 };
+
+
+                        foreach (int cornerIDx in quadCornerInd)
+                        {
+                            int cx = cornerIDx % (xSize + 1);
+                            int cz = cornerIDx / (xSize + 1);
+
+                            for (int nZ = cz - 1; nZ <= cz + 1; nZ++)
+                            {
+                                for (int nX = cx - 1; nX <= cx + 1; nX++)
+                                {
+                                    if (nX == cx && nZ == cz) continue;
+                                    if (nX >= 0 && nX <= xSize && nZ >= 0 && nZ <= zSize)
+                                    {
+
+                                        int NeighbourIndex = nZ * (xSize + 1) + nX;
+                                        if (points[NeighbourIndex].state == States.Water)
+                                        {
+                                            Debug.Log("through");
+                                            isBeachVert = true;
+                                            break;
+                                        }
+                                    }
+
+                                }
+                                if (isBeachVert) break;
+                            }
+                            if (isBeachVert) break;
+                        }
+
+                        if (isBeachVert)
+                        {
+                            BeachTriangles.Add(landMap[i]);
+                            BeachTriangles.Add(landMap[i + xSize + 1]);
+                            BeachTriangles.Add(landMap[i + 1]);
+                            BeachTriangles.Add(landMap[i + 1]);
+                            BeachTriangles.Add(landMap[i + xSize + 1]);
+                            BeachTriangles.Add(landMap[i + xSize + 2]);
+
+                        }
+                        int num = UnityEngine.Random.Range(0, 8);
+
+                        if (num == 2)
+                        {
+
+                            curjungleobjects = jungleobjects[0];
+                            Vector3 pos = new Vector3(points[i].coord.x, islandHeight, points[i].coord.z);
+                            Instantiate(curjungleobjects, pos, quaternion.identity, gameObject.transform);
+                        }
+
                     }
 
 
@@ -565,9 +643,20 @@ public class LandGenerator : MonoBehaviour
 
         mesh.Clear();
         mesh.vertices = meshVerts.ToArray();
-        mesh.triangles = meshTriangles.ToArray();
+        mesh.subMeshCount = 2;
+        mesh.SetTriangles(meshTriangles.ToArray(), 0);
+        mesh.SetTriangles(BeachTriangles.ToArray(), 1);
+
         Landcollider.sharedMesh = mesh;
         mesh.RecalculateNormals();
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+
+
+      Material[] materials = meshRenderer.sharedMaterials;
+      materials[0].renderQueue = 2000;  
+      materials[1].renderQueue = 2002;
+
+        
     }
 
     void OnDrawGizmos()
