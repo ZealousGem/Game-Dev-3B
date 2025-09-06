@@ -169,7 +169,7 @@ MonoBehaviour:
   Speed: 2
   Damage: 10
   TowerDamage: 40
-  Money: 5
+  Money: 6
   Towers: []
   HealthUI: {fileID: 2052239381712186121}
   HealthCanvas: {fileID: 4936946462975125503}

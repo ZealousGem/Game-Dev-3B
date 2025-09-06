@@ -214,7 +214,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0b57debefe2f9f646a6fe52c8567d03a, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1103,6 +1103,8 @@ MonoBehaviour:
   Wide: 1
   jungleobjects:
   - {fileID: 4581036326836099769, guid: 8efd3e643caaa5449ab1f63569f4e77d, type: 3}
+  - {fileID: 7712311245687194548, guid: f9ae96014073ced4ebf5dd7abc8e718f, type: 3}
+  - {fileID: 8224148197291319623, guid: 06bbc96072e699b4caad264eefc80d85, type: 3}
 --- !u!23 &1118968008
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1463,7 +1465,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 0b57debefe2f9f646a6fe52c8567d03a, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1728,7 +1730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 792, y: 273.18143}
+  m_AnchoredPosition: {x: 792, y: 292}
   m_SizeDelta: {x: 255.528, y: 295.9632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1402859218
@@ -2882,7 +2884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 795, y: 460}
+  m_AnchoredPosition: {x: 795, y: 478.81854}
   m_SizeDelta: {x: 308.526, y: 90.456}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1803455210

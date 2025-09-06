@@ -101,7 +101,7 @@ public class LandGenerator : MonoBehaviour
         Landcollider = GetComponent<MeshCollider>();
         GenerateGrid();
         DetermineState();
-        EnemyPath();
+        TowerPath();
         MakePaths(num);
         ThicPath(Wide);
         CreateMesh();
@@ -146,7 +146,7 @@ public class LandGenerator : MonoBehaviour
 
     }
 
-   public PointState[] EnemyPath()
+   public PointState[] TowerPath()
     {
         int Xcenter = xSize / 2;
         int Zcenter = zSize / 2;
@@ -557,7 +557,7 @@ public class LandGenerator : MonoBehaviour
 
         }
 
-
+        
         for (int z = 0; z < zSize; z++)
         {
 
@@ -632,7 +632,41 @@ public class LandGenerator : MonoBehaviour
                             curjungleobjects = jungleobjects[0];
                             Vector3 pos = new Vector3(points[i].coord.x, islandHeight, points[i].coord.z);
                             Instantiate(curjungleobjects, pos, quaternion.identity, gameObject.transform);
+
                         }
+
+                        else
+                        {
+                            int num2 = UnityEngine.Random.Range(0, 70);
+                            // Debug.Log(num2);
+                            if (num2 == 39 && !isBeachVert)
+                            {
+                                curjungleobjects = jungleobjects[1];
+                                Vector3 pos = new Vector3(points[i].coord.x, islandHeight, points[i].coord.z);
+                                Instantiate(curjungleobjects, pos, quaternion.identity, gameObject.transform);
+
+
+                            }
+
+                            else
+                            {
+                               int num3 = UnityEngine.Random.Range(0, 30);
+                            // Debug.Log(num2);
+                            if (num3 == 29 && !isBeachVert)
+                            {
+                                curjungleobjects = jungleobjects[2];
+                                Vector3 pos = new Vector3(points[i].coord.x, islandHeight, points[i].coord.z);
+                                Instantiate(curjungleobjects, pos, quaternion.identity, gameObject.transform);
+
+
+                            }
+                            }
+                        }
+
+                       
+                            
+                        
+                       
 
                     }
 
@@ -640,6 +674,8 @@ public class LandGenerator : MonoBehaviour
                 }
             }
         }
+
+        
 
         mesh.Clear();
         mesh.vertices = meshVerts.ToArray();
@@ -713,7 +749,7 @@ public class Button : Editor
         {
             land.GenerateGrid();
             land.DetermineState();
-            land.EnemyPath();
+            land.TowerPath();
             land.MakePaths(numb);
             land.ThicPath(wd);
             land.CreateMesh();
