@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 public enum StatsChange
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     public float MainTowerHealth = 200f;
 
     public int Money = 50;
+
+    public GameObject explosion;
 
     void OnEnable()
     {
@@ -109,6 +112,16 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
         EndGameEvent end = new EndGameEvent(StatsChange.EndGame);
         EventBus.Act(end);
+        GameObject obj = GameObject.FindGameObjectWithTag("Tower");
+        if (obj != null)
+        {
+            Instantiate(explosion, obj.gameObject.transform.position, quaternion.identity);
+            Destroy(obj);  
+        }
+    
+      
+
+
     }
 
 
