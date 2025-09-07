@@ -1,4 +1,4 @@
-using Microsoft.Unity.VisualStudio.Editor;
+
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Tower", menuName = "Scriptable Objects/Tower")]

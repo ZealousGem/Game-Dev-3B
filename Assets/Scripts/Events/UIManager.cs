@@ -137,6 +137,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public IEnumerator PauseGame()
     {
         yield return new WaitForSeconds(0.1f);

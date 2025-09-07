@@ -683,69 +683,69 @@ public class LandGenerator : MonoBehaviour
         
     }
 
-    void OnDrawGizmos()
-    {
+    // void OnDrawGizmos()
+    // {
 
-        if (points == null) return;
-        for (int i = 0; i < points.Length; i++)
-        {
-            if (points[i].state == States.Enemy)
-            {
-                Color gizmoColour = Color.red;
-                Gizmos.color = gizmoColour;
-                Gizmos.DrawSphere(points[i].coord, .1f);
+    //     if (points == null) return;
+    //     for (int i = 0; i < points.Length; i++)
+    //     {
+    //         if (points[i].state == States.Enemy)
+    //         {
+    //             Color gizmoColour = Color.red;
+    //             Gizmos.color = gizmoColour;
+    //             Gizmos.DrawSphere(points[i].coord, .1f);
 
-            }
+    //         }
 
-            else if (points[i].state == States.Land)
-            {
-                Color gizmoColour = Color.green;
-                Gizmos.color = gizmoColour;
-                Gizmos.DrawSphere(points[i].coord, .1f);
-            }
+    //         else if (points[i].state == States.Land)
+    //         {
+    //             Color gizmoColour = Color.green;
+    //             Gizmos.color = gizmoColour;
+    //             Gizmos.DrawSphere(points[i].coord, .1f);
+    //         }
 
-            else
-            {
-                Color gizmoColour = Color.gray;
-                Gizmos.color = gizmoColour;
-                Gizmos.DrawSphere(points[i].coord, .1f);
-            }
+    //         else
+    //         {
+    //             Color gizmoColour = Color.gray;
+    //             Gizmos.color = gizmoColour;
+    //             Gizmos.DrawSphere(points[i].coord, .1f);
+    //         }
 
 
-        }
-    }
+    //     }
+    // }
 
 }
 
 
 
-[CustomEditor(typeof(LandGenerator))]
+// [CustomEditor(typeof(LandGenerator))]
 
-public class Button : Editor
-{
+// public class Button : Editor
+// {
     
-    public override void OnInspectorGUI()
-    {
-        LandGenerator land = (LandGenerator)target;
-        BuildingsGenerator build = GameObject.FindGameObjectWithTag("Respawn").GetComponent<BuildingsGenerator>();
-        WaveManager Spawners = GameObject.FindGameObjectWithTag("Respawn").GetComponent<WaveManager>();
-        int numb = land.num;
-        int wd = land.Wide;
+//     public override void OnInspectorGUI()
+//     {
+//         LandGenerator land = (LandGenerator)target;
+//         BuildingsGenerator build = GameObject.FindGameObjectWithTag("Respawn").GetComponent<BuildingsGenerator>();
+//         WaveManager Spawners = GameObject.FindGameObjectWithTag("Respawn").GetComponent<WaveManager>();
+//         int numb = land.num;
+//         int wd = land.Wide;
 
-        DrawDefaultInspector();
-        if (GUILayout.Button("Generate"))
-        {
-            land.GenerateGrid();
-            land.DetermineState();
-            land.TowerPath();
-            land.MakePaths(numb);
-            land.ThicPath(wd);
-            land.CreateMesh();
-            build.Spawn();
-            Spawners.RegenSpawners();
-        }
-    }
-}
+//         DrawDefaultInspector();
+//         if (GUILayout.Button("Generate"))
+//         {
+//             land.GenerateGrid();
+//             land.DetermineState();
+//             land.TowerPath();
+//             land.MakePaths(numb);
+//             land.ThicPath(wd);
+//             land.CreateMesh();
+//             build.Spawn();
+//             Spawners.RegenSpawners();
+//         }
+//     }
+// }
 
 
 
