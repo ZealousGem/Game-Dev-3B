@@ -14,8 +14,8 @@ public class WorldGenManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     Mesh mesh;
-    Vector3[] vertcies;
-    int[] triangles;
+    Vector3[] vertcies; // co-orndates of each point in the map
+    int[] triangles; // triangles that will be generated based on the vertices co-nrdates 
 
    
 
@@ -30,14 +30,14 @@ public class WorldGenManager : MonoBehaviour
     public float Xoffset = 100f;
     public float Yoffset = 100f;
 
-
-    void Start()
+ // this scripts creates the ocean of the map 
+    void Start() // creates a ew mesh once it has started 
     {
 
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
-        Xoffset = Random.Range(0f, 9999f);
+        Xoffset = Random.Range(0f, 9999f); // randomly genrates the x and Y offset to generate the waves of the water
         Yoffset = Random.Range(0f, 9999f);
         
         CreateShape();
@@ -46,7 +46,7 @@ public class WorldGenManager : MonoBehaviour
     }
 
 
-    void Update()
+    void Update() // changes offsets to create wave effect
     {
 
 
@@ -60,7 +60,7 @@ public class WorldGenManager : MonoBehaviour
        
     }
 
-    void UpdateVert()
+    void UpdateVert() // updates noewly changed vertices 
     {
         for (int i = 0, z = 0; z <= zSize; z++)
         {
@@ -78,7 +78,7 @@ public class WorldGenManager : MonoBehaviour
     }
 
 
-    void CreateShape()
+    void CreateShape() // creates the map grid of the ocean terrain and genrates the mesh 
     {
         vertcies = new Vector3[(xSize + 1) * (zSize + 1)];
 
@@ -112,7 +112,7 @@ public class WorldGenManager : MonoBehaviour
                 triangles[tris + 5] = vert + xSize + 2;
 
                 vert++;
-                tris += 6;
+                tris += 6; // increases counter by 6 to make sure it does not update alreay set triangles 
 
             }
 
@@ -127,7 +127,7 @@ public class WorldGenManager : MonoBehaviour
 
     }
 
-    float CalHeight(int x, int y)
+    float CalHeight(int x, int y) // calculates the height to genrates a height map for the perilin noise 
     {
         float xC = (float)x / zSize * 10f + Xoffset;
         float yC =(float)y / xSize * 10f + Yoffset;
@@ -135,7 +135,7 @@ public class WorldGenManager : MonoBehaviour
         return Mathf.PerlinNoise(xC, yC);
     }
 
-    void UpdateMesh()
+    void UpdateMesh() // sets the vertices and new triangles to the mesh 
     {
         mesh.Clear();
         mesh.vertices = vertcies;

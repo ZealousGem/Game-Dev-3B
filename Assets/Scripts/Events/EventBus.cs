@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public static class EventBus
 {
 
-    private static Dictionary<Type, Delegate> SubbedActions = new();
+    private static Dictionary<Type, Delegate> SubbedActions = new(); // allows script to call event anywhere to help ehnchance decoupled and less dependencies 
 
-    public static void Act(EventData data)
+    public static void Act(EventData data) // 
     {
 
         Type newType = data.GetType();
@@ -25,7 +25,7 @@ public static class EventBus
 
     }
 
-    public static void Subscribe<T>(Action<T> act) where T : EventData
+    public static void Subscribe<T>(Action<T> act) where T : EventData // subsrbies the script to the specfic event so it can only be called based on that event 
     {
         Type type = typeof(T);
 
@@ -40,7 +40,7 @@ public static class EventBus
         }
     }
 
-    public static void Unsubscribe<T>(Action<T> act) where T : EventData
+    public static void Unsubscribe<T>(Action<T> act) where T : EventData // unsubsrbies the script to the vent once scene has changed or is destoryed so garbage collecter does not leak 
     {
         Type type = typeof(T);
 

@@ -6,7 +6,7 @@ using Unity.Mathematics;
 
 
 
-public struct PointState
+public struct PointState // struct node containing the co-orndates of the grid and what enum state the node is to check whether it is water land or enemy
 {
     public Vector3 coord;
 
@@ -24,7 +24,7 @@ public struct PointState
 
 }
 
-public class AStarNode
+public class AStarNode // astar node used to calucalte path to the center of the tower using heautric formlua
 {
     public int index;
     public AStarNode parent;
@@ -38,7 +38,7 @@ public class AStarNode
     }
 }
 
-public enum States
+public enum States // enums using to differantie nodes in the gird to create proceurdal map 
 {
     Water,
 
@@ -57,33 +57,33 @@ public class LandGenerator : MonoBehaviour
 
 
 
-    PointState[] points;
+    PointState[] points; // map gird
 
-    public int scale = 0;
+    public int scale = 0; // used to determine how many similar land neigbours are suroounding a water node to change its state to a land 
 
     [SerializeField]
 
-   public int xSize = 20;
+   public int xSize = 20; // size of the map
     [SerializeField]
 
    public  int zSize = 20;
 
-    Mesh mesh;
+    Mesh mesh; // mesh that will create the islands once neighbours and vertices have been determined 
 
-    public int num;
+    public int num; // variable used to create the enemy paths
 
     public int Wide;
 
-    public List<GameObject> jungleobjects;
+    public List<GameObject> jungleobjects; // objects tat will spawn on the islands 
 
      GameObject curjungleobjects;
 
 
-    Vector3 middle;
+    Vector3 middle; // middle co-orndiates of the map
 
     MeshCollider Landcollider;
 
-     System.Random random = new System.Random();
+     System.Random random = new System.Random(); // used to randomly generate the enum states of the nodes to create proceudral islands 
     
 
     public PointState[] getPointState()
@@ -108,7 +108,7 @@ public class LandGenerator : MonoBehaviour
 
     }
 
-    public PointState[] GenerateGrid()
+    public PointState[] GenerateGrid() // creates the map grid and randomised the enum states to each node to create a randomised proceuderadl terrain
     {
        
         points = new PointState[(xSize + 1) * (zSize + 1)];
@@ -146,7 +146,7 @@ public class LandGenerator : MonoBehaviour
 
     }
 
-   public PointState[] TowerPath()
+   public PointState[] TowerPath() // this setts the middle of the map which is 9x9 grid setting all the states to enemy to set the enemies final destination as well as making sure islands do not be created in this centre grid
     {
         int Xcenter = xSize / 2;
         int Zcenter = zSize / 2;
@@ -190,7 +190,7 @@ public class LandGenerator : MonoBehaviour
         return points;
     }
 
-    public void ThicPath(int pathWidth)
+    public void ThicPath(int pathWidth) // makes the enemy path thicker by setting any land enum states to water if a land state next to the enemy enum state  
     {
          var pointsToWiden = new HashSet<int>();
 
@@ -244,7 +244,7 @@ public class LandGenerator : MonoBehaviour
     
 
 
-    public PointState[] DetermineState()
+    public PointState[] DetermineState() // this function detects neighbours surrouding its node co-rodniate and changes to the desired state based on the rules below
     {
         PointState[] newPoints = new PointState[points.Length];
         Array.Copy(points, newPoints, points.Length);
@@ -301,7 +301,7 @@ public class LandGenerator : MonoBehaviour
 
                     if (points[i].state == States.Land)
                     {
-                        if (landNeighbours < 1)
+                        if (landNeighbours < 1) // if there are less than 1 land neighobur the land node will change to water 
                         {
                             newPoints[i].state = States.Water;
                         }
@@ -310,7 +310,7 @@ public class LandGenerator : MonoBehaviour
 
                     else if (points[i].state == States.Water)
                     {
-                        if (landNeighbours > scale)
+                        if (landNeighbours > scale) //  if there are more than 3 land neighbours, the water node will change to land 
                         {
                             newPoints[i].state = States.Land;
                         }
@@ -322,7 +322,7 @@ public class LandGenerator : MonoBehaviour
         }
 
         points = newPoints;
-        newPoints = new PointState[points.Length];
+        newPoints = new PointState[points.Length]; // overiddes the previous grid map using the new grid map creating using Moore Neighbourhood formula 
         Array.Copy(points, newPoints, points.Length);
         return points;
     }
@@ -335,7 +335,7 @@ public class LandGenerator : MonoBehaviour
         }
     }
 
-    public void AStarEnemyPathfiding()
+    public void AStarEnemyPathfiding() // this function uses astar to generate the enemy path the enemy player will traverse it uses astar from the edgoe of the map and calucaltes the lowest cost to get to the centre
     {  
         
             int BeginX, BeginZ;
@@ -343,7 +343,7 @@ public class LandGenerator : MonoBehaviour
 
             int border = random.Next(0, 4);
 
-            switch (border)
+            switch (border) // finds a random edge in the map
             {
                 case 0:
                     BeginX = random.Next(0, xSize + 1);
@@ -378,7 +378,7 @@ public class LandGenerator : MonoBehaviour
             open.Add(NodeStart);
             allNodes.Add(StartInd, NodeStart);
 
-            while (open.Count > 0)
+            while (open.Count > 0) // will find the best path from the edge to the centre by finind the lowest H
             {
 
                 AStarNode curNode = open[0];
@@ -412,11 +412,11 @@ public class LandGenerator : MonoBehaviour
                         int neighborX = x + xOff;
                         int neighborZ = z + zOff;
 
-                        if (neighborX >= 0 && neighborX <= xSize && neighborZ >= 0 && neighborZ <= zSize)
+                        if (neighborX >= 0 && neighborX <= xSize && neighborZ >= 0 && neighborZ <= zSize) // make sure grid is not out of bounds
                         {
                             int neighborIndex = neighborZ * (xSize + 1) + neighborX;
 
-                            // Check if the neighbor is valid (e.g., not water) and not in the closed set
+                            // Check if the neighbour is valid 
                             if (points[neighborIndex].state == States.Water || close.Contains(neighborIndex))
                             {
                                 continue;
@@ -432,7 +432,7 @@ public class LandGenerator : MonoBehaviour
                                 allNodes.Add(neighborIndex, neighborNode);
                             }
 
-                            // If a better path is found, update the neighbor's costs
+                            // updates the neighbor's costs if better path is found 
                             if (newGCost < neighborNode.gCost || !open.Contains(neighborNode))
                             {
                                 neighborNode.gCost = newGCost;
@@ -459,7 +459,7 @@ public class LandGenerator : MonoBehaviour
 
     }
 
-    int CalH(int startId, int endId) {
+    int CalH(int startId, int endId) { // calculates the H in the Heaursitic foromula , h(n)
         int stX = startId % (xSize + 1);
         int stZ = startId / (xSize + 1);
         int endX = endId % (xSize + 1);
@@ -468,7 +468,7 @@ public class LandGenerator : MonoBehaviour
         return Mathf.Abs(stX - endX) + Mathf.Abs(stZ - endZ);
     }
 
-    private void ReconstructPath(AStarNode endNode)
+    private void ReconstructPath(AStarNode endNode) // makes path if the current nodes index has reached the center hence a path is made 
     {
         
         AStarNode currentNode = endNode;
@@ -481,10 +481,10 @@ public class LandGenerator : MonoBehaviour
        
     }
 
-    public void CreateMesh()
+    public void CreateMesh() // creates the mesh islands once the grid map islands and enemy paths have been set
     {
         
-        string[] tags = { "Jungle" };
+        string[] tags = { "Jungle" }; // finds any exisiting objects and destroys it 
         List<GameObject> obj = new List<GameObject>();
 
         foreach (string t in tags)
@@ -502,13 +502,13 @@ public class LandGenerator : MonoBehaviour
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
 
-        List<Vector3> meshVerts = new List<Vector3>();
-        List<int> meshTriangles = new List<int>();
-        List<int> BeachTriangles = new List<int>();
-        Dictionary<int, int> landMap = new Dictionary<int, int>();
+        List<Vector3> meshVerts = new List<Vector3>(); // list that will store the co-ordnates for the vertices
+        List<int> meshTriangles = new List<int>(); // triangles that will be made from the vertices to generate mesh
+        List<int> BeachTriangles = new List<int>(); // genrates trianlges located on the edge of the isalnds 
+        Dictionary<int, int> landMap = new Dictionary<int, int>(); // dictionary used to make sure vertices are laid out similar to the pointstate grid 
         float islandHeight = 1.1f;
 
-        for (int i = 0; i < points.Length; i++)
+        for (int i = 0; i < points.Length; i++) // will only create verticies, if the node's enum state is a land to genreate islands
         {
 
             if (points[i].state == States.Land)
@@ -545,10 +545,10 @@ public class LandGenerator : MonoBehaviour
                 {
                     height = 0f;
                 }
-                float y = Mathf.PerlinNoise(points[i].coord.x * 0.1f, points[i].coord.z * 0.1f) * height;
+                float y = Mathf.PerlinNoise(points[i].coord.x * 0.1f, points[i].coord.z * 0.1f) * height; // creates the height of the island using perilins noise
                 Vector3 landVert = new Vector3(points[i].coord.x, y, points[i].coord.z);
                 meshVerts.Add(landVert);
-                landMap.Add(i, meshVerts.Count - 1);
+                landMap.Add(i, meshVerts.Count - 1); 
 
                 //  float y = Mathf.PerlinNoise(points[i].coord.x * 0.3f, points[i].coord.x * 0.1f) * 2f;
 
@@ -558,7 +558,7 @@ public class LandGenerator : MonoBehaviour
         }
 
         
-        for (int z = 0; z < zSize; z++)
+        for (int z = 0; z < zSize; z++) // adds all the vertices into the mesh triangle mesh and checks if node and its three neighbours surrounding is are land nodes to be able to create a square with 2 triangles
         {
 
             for (int x = 0; x < xSize; x++)
@@ -573,7 +573,7 @@ public class LandGenerator : MonoBehaviour
                    points[i + xSize + 1].state == States.Land &&
                    points[i + xSize + 2].state == States.Land)
                     {
-                        meshTriangles.Add(landMap[i]);
+                        meshTriangles.Add(landMap[i]); // adds the verticle to the traingles to create a square 
                         meshTriangles.Add(landMap[i + xSize + 1]);
                         meshTriangles.Add(landMap[i + 1]);
 
@@ -581,9 +581,9 @@ public class LandGenerator : MonoBehaviour
                         meshTriangles.Add(landMap[i + xSize + 1]);
                         meshTriangles.Add(landMap[i + xSize + 2]);
 
-                        bool isBeachVert = false;
+                        bool isBeachVert = false; // checks whether the vertices is located close to water nodes 
 
-                        int[] quadCornerInd = { i, i + 1, i + xSize + 1, i + xSize + 2 };
+                        int[] quadCornerInd = { i, i + 1, i + xSize + 1, i + xSize + 2 }; 
 
 
                         foreach (int cornerIDx in quadCornerInd)
@@ -591,7 +591,7 @@ public class LandGenerator : MonoBehaviour
                             int cx = cornerIDx % (xSize + 1);
                             int cz = cornerIDx / (xSize + 1);
 
-                            for (int nZ = cz - 1; nZ <= cz + 1; nZ++)
+                            for (int nZ = cz - 1; nZ <= cz + 1; nZ++) // loops through the grid 
                             {
                                 for (int nX = cx - 1; nX <= cx + 1; nX++)
                                 {
@@ -600,7 +600,7 @@ public class LandGenerator : MonoBehaviour
                                     {
 
                                         int NeighbourIndex = nZ * (xSize + 1) + nX;
-                                        if (points[NeighbourIndex].state == States.Water)
+                                        if (points[NeighbourIndex].state == States.Water) // if a water node is next  to the land node the vertice will alos be added to the beach traingles 
                                         {
                                         //    Debug.Log("through");
                                             isBeachVert = true;
@@ -614,7 +614,7 @@ public class LandGenerator : MonoBehaviour
                             if (isBeachVert) break;
                         }
 
-                        if (isBeachVert)
+                        if (isBeachVert) // adds the vertice and it's neighbours in the beach traingle list 
                         {
                             BeachTriangles.Add(landMap[i]);
                             BeachTriangles.Add(landMap[i + xSize + 1]);
@@ -624,9 +624,9 @@ public class LandGenerator : MonoBehaviour
                             BeachTriangles.Add(landMap[i + xSize + 2]);
 
                         }
-                        int num = UnityEngine.Random.Range(0, 8);
+                        int num = UnityEngine.Random.Range(0, 8); // randomises the number to determine which object will spawn on the node
 
-                        if (num == 2)
+                        if (num == 2) // spawns a tree
                         {
 
                             curjungleobjects = jungleobjects[0];
@@ -639,7 +639,7 @@ public class LandGenerator : MonoBehaviour
                         {
                             int num2 = UnityEngine.Random.Range(0, 50);
                             // Debug.Log(num2);
-                            if (num2 == 39 && !isBeachVert)
+                            if (num2 == 39 && !isBeachVert) // spawns a temple
                             {
                                 curjungleobjects = jungleobjects[1];
                                 Vector3 pos = new Vector3(points[i].coord.x, islandHeight, points[i].coord.z);
@@ -664,12 +664,12 @@ public class LandGenerator : MonoBehaviour
         }
 
         
-
-        mesh.Clear();
+        // makes the mesh once all the triangles have been set above and generates the mesh 
+        mesh.Clear(); 
         mesh.vertices = meshVerts.ToArray();
         mesh.subMeshCount = 2;
-        mesh.SetTriangles(meshTriangles.ToArray(), 0);
-        mesh.SetTriangles(BeachTriangles.ToArray(), 1);
+        mesh.SetTriangles(meshTriangles.ToArray(), 0); // genrates the island
+        mesh.SetTriangles(BeachTriangles.ToArray(), 1); // genrates the beach surrounding the islands 
 
         Landcollider.sharedMesh = mesh;
         mesh.RecalculateNormals();
@@ -683,37 +683,37 @@ public class LandGenerator : MonoBehaviour
         
     }
 
-    // void OnDrawGizmos()
-    // {
+    void OnDrawGizmos() // gizmos showing each node on the map and shows what state it is is based on it's colour 
+    {
 
-    //     if (points == null) return;
-    //     for (int i = 0; i < points.Length; i++)
-    //     {
-    //         if (points[i].state == States.Enemy)
-    //         {
-    //             Color gizmoColour = Color.red;
-    //             Gizmos.color = gizmoColour;
-    //             Gizmos.DrawSphere(points[i].coord, .1f);
+        if (points == null) return;
+        for (int i = 0; i < points.Length; i++)
+        {
+            if (points[i].state == States.Enemy)
+            {
+                Color gizmoColour = Color.red;
+                Gizmos.color = gizmoColour;
+                Gizmos.DrawSphere(points[i].coord, .1f);
 
-    //         }
+            }
 
-    //         else if (points[i].state == States.Land)
-    //         {
-    //             Color gizmoColour = Color.green;
-    //             Gizmos.color = gizmoColour;
-    //             Gizmos.DrawSphere(points[i].coord, .1f);
-    //         }
+            else if (points[i].state == States.Land)
+            {
+                Color gizmoColour = Color.green;
+                Gizmos.color = gizmoColour;
+                Gizmos.DrawSphere(points[i].coord, .1f);
+            }
 
-    //         else
-    //         {
-    //             Color gizmoColour = Color.gray;
-    //             Gizmos.color = gizmoColour;
-    //             Gizmos.DrawSphere(points[i].coord, .1f);
-    //         }
+            else
+            {
+                Color gizmoColour = Color.gray;
+                Gizmos.color = gizmoColour;
+                Gizmos.DrawSphere(points[i].coord, .1f);
+            }
 
 
-    //     }
-    // }
+        }
+    }
 
 }
 

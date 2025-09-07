@@ -8,17 +8,17 @@ public class CaermaMovemtn : MonoBehaviour
 
     public Camera cam;
 
-    float MaxZoom = 8.07f;
+    float MaxZoom = 8.07f; // allows camera to zoom 
 
     float MinZoom = 13.73183f;
 
-    Vector3 origin;
+    Vector3 origin; // mouse input location 
 
-    float plain;
+    float plain; // speed of movement 
 
     public float speed = 10;
 
-    public float minX = 0, minZ = 0, MaxX = 70, MaxZ = 40;
+    public float minX = 0, minZ = 0, MaxX = 70, MaxZ = 40; // borders to constraint camera so it does not go to edge of the terrain map 
     
     bool dragging = false;
 
@@ -57,13 +57,13 @@ public class CaermaMovemtn : MonoBehaviour
             
     }
 
-    void EndGame()
+    void EndGame() // makes the camera stop mivng 
     {
         isGameEnd = true;
        
     }
 
-    void UnPause()
+    void UnPause() // lets camera move again 
     {
         isGameEnd = false;
     }
@@ -71,14 +71,14 @@ public class CaermaMovemtn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject() && !isGameEnd)
+        if (!EventSystem.current.IsPointerOverGameObject() && !isGameEnd) // gets mouse postion to allow drag 
         {
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 origin = FindWorldPosition(Mouse.current.position.ReadValue());
                 dragging = true;
             }
-            else if (Mouse.current.leftButton.wasReleasedThisFrame)
+            else if (Mouse.current.leftButton.wasReleasedThisFrame) 
             {
                 dragging = false;
             }
@@ -97,7 +97,7 @@ public class CaermaMovemtn : MonoBehaviour
 
 
 
-        if (dragging)
+        if (dragging) // caluclates the mouses location moves the camera based on the mouses movement and changed location  
         {
             Vector3 world = FindWorldPosition(Mouse.current.position.ReadValue());
             Vector3 delta = origin - world;
@@ -115,7 +115,7 @@ public class CaermaMovemtn : MonoBehaviour
        
     }
 
-    Vector3 FindWorldPosition(Vector3 scr)
+    Vector3 FindWorldPosition(Vector3 scr) // finds the position of the mouse 
     {
 
         Ray ray = cam.ScreenPointToRay(scr);
@@ -131,7 +131,7 @@ public class CaermaMovemtn : MonoBehaviour
 
     }
 
-    void ZoominCamera()
+    void ZoominCamera() // allows the camera to zoom in and zoom out based on the max and min zoom contrains 
     {
         float scrollInput = Mouse.current.scroll.ReadValue().y;
 
