@@ -44,16 +44,28 @@ public class CaermaMovemtn : MonoBehaviour
 
     void getEndDate(EndGameEvent data)
     {
-        if (data.type == StatsChange.EndGame)
+
+        switch (data.type)
         {
-            EndGame();
+
+            case StatsChange.EndGame: EndGame(); break;
+            case StatsChange.PausedGame: EndGame(); break;
+            case StatsChange.UnPausedGame: UnPause(); break;
+
         }
+       
             
     }
 
     void EndGame()
     {
         isGameEnd = true;
+       
+    }
+
+    void UnPause()
+    {
+        isGameEnd = false;
     }
 
     // Update is called once per frame

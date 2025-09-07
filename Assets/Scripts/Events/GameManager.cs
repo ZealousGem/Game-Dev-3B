@@ -15,7 +15,11 @@ public enum StatsChange
 
     ChangeWave,
 
-    EndGame
+    EndGame,
+
+    PausedGame,
+    
+    UnPausedGame,
 
 }
 

@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using System.Collections;
 
 
 public class UIManager : MonoBehaviour
@@ -21,6 +22,8 @@ public class UIManager : MonoBehaviour
 
     public GameObject GameOverUI;
 
+    public GameObject PauseMenuUI;
+
     public TMP_Text waveUI;
 
     int WaveCounter = 1;
@@ -28,6 +31,10 @@ public class UIManager : MonoBehaviour
     int amountUI;
 
     float MaxTowerHealth = 200f;
+
+    bool isPaused = false;
+
+    bool isGameover = false;
 
 
     void OnEnable()
@@ -64,12 +71,18 @@ public class UIManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("Game");
+        if (isPaused)
+        {
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
     }
 
     void EndGame()
     {
         inGameUI.SetActive(false);
         GameOverUI.SetActive(true);
+        isGameover = true;
     }
 
     void getData(AmountEvent data)
@@ -95,8 +108,54 @@ public class UIManager : MonoBehaviour
     {
         TowerUI.SetActive(false);
         GameOverUI.SetActive(false);
+        PauseMenuUI.SetActive(false);
         TowerHealth.fillAmount = 1f;
         
+    }
+
+    void Update()
+    {
+        if (!isGameover)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (isPaused)
+                {
+                    
+                    Resume();
+                }
+
+                else
+                {
+                    EndGameEvent pause = new EndGameEvent(StatsChange.PausedGame);
+                    EventBus.Act(pause);
+                    StartCoroutine(PauseGame());
+                }
+            }
+            
+            
+        }
+    }
+
+    public IEnumerator PauseGame()
+    {
+        yield return new WaitForSeconds(0.1f);
+        inGameUI.SetActive(false);
+        PauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    public void Resume()
+    {
+
+        inGameUI.SetActive(true);
+        PauseMenuUI.SetActive(false);
+        isPaused = false;
+        Time.timeScale = 1f;
+        EndGameEvent Unpause = new EndGameEvent(StatsChange.UnPausedGame);
+        EventBus.Act(Unpause);
+
     }
 
     // Update is called once per frame

@@ -30,14 +30,34 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
     float currentAmount = 0;
 
+    bool isPasued = false;
+
     void OnEnable()
     {
-         EventBus.Subscribe<AmountEvent>(getData);
+        EventBus.Subscribe<AmountEvent>(getData);
+         EventBus.Subscribe<EndGameEvent>(getData2); 
     }
 
     void OnDisable()
     {
-         EventBus.Unsubscribe<AmountEvent>(getData);
+        EventBus.Unsubscribe<AmountEvent>(getData);
+          EventBus.Unsubscribe<EndGameEvent>(getData2);
+    }
+
+    void getData2(EndGameEvent data)
+    {
+        if (data.type == StatsChange.PausedGame)
+        {
+            isPasued = true;
+
+        }
+
+        else if (data.type == StatsChange.UnPausedGame)
+        {
+            isPasued = false;
+        }
+        
+         Debug.Log(isPasued);
     }
 
     void getData(AmountEvent data)
@@ -62,7 +82,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     public void OnDrag(PointerEventData eventData)
     {
         //  throw new System.NotImplementedException();
-        if (tempTower != null)
+        if (tempTower != null && !isPasued)
         {
             tempTower.transform.position = eventData.position;
 
@@ -75,10 +95,10 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                 {
                     if (currentAmount >= Amount)
                     {
-                          tempTower.color = Color.green;
+                        tempTower.color = Color.green;
                     }
-                  
-                   
+
+
                 }
 
                 else if (!hit.transform.CompareTag("island"))
@@ -90,19 +110,21 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
             else
             {
-                 tempTower.color = Color.red;
+                tempTower.color = Color.red;
             }
 
 
 
         }
+        
+       
     }
 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        
-        if (eventData.button == PointerEventData.InputButton.Left)
+
+        if (eventData.button == PointerEventData.InputButton.Left && !isPasued)
         {
             GameObject ob = eventData.pointerCurrentRaycast.gameObject;
             tempTower = null;
@@ -133,13 +155,23 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
 
                 }
-      
+
             }
 
             // Debug.Log(it);
 
 
         }
+
+        else
+        {
+            for (int i = 0; i < Towers.Length; i++)
+            {
+                TowerUI[i].color = Color.white;  
+            }
+        }
+
+        
         //  throw new System.NotImplementedException();
     }
 
@@ -183,6 +215,15 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
             tempTower = null;
 
 
+        }
+
+        else if (isPasued && currentAmount > Amount && tempTower != null) {
+            tempTower.color = Color.white;
+            tempTower.rectTransform.anchoredPosition = it;
+            Amount = 0;
+            //  Debug.Log(it);
+            tempTower.raycastTarget = true;
+            tempTower = null;
         }
 
     }
