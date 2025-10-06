@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
-public enum StatsChange // enums used to call event bus and create specfic event 
+public enum StatsChange
 {
 
     Health,
@@ -28,11 +28,11 @@ public class GameManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public float MainTowerHealth = 200f; 
+    public float MainTowerHealth = 200f;
 
     public int Money = 50;
 
-    public GameObject explosion; // main tower explosion effect 
+    public GameObject explosion;
 
     void OnEnable()
     {
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void DecreaseTowerHealth(float Damage) // decreases the main towers health evertyime enemy has reached it 
+    void DecreaseTowerHealth(float Damage)
     {
         if (MainTowerHealth > 0)
         {
@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(MainTowerHealth);
     }
 
-    void DecreaseMoney(float newAmount) // decreases the money player has once they have purchased a turret 
+    void DecreaseMoney(float newAmount)
     {
         if (Money > 0)
         {
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(Money);
     }
 
-    void IncreaseMoney(float newAmount) // increases money if the player has kiiled and enemy 
+    void IncreaseMoney(float newAmount)
     {
         Money += (int)newAmount;
         AmountEvent money = new AmountEvent(Money);
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
        // Debug.Log(Money);
     }
 
-    void EndGame() // ends the game if the main towers health is 0 
+    void EndGame()
     {
         Debug.Log("Game Over");
         EndGameEvent end = new EndGameEvent(StatsChange.EndGame);

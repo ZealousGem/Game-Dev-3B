@@ -7,17 +7,17 @@ public class WaveManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public List<GameObject> EnemyPrefabs; // enemies wavemanager will spawn 
+    public List<GameObject> EnemyPrefabs;
     
-    List<GameObject> Spawners; // spawners located in map
+    List<GameObject> Spawners;
 
-    float counter = 0; // cooldown timer
+    float counter = 0;
 
-    int botskilled = 0; // counter to track how many enemies have been
+    int botskilled = 0;
 
-    int maxbotKilled = 10; // used to changed wave
+    int maxbotKilled = 10;
 
-    public float maxCout = 1f; // minuium cooldown for spawner
+    public float maxCout = 1f;
 
     bool Spawned = false;
 
@@ -64,7 +64,7 @@ public class WaveManager : MonoBehaviour
         isFound = false;
     }
 
-    void IncreaseBotKilledCount(int num) // increases the enemiy kill count everytime enemy has been killed 
+    void IncreaseBotKilledCount(int num)
     {
         botskilled += num;
         if (botskilled >= maxbotKilled)
@@ -79,7 +79,7 @@ public class WaveManager : MonoBehaviour
        // Debug.Log(botskilled);
     }
 
-    IEnumerator ChangeWave() // changes the wave if enemies have reached max amount of enemies killed 
+    IEnumerator ChangeWave()
     {
         isFound = false;
 
@@ -105,7 +105,7 @@ public class WaveManager : MonoBehaviour
 
     }
 
-    IEnumerator FindSpawerns() // finds spawners on the terrain 
+    IEnumerator FindSpawerns()
     {
         yield return new WaitForSeconds(5f);
         string tag = "Enemy";
@@ -117,7 +117,7 @@ public class WaveManager : MonoBehaviour
 
     }
 
-    void SpawnEnemies() //  instates the enemy on the random spawner pciked 
+    void SpawnEnemies()
     {
         if (!Spawned)
         {

@@ -6,13 +6,13 @@ public class BuildingsGenerator : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public GameObject tower; // tower prefab
+    public GameObject tower;
 
-    public GameObject EnemySpawnersObj; // enemy spanwer prefabs enemy will spawn 
+    public GameObject EnemySpawnersObj;
 
-    public LandGenerator land; // gets the terrain map 
+    public LandGenerator land;
 
-    HashSet<Vector3> EnemySpawnerPos = new HashSet<Vector3>(); // used haset to place in the list of spawners 
+    HashSet<Vector3> EnemySpawnerPos = new HashSet<Vector3>();
 
     List<GameObject> obj;
 
@@ -30,9 +30,9 @@ public class BuildingsGenerator : MonoBehaviour
         StartCoroutine(EnemeySpawners());
     }
 
-    public void Spawn() // spawns objects above 
+    public void Spawn()
     {
-       string[] tags = { "Tower", "Enemy", "DefenceTower" }; // destorys any exisiting objects based on the tag
+       string[] tags = { "Tower", "Enemy", "DefenceTower" };
        obj = new List<GameObject>();
 
         foreach (string t in tags)
@@ -48,13 +48,13 @@ public class BuildingsGenerator : MonoBehaviour
             DestroyImmediate(obj[i]);
         }
 
-        EnemySpawnerPos.Clear(); // clears old spawner co-orndate to allow new ones to spawn 
+        EnemySpawnerPos.Clear();
 
-        StartCoroutine(SpawnTower()); 
+        StartCoroutine(SpawnTower());
         StartCoroutine(EnemeySpawners());
     }
 
-    IEnumerator SpawnTower() // spawns the tower in the centre the map 
+    IEnumerator SpawnTower()
     {
         yield return new WaitForSeconds(0.001f);
         points = land.getPointState();
@@ -71,7 +71,7 @@ public class BuildingsGenerator : MonoBehaviour
         }
     }
 
-    IEnumerator EnemeySpawners() // spawns the enemy spawners on the edge of the map  if there are any enemy node states located
+    IEnumerator EnemeySpawners()
     {
 
         yield return new WaitForSeconds(0.001f);
@@ -87,17 +87,17 @@ public class BuildingsGenerator : MonoBehaviour
 
         }
 
-        for (int i = 0; i < land.zSize; i++) // loops the map
+        for (int i = 0; i < land.zSize; i++)
         {
             for (int j = 0; j < land.xSize; j++)
             {
 
                 if (i == 0 || i == land.zSize - 1 || j == 0 || j == land.xSize - 1)
                 {
-                    int ind = i * (land.xSize + 1) + j; // finds the current node loop is on
+                    int ind = i * (land.xSize + 1) + j;
                     if (j > 0)
                     {
-                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy) // will be added if the node state is an enemy 
+                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy)
                         {
                             EnemySpawnerPos.Add(points[ind].coord);
                         }
@@ -107,7 +107,7 @@ public class BuildingsGenerator : MonoBehaviour
 
                      if ( j < land.xSize)
                     {
-                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy) // will be added if the node state is an enemy 
+                        if (ind >= 0 && ind < points.Length && points[ind].state == States.Enemy)
                         {
                             EnemySpawnerPos.Add(points[ind].coord);
                         }
@@ -125,7 +125,7 @@ public class BuildingsGenerator : MonoBehaviour
 
         
 
-        foreach (Vector3 x in EnemySpawnerPos) // isntate spawners 
+        foreach (Vector3 x in EnemySpawnerPos)
         {
 
          GameObject temp = Instantiate(EnemySpawnersObj, x, Quaternion.identity, gameObject.transform);

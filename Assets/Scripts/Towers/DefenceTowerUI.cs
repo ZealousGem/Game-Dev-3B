@@ -12,36 +12,36 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public Tower[] Towers; // Towers that player can spawn
+    public Tower[] Towers;
 
-    public Image[] TowerUI; // UI of the Tower the player can spawn 
+    public Image[] TowerUI;
 
     Image tempTower;
 
     Tower newTower;
 
-    float islandHeight = 1.1f; // this is so the Tower does not sink into the map and make sure it is above
+    float islandHeight = 1.1f;
 
-    List<Vector3> ori; // to return the ui image back to it's original location 
+    List<Vector3> ori;
 
     Vector3 it;
 
-    float Amount = 0; // amount required to buy tower
+    float Amount = 0;
 
-    float currentAmount = 0; // curret amount player has 
+    float currentAmount = 0;
 
     bool isPasued = false;
 
     void OnEnable()
     {
         EventBus.Subscribe<AmountEvent>(getData);
-        EventBus.Subscribe<EndGameEvent>(getData2); 
+         EventBus.Subscribe<EndGameEvent>(getData2); 
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<AmountEvent>(getData);
-        EventBus.Unsubscribe<EndGameEvent>(getData2);
+          EventBus.Unsubscribe<EndGameEvent>(getData2);
     }
 
     void getData2(EndGameEvent data)
@@ -60,7 +60,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
          Debug.Log(isPasued);
     }
 
-    void getData(AmountEvent data) // gets the amount of money player has
+    void getData(AmountEvent data)
     {
         currentAmount = data.changed;
         Debug.Log(currentAmount);
@@ -68,8 +68,8 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
     void Start()
     {
-        ori = new List<Vector3>(); // sets the original location of the image
-        for (int i = 0; i < Towers.Length; i++) // instaties the TowerUI Sprite from the Sprite in the scriptable object
+        ori = new List<Vector3>();
+        for (int i = 0; i < Towers.Length; i++)
         {
 
             TowerUI[i].sprite = Towers[i].TowerUI;
@@ -79,36 +79,36 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     }
 
     // Update is called once per frame
-    public void OnDrag(PointerEventData eventData) 
+    public void OnDrag(PointerEventData eventData)
     {
         //  throw new System.NotImplementedException();
         if (tempTower != null && !isPasued)
         {
-            tempTower.transform.position = eventData.position; // will change the images position based on the players mouse co-orndaites 
+            tempTower.transform.position = eventData.position;
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) // use raycast to detect whether the player is placing the tower on the islands or the water
+            if (Physics.Raycast(ray, out hit))
             {
-                
-                if (hit.transform.CompareTag("island")) // if it's casting  colliding the island mesh ui image will change to green , showing tower is placeable 
+                // If the ray hits, check if the object has the "island" tag
+                if (hit.transform.CompareTag("island"))
                 {
                     if (currentAmount >= Amount)
                     {
-                        tempTower.color = Color.green; 
+                        tempTower.color = Color.green;
                     }
 
 
                 }
 
-                else if (!hit.transform.CompareTag("island")) // if it's not casting  colliding the island mesh ui image will change to red , showing tower is not placeable 
+                else if (!hit.transform.CompareTag("island"))
                 {
                     tempTower.color = Color.red;
                 }
 
             }
 
-            else // if there are no raycast hit then colour will change to red 
+            else
             {
                 tempTower.color = Color.red;
             }
@@ -121,21 +121,21 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     }
 
 
-    public void OnPointerDown(PointerEventData eventData) // used PointerEventData so player can drag the TowerImage then place it on the map 
+    public void OnPointerDown(PointerEventData eventData)
     {
 
         if (eventData.button == PointerEventData.InputButton.Left && !isPasued)
         {
-            GameObject ob = eventData.pointerCurrentRaycast.gameObject; // gets the mouses location youusing the pointer event
+            GameObject ob = eventData.pointerCurrentRaycast.gameObject;
             tempTower = null;
             //  CaermaMovemtn.NoInv = true;
             //  List<GameObject> tempIamge = new List<GameObject>(); 
 
-            for (int i = 0; i < Towers.Length; i++) 
+            for (int i = 0; i < Towers.Length; i++)
             {
                 if (ob == TowerUI[i].gameObject)
                 {
-                    if (currentAmount >= Towers[i].reqAmount) // checks if player has enough money to buy the turret
+                    if (currentAmount >= Towers[i].reqAmount)
                     {
                         tempTower = ob.GetComponent<Image>();
                         it = ori[i];
@@ -148,7 +148,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
                     else
                     {
-                        StartCoroutine(NotEnoughMoney(TowerUI[i])); // if not image will be red and not draggable 
+                        StartCoroutine(NotEnoughMoney(TowerUI[i]));
                     }
                     // tempIamge.Add(item[i].gameObject);
 
@@ -192,22 +192,22 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
             RaycastHit hit;
 
             // Check if the ray hits a collider
-            if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("island") && currentAmount >= Amount) // checks if the raycast has hit the island mesh if not then the image will just reset and not instantiate the object
+            if (Physics.Raycast(ray, out hit) && hit.transform.CompareTag("island") && currentAmount >= Amount)
             {
-                
+                // If the ray hits, check if the object has the "island" tag
 
 
-                
-                GameObject tempObj = newTower.Prefab; // if the ray cast has hit the island mesh and the player has enough money to purchase then the tower will spawn on the mouse location
+                // Instantiate the tower prefab at the hit position
+                GameObject tempObj = newTower.Prefab;
                 Vector3 coord = new Vector3(hit.point.x, islandHeight, hit.point.z);
                 Instantiate(tempObj, coord, quaternion.identity);
-                GameManagerEvent loseMoney = new GameManagerEvent(Amount, StatsChange.MoneyLost); // money will be lost once the turret has spawned  
+                GameManagerEvent loseMoney = new GameManagerEvent(Amount, StatsChange.MoneyLost);
                 EventBus.Act(loseMoney);
 
 
             }
 
-            tempTower.color = Color.white; // resets once mouse key has been let go
+            tempTower.color = Color.white;
             tempTower.rectTransform.anchoredPosition = it;
             Amount = 0;
             //  Debug.Log(it);
@@ -217,7 +217,7 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
 
         }
 
-        else if (isPasued && currentAmount > Amount && tempTower != null) { // will reset if the game is paused 
+        else if (isPasued && currentAmount > Amount && tempTower != null) {
             tempTower.color = Color.white;
             tempTower.rectTransform.anchoredPosition = it;
             Amount = 0;

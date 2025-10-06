@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
 
     public GameObject Parent; 
 
-     void OnTriggerEnter(Collider other) // if a bomb tag collides with the enemy, the bombs damage will be notfiied in the enemy script to decrease it's health 
+     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Bomb") && other != null)
         {

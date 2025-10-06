@@ -15,7 +15,7 @@ public class EventData
 }
 
 
-public class DamageObjectEvent : EventData // migrates the damage that was inflited and goes to scripts that need to decrea their health 
+public class DamageObjectEvent : EventData
 {
 
     public int name;
@@ -30,7 +30,7 @@ public class DamageObjectEvent : EventData // migrates the damage that was infli
 
 }
 
-public class ChangeStateEvent : EventData // called when the state needs to be changed on the enemy 
+public class ChangeStateEvent : EventData
 {
 
     public int name;
@@ -46,7 +46,7 @@ public class ChangeStateEvent : EventData // called when the state needs to be c
 
 }
 
-public class GameManagerEvent : EventData // migrates data from game manager to ui mamanger so it can be displayed to the player, updates the health ui and gold ui
+public class GameManagerEvent : EventData
 {
 
     public float changed;
@@ -62,7 +62,7 @@ public class GameManagerEvent : EventData // migrates data from game manager to 
 
 }
 
-public class AmountEvent : EventData // used for the defence UI script to know how much player has whether they can spend money to get a turret 
+public class AmountEvent : EventData
 {
 
     public float changed;
@@ -77,7 +77,7 @@ public class AmountEvent : EventData // used for the defence UI script to know h
 
 }
 
-public class EndGameEvent : EventData // ends the game if the main tower has been destoryed 
+public class EndGameEvent : EventData
 {
 
     public StatsChange type;

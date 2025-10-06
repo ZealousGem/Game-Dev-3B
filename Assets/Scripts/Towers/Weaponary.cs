@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class Weaponary : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-
-    // all the tower stats 
     public float Health = 100f;
 
     float maxHealth = 0f; 
@@ -23,23 +21,21 @@ public class Weaponary : MonoBehaviour
 
     float coolDown = 0f;
 
-    // all the tower stats 
+    public GameObject Projectile;
 
-    public GameObject Projectile; // bomb that tower will shoot 
-
-    public List<Transform> locations; // location to where projectile will spawn 
+    public List<Transform> locations;
 
     public Image HealthUI;
 
     public GameObject HealthCanvas;
 
-    public GameObject Explosion; // explosion effect when tower health is at 0 
+    public GameObject Explosion;
 
     bool IsOver = false;
 
     
 
-    List<GameObject> targets = new List<GameObject>(); // list of targets that are within the towers radius 
+    List<GameObject> targets = new List<GameObject>();
 
     void Awake()
     {
@@ -74,7 +70,7 @@ public class Weaponary : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-        if (other.CompareTag("Enemy")) // if enemy is detected in the radius, enemy will be added to the list of targets 
+        if (other.CompareTag("Enemy"))
         {
 
             GameObject target = other.gameObject;
@@ -86,7 +82,7 @@ public class Weaponary : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy")) // if enemy is out of radius or is killed, enemy will be taking out of list of enemy target
+        if (other.CompareTag("Enemy"))
         {
 
             //   Debug.Log("Enemy lost");
@@ -95,7 +91,7 @@ public class Weaponary : MonoBehaviour
 
     }
 
-    void ShootEnemy() // similar to the enemy shooting script, activates if there is and enemiy in the list spawns projectile and adds froce to the target 
+    void ShootEnemy()
     {
         if (targets.Count > 0)
         {
@@ -103,17 +99,17 @@ public class Weaponary : MonoBehaviour
             GameObject currentTarget = targets[0];
 
 
-            if (currentTarget == null) // removes target if has been destoryed or moves to next one in the l;ist 
+            if (currentTarget == null)
             {
                 targets.RemoveAt(0);
                 return;
             }
 
-            transform.LookAt(currentTarget.transform.position); // aims at the enemy 
+            transform.LookAt(currentTarget.transform.position);
 
-            if (coolDown >= MaxcoolDown) // will only spawn if cooldown is equal to max cool down
+            if (coolDown >= MaxcoolDown)
             {
-                for (int i = 0; i < locations.Count; i++) // spawns the projectile and instatiate the damage on to the bomb then it adds force to the direction of the target 
+                for (int i = 0; i < locations.Count; i++)
                 {
                     GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation, gameObject.transform);
                     Rigidbody r = temp.GetComponent<Rigidbody>();
@@ -131,12 +127,12 @@ public class Weaponary : MonoBehaviour
             }
         }
     }
-    void EndTurret() // bool will set true of no more enemies in radius 
+    void EndTurret()
     {
         IsOver = true;
     }
 
-    void Update() // cooldown made to make sure tower does not spam the projectile 
+    void Update()
     {
         if (targets.Count > 0 && !IsOver)
         {
@@ -145,7 +141,7 @@ public class Weaponary : MonoBehaviour
         }
     }
     
-    void DecreaseHealth(float dam) // decreases towers health
+    void DecreaseHealth(float dam)
     {
 
         if (Health > 0)
@@ -165,7 +161,7 @@ public class Weaponary : MonoBehaviour
        
     }
 
-    IEnumerator TowerUI() // healthUI changes once Health had decreased 
+    IEnumerator TowerUI()
     {
         HealthCanvas.SetActive(true);
         HealthUI.fillAmount = Health / maxHealth;
@@ -175,7 +171,7 @@ public class Weaponary : MonoBehaviour
 
     
 
-    public void KillTower() // destorys Tower if health is 0 
+    public void KillTower()
     {
         Instantiate(Explosion, this.gameObject.transform.position, quaternion.identity);
         Destroy(this.gameObject);

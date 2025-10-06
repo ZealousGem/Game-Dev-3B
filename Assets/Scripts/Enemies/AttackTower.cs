@@ -7,7 +7,7 @@ public class AttackTower : MonoBehaviour
 
     public GameObject Explosion;
 
-    public void BlowUpTower(float Damage) // destorys enemy and inflicts damgae to main tower also instaties explosion effect 
+    public void BlowUpTower(float Damage)
     {
 
         GameManagerEvent decreaseHealth = new GameManagerEvent(Damage, StatsChange.Health);
