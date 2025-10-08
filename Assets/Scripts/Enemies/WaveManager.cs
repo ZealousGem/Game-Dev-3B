@@ -41,9 +41,15 @@ public class WaveManager : MonoBehaviour
 
     public float maxCout = 1f;
 
+    int SpawnEnemiesCounter = 0;
+
     bool Spawned = false;
 
     bool isFound = false;
+
+    int currentDamageIncrease = 0;
+
+    int currentHealthIncrease = 0; 
 
 
     void Start()
@@ -88,6 +94,7 @@ public class WaveManager : MonoBehaviour
     void IncreaseBotKilledCount(int num)
     {
         botskilled += num;
+        Debug.Log(botskilled);
         if (botskilled >= maxbotKilled)
         {
             botskilled = 0;
@@ -108,7 +115,6 @@ public class WaveManager : MonoBehaviour
             CurrentEnemies = EnemyPrefabs[waveIndex].Enemies;
             int rand = UnityEngine.Random.Range(currentWave, currentWave + 4);
             ChangeWaveSet = rand;
-            ChangeWaveSet++;
             waveIndex++;
             Debug.Log(ChangeWaveSet);
 
@@ -135,9 +141,29 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log("changed Wave" + currentWave);
+        SpawnEnemiesCounter = 0;
         ChangeWavetype();
+        IncreaseStats();
         yield return new WaitForSeconds(10f);
         isFound = true;
+    }
+
+    void IncreaseStats()
+    {
+        if (currentDamageIncrease > 0 || currentHealthIncrease > 0)
+        {
+            int newDamage = UnityEngine.Random.Range(currentDamageIncrease, currentDamageIncrease + 3);
+            int newHealth = UnityEngine.Random.Range(currentHealthIncrease, currentHealthIncrease + 3);
+
+            currentDamageIncrease += newDamage;
+            currentHealthIncrease += newHealth;
+        }
+
+        else
+        {
+            currentDamageIncrease += 3;
+            currentHealthIncrease += 5;
+        }
     }
 
     public void RegenSpawners()
@@ -165,18 +191,32 @@ public class WaveManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        if (!Spawned)
+        if (!Spawned && SpawnEnemiesCounter <= maxbotKilled)
         {
             int random = UnityEngine.Random.Range(0, CurrentEnemies.Count);
             int randomSpawner = UnityEngine.Random.Range(0, Spawners.Count);
             GameObject Enemy = CurrentEnemies[random];
             GameObject Spawer = Spawners[randomSpawner];
 
-            Instantiate(Enemy, Spawer.transform.position, quaternion.identity);
+          GameObject intst = Instantiate(Enemy, Spawer.transform.position, quaternion.identity);
+          Enemy script = intst.GetComponent<Enemy>();
+            if (script != null)
+            {
+                script.Health += currentHealthIncrease;
+                script.Damage += currentDamageIncrease;
 
+            }
+            SpawnEnemiesCounter++;
             Spawned = true;
 
         }
+
+        else
+        {
+            Debug.Log("no more enemies");
+        }
+
+        
 
     }
 

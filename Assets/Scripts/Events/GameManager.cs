@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
             MainTowerHealth -= Damage;
             GameManagerEvent HealthUI = new GameManagerEvent(MainTowerHealth, StatsChange.HealthUI);
             EventBus.Act(HealthUI);
+            GameManagerEvent EnemyKilled = new GameManagerEvent(1, StatsChange.EnemyDead);
+            EventBus.Act(EnemyKilled);
             if (MainTowerHealth <= 0)
             {
                 EndGame();

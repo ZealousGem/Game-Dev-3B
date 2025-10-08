@@ -94,11 +94,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4057fba241c565142ae3acfd2df882a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
-  Speed: 2
+  Health: 70
+  Speed: 4
   Damage: 10
-  TowerDamage: 40
-  Money: 6
+  TowerDamage: 20
+  Money: 8
   Towers: []
   HealthUI: {fileID: 2235313834282534020}
   HealthCanvas: {fileID: 6850614742484647236}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e6e85a853866e419d4dfd6c47c8d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 25
+  Speed: 10
   MaxcoolDown: 1
   Projectile: {fileID: 4979482060260821086, guid: 88de23f90fb7a7e4e974716448bb428d, type: 3}
   locations:

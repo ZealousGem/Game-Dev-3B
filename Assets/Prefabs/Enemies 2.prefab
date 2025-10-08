@@ -138,11 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4057fba241c565142ae3acfd2df882a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 100
-  Speed: 2
+  Health: 135
+  Speed: 1
   Damage: 10
-  TowerDamage: 40
-  Money: 6
+  TowerDamage: 60
+  Money: 12
   Towers: []
   HealthUI: {fileID: 2273259711771222807}
   HealthCanvas: {fileID: 6304242352011462441}
