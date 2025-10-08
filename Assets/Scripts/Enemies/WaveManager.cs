@@ -3,19 +3,41 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+public enum Enemytypes
+{
+    Health,
+    Damage,
+
+    TowerDamage,
+
+    Speed, 
+    
+
+}
+
 public class WaveManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public List<GameObject> EnemyPrefabs;
-    
+    public List<EnemyWaves> EnemyPrefabs;
+
+     List<GameObject> CurrentEnemies = new List<GameObject>();
+
+  //  public List<Enemytypes> Upgrade; 
+
     List<GameObject> Spawners;
 
     float counter = 0;
 
     int botskilled = 0;
 
+    int ChangeWaveSet = 0;
+
+    int waveIndex = 0;
+
     int maxbotKilled = 10;
+
+    int currentWave = 1;
 
     public float maxCout = 1f;
 
@@ -27,13 +49,12 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(FindSpawerns());
-       
     }
 
     void OnEnable()
     {
-         EventBus.Subscribe<GameManagerEvent>(getData);
-         EventBus.Subscribe<EndGameEvent>(getEndDate);
+        EventBus.Subscribe<GameManagerEvent>(getData);
+        EventBus.Subscribe<EndGameEvent>(getEndDate);
     }
 
     void OnDisable()
@@ -45,9 +66,9 @@ public class WaveManager : MonoBehaviour
     void getData(GameManagerEvent data)
     {
         if (StatsChange.EnemyDead == data.type)
-         {
-            IncreaseBotKilledCount((int)data.changed);     
-         }
+        {
+            IncreaseBotKilledCount((int)data.changed);
+        }
     }
 
     void getEndDate(EndGameEvent data)
@@ -56,7 +77,7 @@ public class WaveManager : MonoBehaviour
         {
             EndGame();
         }
-            
+
     }
 
     void EndGame()
@@ -73,10 +94,30 @@ public class WaveManager : MonoBehaviour
             maxbotKilled += 4;
             EndGameEvent WaveChange = new EndGameEvent(StatsChange.ChangeWave);
             EventBus.Act(WaveChange);
+            currentWave += 1;
             StartCoroutine(ChangeWave());
         }
 
-       // Debug.Log(botskilled);
+        // Debug.Log(botskilled);
+    }
+
+    void ChangeWavetype()
+    {
+        if (currentWave == ChangeWaveSet && waveIndex < EnemyPrefabs.Count)
+        {
+            CurrentEnemies = EnemyPrefabs[waveIndex].Enemies;
+            int rand = UnityEngine.Random.Range(currentWave, currentWave + 4);
+            ChangeWaveSet = rand;
+            ChangeWaveSet++;
+            waveIndex++;
+            Debug.Log(ChangeWaveSet);
+
+        }
+
+        else
+        {
+            return;
+        }
     }
 
     IEnumerator ChangeWave()
@@ -92,10 +133,11 @@ public class WaveManager : MonoBehaviour
         {
             maxCout = 0.2f;
         }
-        
-        Debug.Log("changed Wave" + maxCout);
+
+        Debug.Log("changed Wave" + currentWave);
+        ChangeWavetype();
         yield return new WaitForSeconds(10f);
-        isFound = true; 
+        isFound = true;
     }
 
     public void RegenSpawners()
@@ -112,7 +154,11 @@ public class WaveManager : MonoBehaviour
         Spawners = new List<GameObject>();
         Spawners.AddRange(GameObject.FindGameObjectsWithTag(tag));
         isFound = true;
-
+        CurrentEnemies = EnemyPrefabs[0].Enemies;
+        waveIndex++;
+         ChangeWaveSet =  UnityEngine.Random.Range(currentWave + 2, 4);
+        //ChangeWaveSet = 2;
+        Debug.Log(ChangeWaveSet);
         SpawnEnemies();
 
     }
@@ -121,9 +167,9 @@ public class WaveManager : MonoBehaviour
     {
         if (!Spawned)
         {
-            int random = UnityEngine.Random.Range(0, EnemyPrefabs.Count);
+            int random = UnityEngine.Random.Range(0, CurrentEnemies.Count);
             int randomSpawner = UnityEngine.Random.Range(0, Spawners.Count);
-            GameObject Enemy = EnemyPrefabs[random];
+            GameObject Enemy = CurrentEnemies[random];
             GameObject Spawer = Spawners[randomSpawner];
 
             Instantiate(Enemy, Spawer.transform.position, quaternion.identity);
@@ -137,7 +183,7 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
 
         if (isFound)
         {
@@ -149,9 +195,9 @@ public class WaveManager : MonoBehaviour
                 SpawnEnemies();
             }
 
-           
+
 
         }
-        
+
     }
 }

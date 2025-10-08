@@ -3804,9 +3804,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefabs:
-  - {fileID: 5082132387180764653, guid: c96c636ad49ccb043992043d3c943bcd, type: 3}
-  - {fileID: 4228287800924198557, guid: 91801ec4775b4ea41a1b25e467a2031c, type: 3}
-  - {fileID: 5434886162831474460, guid: b37d9ba27c986d04ca4fae381da679d3, type: 3}
+  - {fileID: 11400000, guid: d2f27b125746af64fa31830d4f87c403, type: 2}
+  - {fileID: 11400000, guid: 2c2b3c4469571834fb06523164dc5f32, type: 2}
+  - {fileID: 11400000, guid: 6c5886a1626d4bd4e96de05fdc41b7bf, type: 2}
   maxCout: 5
 --- !u!114 &1658828608
 MonoBehaviour:

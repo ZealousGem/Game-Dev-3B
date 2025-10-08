@@ -57,13 +57,13 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
             isPasued = false;
         }
         
-         Debug.Log(isPasued);
+     //    Debug.Log(isPasued);
     }
 
     void getData(AmountEvent data)
     {
         currentAmount = data.changed;
-        Debug.Log(currentAmount);
+      //  Debug.Log(currentAmount);
     }
 
     void Start()
