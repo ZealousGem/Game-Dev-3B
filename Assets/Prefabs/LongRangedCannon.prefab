@@ -232,8 +232,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 130
   Speed: 20
-  MaxcoolDown: 0.5
-  Damage: 20
+  MaxcoolDown: 1
+  Damage: 30
   Projectile: {fileID: 7741784476874204772, guid: 30925c697f41df94eb01ab821272517a, type: 3}
   locations:
   - {fileID: 355258864622322070}
