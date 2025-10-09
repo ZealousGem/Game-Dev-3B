@@ -168,7 +168,7 @@ MonoBehaviour:
   Health: 100
   Speed: 2
   Damage: 10
-  TowerDamage: 40
+  TowerDamage: 10
   Money: 6
   Towers: []
   HealthUI: {fileID: 2052239381712186121}

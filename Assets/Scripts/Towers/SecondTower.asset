@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fef87b9b42acf1a47ba75ef85e34417a, type: 3}
+  m_Name: SecondTower
+  m_EditorClassIdentifier: 
+  TowerUI: {fileID: 21300000, guid: 6cd5dbec63d5e83458185a75f38c182e, type: 3}
+  Prefab: {fileID: 6913008257002631414, guid: 08d302c7c42146a469dc13a740ece5fb, type: 3}
+  reqAmount: 40

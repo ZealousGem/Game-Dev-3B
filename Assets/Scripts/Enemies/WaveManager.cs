@@ -164,7 +164,7 @@ public class WaveManager : MonoBehaviour
         {
             int newDamage = UnityEngine.Random.Range(1 , 4);
             int newHealth = UnityEngine.Random.Range(5, 8);
-            int newMoney = UnityEngine.Random.Range(1, 3);
+            int newMoney = UnityEngine.Random.Range(1, 5);
 
             currentDamageIncrease += newDamage;
             currentHealthIncrease += newHealth;
