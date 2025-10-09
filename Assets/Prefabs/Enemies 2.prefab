@@ -140,8 +140,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 135
   Speed: 1
-  Damage: 10
-  TowerDamage: 60
+  Damage: 20
+  TowerDamage: 20
   Money: 12
   Towers: []
   HealthUI: {fileID: 2273259711771222807}

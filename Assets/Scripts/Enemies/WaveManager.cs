@@ -49,7 +49,9 @@ public class WaveManager : MonoBehaviour
 
     int currentDamageIncrease = 0;
 
-    int currentHealthIncrease = 0; 
+    int currentHealthIncrease = 0;
+
+    int increaseMoney = 0;
 
 
     void Start()
@@ -150,19 +152,23 @@ public class WaveManager : MonoBehaviour
 
     void IncreaseStats()
     {
-        if (currentDamageIncrease > 0 || currentHealthIncrease > 0)
+
+        if (currentWave == 3)
         {
-            int newDamage = UnityEngine.Random.Range(currentDamageIncrease, currentDamageIncrease + 3);
-            int newHealth = UnityEngine.Random.Range(currentHealthIncrease, currentHealthIncrease + 3);
+            currentDamageIncrease = 3;
+            currentHealthIncrease = 5;
+            increaseMoney = 1;
+        }
+
+        else if (currentWave > 3)
+        {
+            int newDamage = UnityEngine.Random.Range(1 , 4);
+            int newHealth = UnityEngine.Random.Range(5, 8);
+            int newMoney = UnityEngine.Random.Range(1, 3);
 
             currentDamageIncrease += newDamage;
             currentHealthIncrease += newHealth;
-        }
-
-        else
-        {
-            currentDamageIncrease += 3;
-            currentHealthIncrease += 5;
+            increaseMoney += newMoney;
         }
     }
 
@@ -182,7 +188,7 @@ public class WaveManager : MonoBehaviour
         isFound = true;
         CurrentEnemies = EnemyPrefabs[0].Enemies;
         waveIndex++;
-         ChangeWaveSet =  UnityEngine.Random.Range(currentWave + 2, 4);
+        ChangeWaveSet =  UnityEngine.Random.Range(currentWave + 2, 4);
         //ChangeWaveSet = 2;
         Debug.Log(ChangeWaveSet);
         SpawnEnemies();
@@ -204,6 +210,7 @@ public class WaveManager : MonoBehaviour
             {
                 script.Health += currentHealthIncrease;
                 script.Damage += currentDamageIncrease;
+                script.Money += increaseMoney;
 
             }
             SpawnEnemiesCounter++;
