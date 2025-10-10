@@ -54,6 +54,7 @@ public class WaveManager : MonoBehaviour
     int increaseMoney = 0;
 
 
+
     void Start()
     {
         StartCoroutine(FindSpawerns());
@@ -142,7 +143,7 @@ public class WaveManager : MonoBehaviour
             maxCout = 0.2f;
         }
 
-        Debug.Log("changed Wave" + currentWave);
+        Debug.Log("changed Wave " + currentWave);
         SpawnEnemiesCounter = 0;
         ChangeWavetype();
         IncreaseStats();
@@ -153,18 +154,19 @@ public class WaveManager : MonoBehaviour
     void IncreaseStats()
     {
 
-        if (currentWave == 3)
+        if (currentWave == 5)
         {
             currentDamageIncrease = 3;
             currentHealthIncrease = 5;
             increaseMoney = 1;
+            
         }
 
-        else if (currentWave > 3)
+        else if (currentWave > 5)
         {
-            int newDamage = UnityEngine.Random.Range(1 , 4);
-            int newHealth = UnityEngine.Random.Range(5, 8);
-            int newMoney = UnityEngine.Random.Range(1, 5);
+            int newDamage = UnityEngine.Random.Range(1 , 3);
+            int newHealth = UnityEngine.Random.Range(1, 5);
+            int newMoney = UnityEngine.Random.Range(2, 6);
 
             currentDamageIncrease += newDamage;
             currentHealthIncrease += newHealth;
@@ -188,9 +190,9 @@ public class WaveManager : MonoBehaviour
         isFound = true;
         CurrentEnemies = EnemyPrefabs[0].Enemies;
         waveIndex++;
-        ChangeWaveSet =  UnityEngine.Random.Range(currentWave + 2, 4);
+        ChangeWaveSet = 4;
         //ChangeWaveSet = 2;
-        Debug.Log(ChangeWaveSet);
+        Debug.Log("Wave type: "+ChangeWaveSet);
         SpawnEnemies();
 
     }
@@ -204,8 +206,8 @@ public class WaveManager : MonoBehaviour
             GameObject Enemy = CurrentEnemies[random];
             GameObject Spawer = Spawners[randomSpawner];
 
-          GameObject intst = Instantiate(Enemy, Spawer.transform.position, quaternion.identity);
-          Enemy script = intst.GetComponent<Enemy>();
+            GameObject intst = Instantiate(Enemy, Spawer.transform.position, quaternion.identity);
+            Enemy script = intst.GetComponent<Enemy>();
             if (script != null)
             {
                 script.Health += currentHealthIncrease;

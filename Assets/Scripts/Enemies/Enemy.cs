@@ -20,6 +20,8 @@ public class Enemy : MonoBehaviour
 
     public int Money = 10;
 
+    [HideInInspector]
+    public int MoneyGiven = 1;
 
     [HideInInspector]
 
@@ -138,7 +140,12 @@ public class Enemy : MonoBehaviour
     {
         if (Health > 0)
         {
-            
+
+            if (dam > 3)
+            {
+                 GameManagerEvent giveMoney = new GameManagerEvent(MoneyGiven, StatsChange.MonenyGained);
+                 EventBus.Act(giveMoney);
+            }
             Health -= dam;
             StartCoroutine(EnemyUI());
             if (Health <= 0)
