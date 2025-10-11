@@ -10,9 +10,32 @@ public enum Enemytypes
 
     TowerDamage,
 
-    Speed, 
-    
+    Speed,
 
+
+}
+
+public struct EnemyWeights
+{
+    GameObject Enemy;
+
+    int weight;
+
+    public EnemyWeights(GameObject _Enemy, int _weight)
+    {
+        Enemy = _Enemy;
+        weight = _weight;
+    }
+
+    public GameObject getEnemy()
+    {
+        return Enemy;
+    }
+    
+    public int getWeight()
+    {
+        return weight;
+    }
 }
 
 public class WaveManager : MonoBehaviour
@@ -21,9 +44,11 @@ public class WaveManager : MonoBehaviour
 
     public List<EnemyWaves> EnemyPrefabs;
 
-     List<GameObject> CurrentEnemies = new List<GameObject>();
+    List<EnemyWeights> Enemies = new List<EnemyWeights>();
 
-  //  public List<Enemytypes> Upgrade; 
+    List<GameObject> CurrentEnemies = new List<GameObject>();
+
+    public List<GameObject> EnemiesToSpawn = new List<GameObject>(); 
 
     List<GameObject> Spawners;
 
@@ -52,7 +77,6 @@ public class WaveManager : MonoBehaviour
     int currentHealthIncrease = 0;
 
     int increaseMoney = 0;
-
 
 
     void Start()
@@ -86,6 +110,49 @@ public class WaveManager : MonoBehaviour
         {
             EndGame();
         }
+
+    }
+
+    void CalEnemyWieghts()
+    {
+        // CurrentEnemies.Clear();
+        Enemies.Clear();
+        EnemiesToSpawn.Clear();
+        int totalWieght = 0;
+
+     if (CurrentEnemies == null || CurrentEnemies.Count == 0)
+    {
+        Debug.LogError("CurrentEnemies list is empty! Cannot calculate weights.");
+        return;
+    }
+        foreach (GameObject enemy in CurrentEnemies)
+        {
+            int randomWeight = UnityEngine.Random.Range(1, 6);
+            EnemyWeights en = new EnemyWeights(enemy, randomWeight);
+            Enemies.Add(en);
+            totalWieght += randomWeight;
+            
+
+
+        }
+        int RandomEnemyAmount = UnityEngine.Random.Range(2, 8);
+        for (int i = 0; i < RandomEnemyAmount; i++)
+        {
+           int RandomWeight = UnityEngine.Random.Range(0, totalWieght);
+           foreach (EnemyWeights e in Enemies)
+           {
+            RandomWeight -= e.getWeight();
+            if (RandomWeight < 0)
+            {
+                GameObject gameObject = e.getEnemy();
+                EnemiesToSpawn.Add(gameObject);
+                break;  
+            }
+          }
+        }
+       
+      
+
 
     }
 
@@ -147,6 +214,7 @@ public class WaveManager : MonoBehaviour
         SpawnEnemiesCounter = 0;
         ChangeWavetype();
         IncreaseStats();
+        CalEnemyWieghts();
         yield return new WaitForSeconds(10f);
         isFound = true;
     }
@@ -159,12 +227,12 @@ public class WaveManager : MonoBehaviour
             currentDamageIncrease = 3;
             currentHealthIncrease = 5;
             increaseMoney = 1;
-            
+
         }
 
         else if (currentWave > 5)
         {
-            int newDamage = UnityEngine.Random.Range(1 , 3);
+            int newDamage = UnityEngine.Random.Range(1, 3);
             int newHealth = UnityEngine.Random.Range(1, 5);
             int newMoney = UnityEngine.Random.Range(2, 6);
 
@@ -192,7 +260,8 @@ public class WaveManager : MonoBehaviour
         waveIndex++;
         ChangeWaveSet = 4;
         //ChangeWaveSet = 2;
-        Debug.Log("Wave type: "+ChangeWaveSet);
+        Debug.Log("Wave type: " + ChangeWaveSet);
+        CalEnemyWieghts();
         SpawnEnemies();
 
     }
@@ -201,9 +270,9 @@ public class WaveManager : MonoBehaviour
     {
         if (!Spawned && SpawnEnemiesCounter <= maxbotKilled)
         {
-            int random = UnityEngine.Random.Range(0, CurrentEnemies.Count);
+            int random = UnityEngine.Random.Range(0, EnemiesToSpawn.Count);
             int randomSpawner = UnityEngine.Random.Range(0, Spawners.Count);
-            GameObject Enemy = CurrentEnemies[random];
+            GameObject Enemy = EnemiesToSpawn[random];
             GameObject Spawer = Spawners[randomSpawner];
 
             GameObject intst = Instantiate(Enemy, Spawer.transform.position, quaternion.identity);
@@ -225,7 +294,7 @@ public class WaveManager : MonoBehaviour
             Debug.Log("no more enemies");
         }
 
-        
+
 
     }
 
