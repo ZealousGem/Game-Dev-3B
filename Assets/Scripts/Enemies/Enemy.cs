@@ -141,7 +141,7 @@ public class Enemy : MonoBehaviour
         if (Health > 0)
         {
 
-            if (dam > 3)
+            if (dam > 4)
             {
                  GameManagerEvent giveMoney = new GameManagerEvent(MoneyGiven, StatsChange.MonenyGained);
                  EventBus.Act(giveMoney);
