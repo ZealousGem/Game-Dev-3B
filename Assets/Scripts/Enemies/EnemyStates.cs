@@ -9,13 +9,14 @@ public abstract class EnemyStates
     public abstract void ChangeState(Enemy change, EnemyStates state);
 }
 
+// Enemy States used to easily transtion between enemy scripts to make orngaition better , read enemy script to see state functions 
 
 public class MoveState : EnemyStates
 {
 
     public override void ChangeState(Enemy change, EnemyStates state)
     {
-        // throw new System.NotImplementedException();
+       
         if (change.GetComponent<Pathing>())
         {
             Pathing path = change.GetComponent<Pathing>();
@@ -27,8 +28,8 @@ public class MoveState : EnemyStates
 
     public override void EnterState(Enemy change)
     {
-        //  throw new System.NotImplementedException();
         
+
         if (change.GetComponent<Pathing>())
         {
             Pathing path = change.GetComponent<Pathing>();
@@ -40,14 +41,14 @@ public class MoveState : EnemyStates
         }
 
     }
-    
+
 }
 
 public class AttackState : EnemyStates
 {
     public override void ChangeState(Enemy change, EnemyStates state)
     {
-        // throw new System.NotImplementedException();
+      
 
         change.enemyStates = state;
 
@@ -57,7 +58,7 @@ public class AttackState : EnemyStates
 
     public override void EnterState(Enemy change)
     {
-        //  throw new System.NotImplementedException();
+        
         if (change.GetComponent<AttackDefenceTowers>())
         {
 
@@ -98,7 +99,7 @@ public class AttackTowerState : EnemyStates
 
     public override void EnterState(Enemy change)
     {
-        //  throw new System.NotImplementedException();
+        
         if (change.GetComponent<AttackTower>())
         {
             AttackTower sucide = change.GetComponent<AttackTower>();
@@ -117,7 +118,7 @@ public class StopState : EnemyStates
 
     public override void EnterState(Enemy change)
     {
-        //  throw new System.NotImplementedException();
+        
         Debug.Log("stopped");
        
     }

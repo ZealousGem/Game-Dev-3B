@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+  // you should know what these variables do marker 
     public GameObject TowerUI;
 
     bool Displayed = false;
@@ -62,13 +63,13 @@ public class UIManager : MonoBehaviour
         
     }
 
-    void ChangeWaveCounter()
+    void ChangeWaveCounter() // changes the wave counter UI
     {
         WaveCounter += 1;
         waveUI.text = WaveCounter.ToString();
     }
 
-    public void RestartGame()
+    public void RestartGame() // Restarts the game in the scene 
     {
         SceneManager.LoadScene("Game");
         if (isPaused)
@@ -78,7 +79,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void EndGame()
+    void EndGame()  // dsiaplys game over UI
     {
         inGameUI.SetActive(false);
         GameOverUI.SetActive(true);
@@ -98,7 +99,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void UpdateHealthUI(float health)
+    void UpdateHealthUI(float health) // updates HealthUI
     {
         TowerHealth.fillAmount = health / MaxTowerHealth;
        // Debug.Log("UI Health" + TowerHealth.fillAmount);
@@ -117,7 +118,7 @@ public class UIManager : MonoBehaviour
     {
         if (!isGameover)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape))  // pauses the game based on the bool, true game is pasued , false game is not paused 
             {
                 if (isPaused)
                 {
@@ -137,12 +138,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void QuitGame()
+    public void QuitGame() // quits application 
     {
         Application.Quit();
     }
 
-    public IEnumerator PauseGame()
+    public IEnumerator PauseGame()  // pauses game and displays pasue menu 
     {
         yield return new WaitForSeconds(0.1f);
         inGameUI.SetActive(false);
@@ -151,8 +152,8 @@ public class UIManager : MonoBehaviour
         isPaused = true;
     }
 
-    public void Resume()
-    {
+    public void Resume()// hides pausemenu, dispalys ingame UI and unpauses game
+    { 
 
         inGameUI.SetActive(true);
         PauseMenuUI.SetActive(false);
@@ -165,7 +166,7 @@ public class UIManager : MonoBehaviour
 
     // Update is called once per frame
 
-    public void ShowTowerUI()
+    public void ShowTowerUI() // if button is clicked TowerUI will pop up allowing the player to buy turrets , true dispalyed, false hidden 
     {
         if (Displayed)
         {
@@ -184,7 +185,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void ChangeGoldUI(int amount)
+    void ChangeGoldUI(int amount) // changes gold UI 
     {
         GoldUI.text = amount.ToString();
         amountUI = amount;

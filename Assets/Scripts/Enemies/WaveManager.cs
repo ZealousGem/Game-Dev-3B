@@ -42,29 +42,29 @@ public class WaveManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public List<EnemyWaves> EnemyPrefabs;
+    public List<EnemyWaves> EnemyPrefabs; // enemies types wavemanager will spawn 
 
     List<EnemyWeights> Enemies = new List<EnemyWeights>();
 
-    List<GameObject> CurrentEnemies = new List<GameObject>();
+    public List<GameObject> CurrentEnemies = new List<GameObject>();
 
     public List<GameObject> EnemiesToSpawn = new List<GameObject>(); 
 
-    List<GameObject> Spawners;
+    List<GameObject> Spawners; // spawners located in map
 
-    float counter = 0;
+    float counter = 0; // cooldown timer
 
-    int botskilled = 0;
+    int botskilled = 0; // counter to track how many enemies have been
 
     int ChangeWaveSet = 0;
 
     int waveIndex = 0;
 
-    int maxbotKilled = 10;
+    int maxbotKilled = 10; // used to changed wave
 
     int currentWave = 1;
 
-    public float maxCout = 1f;
+    public float maxCout = 1f;  // minuium cooldown for spawner
 
     int SpawnEnemiesCounter = 0;
 
@@ -113,7 +113,7 @@ public class WaveManager : MonoBehaviour
 
     }
 
-    void CalEnemyWieghts()
+    void CalEnemyWieghts() // uses proablity wight sysystem to  from the enemy prefab to create unprediable waves 
     {
         // CurrentEnemies.Clear();
         Enemies.Clear();
@@ -125,7 +125,7 @@ public class WaveManager : MonoBehaviour
         Debug.LogError("CurrentEnemies list is empty! Cannot calculate weights.");
         return;
     }
-        foreach (GameObject enemy in CurrentEnemies)
+        foreach (GameObject enemy in CurrentEnemies) // adds a weight to each enemy type
         {
             int randomWeight = UnityEngine.Random.Range(1, 6);
             EnemyWeights en = new EnemyWeights(enemy, randomWeight);
@@ -135,11 +135,11 @@ public class WaveManager : MonoBehaviour
 
 
         }
-        int RandomEnemyAmount = UnityEngine.Random.Range(2, 8);
-        for (int i = 0; i < RandomEnemyAmount; i++)
+        int RandomEnemyAmount = UnityEngine.Random.Range(2, 8); // gets a random to determine amount of enemies in the wave
+        for (int i = 0; i < RandomEnemyAmount; i++) 
         {
-           int RandomWeight = UnityEngine.Random.Range(0, totalWieght);
-           foreach (EnemyWeights e in Enemies)
+           int RandomWeight = UnityEngine.Random.Range(0, totalWieght); // randomly genereates required weight 
+           foreach (EnemyWeights e in Enemies) // if enemies weight is highewr than the required weight, the enemy will spawn in the next wave
            {
             RandomWeight -= e.getWeight();
             if (RandomWeight < 0)
@@ -161,10 +161,10 @@ public class WaveManager : MonoBehaviour
         isFound = false;
     }
 
-    void IncreaseBotKilledCount(int num)
+    void IncreaseBotKilledCount(int num)  // increases the enemiy kill count everytime enemy has been killed 
     {
         botskilled += num;
-        Debug.Log(botskilled);
+        //Debug.Log(botskilled);
         if (botskilled >= maxbotKilled)
         {
             botskilled = 0;
@@ -178,15 +178,15 @@ public class WaveManager : MonoBehaviour
         // Debug.Log(botskilled);
     }
 
-    void ChangeWavetype()
+    void ChangeWavetype() // introduces new enemy types to enchance diffuculty.
     {
-        if (currentWave == ChangeWaveSet && waveIndex < EnemyPrefabs.Count)
+        if (currentWave == ChangeWaveSet && waveIndex < EnemyPrefabs.Count) // if current equals wave type change wave, the new enemy types will be added 
         {
             CurrentEnemies = EnemyPrefabs[waveIndex].Enemies;
-            int rand = UnityEngine.Random.Range(currentWave, currentWave + 4);
-            ChangeWaveSet = rand;
+            int rand = UnityEngine.Random.Range(ChangeWaveSet + 1, ChangeWaveSet + 4);
+            ChangeWaveSet = rand; // random sets wave type variable to create unprediability when enemy types are added 
             waveIndex++;
-            Debug.Log(ChangeWaveSet);
+            Debug.Log("wave type change :"+ChangeWaveSet);
 
         }
 
@@ -196,7 +196,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    IEnumerator ChangeWave()
+    IEnumerator ChangeWave() // changes the wave if enemies have reached max amount of enemies killed 
     {
         isFound = false;
 
@@ -219,7 +219,7 @@ public class WaveManager : MonoBehaviour
         isFound = true;
     }
 
-    void IncreaseStats()
+    void IncreaseStats() // Increases Enemies, Health, damage and money recieved if killed was waves contnue
     {
 
         if (currentWave == 5)
@@ -232,6 +232,7 @@ public class WaveManager : MonoBehaviour
 
         else if (currentWave > 5)
         {
+            // randomised amount to create unpredicability
             int newDamage = UnityEngine.Random.Range(1, 3);
             int newHealth = UnityEngine.Random.Range(1, 5);
             int newMoney = UnityEngine.Random.Range(2, 6);
@@ -249,7 +250,7 @@ public class WaveManager : MonoBehaviour
 
     }
 
-    IEnumerator FindSpawerns()
+    IEnumerator FindSpawerns() // finds spawners on the terrain 
     {
         yield return new WaitForSeconds(5f);
         string tag = "Enemy";
@@ -258,7 +259,7 @@ public class WaveManager : MonoBehaviour
         isFound = true;
         CurrentEnemies = EnemyPrefabs[0].Enemies;
         waveIndex++;
-        ChangeWaveSet = 4;
+        ChangeWaveSet = 3;
         //ChangeWaveSet = 2;
         Debug.Log("Wave type: " + ChangeWaveSet);
         CalEnemyWieghts();
@@ -266,7 +267,7 @@ public class WaveManager : MonoBehaviour
 
     }
 
-    void SpawnEnemies()
+    void SpawnEnemies() //  instates the enemy on the random spawner pciked 
     {
         if (!Spawned && SpawnEnemiesCounter <= maxbotKilled)
         {
@@ -302,7 +303,7 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
 
-
+    
         if (isFound)
         {
             counter += Time.deltaTime;

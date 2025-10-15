@@ -5,7 +5,7 @@ public class TowerHealth : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public GameObject Parent; 
 
-     void OnTriggerEnter(Collider other)
+     void OnTriggerEnter(Collider other) // if bomb has collided with the tower, the damaged will be migrated to the Weaponary Script 
     {
         if (other.CompareTag("EnemyBomb") && other != null)
         {
@@ -18,7 +18,7 @@ public class TowerHealth : MonoBehaviour
             EventBus.Act(dam);
             
             
-            Destroy(other.gameObject); 
+            Destroy(other.gameObject); // destorys the bomb colliding with the tower 
             }
            
         }

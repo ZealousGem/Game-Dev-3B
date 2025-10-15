@@ -5,11 +5,11 @@ using UnityEngine;
 public class Tower : ScriptableObject
 {
 
-    public Sprite TowerUI;
+    public Sprite TowerUI;  // image of the tower
 
-    public GameObject Prefab;
+    public GameObject Prefab; 
 
-    public int reqAmount; 
+    public int reqAmount;  // amount needed to spawn tower
 
 
 }

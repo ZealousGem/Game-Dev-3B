@@ -5,13 +5,7 @@ using UnityEngine;
 public class EnemyWaves : ScriptableObject
 {
 
-    public List<GameObject> Enemies;
+    public List<GameObject> Enemies; // Enemeis types contained in wave
 
-   // public bool upgrade;
-
-  //  public int increaseAmount = 0;
-
-   
-  //  public 
 
 }

@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
+// enemy stats 
     public float Health;
 
     public float Speed;
@@ -25,17 +26,17 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector]
 
-    public EnemyStates enemyStates;
+    public EnemyStates enemyStates; // current state enemy is using 
 
      [HideInInspector]
 
-    public List<GameObject> Towers = new List<GameObject>();
+    public List<GameObject> Towers = new List<GameObject>(); // defence towers that will be located in its radius 
 
-    public Image HealthUI;
+    public Image HealthUI; // ui to show how much health the enemy has left 
 
     public GameObject HealthCanvas;
 
-    public GameObject Explosion;
+    public GameObject Explosion; // explosion effect once enemy is dead 
 
     float maxHealth = 0;
 
@@ -73,7 +74,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void setStopState()
+    void setStopState() // stop state happenes once game is over making enemy stop
     {
         Towers.RemoveAll(Towers.Contains);
         enemyStates.ChangeState(this, Stop);
@@ -113,15 +114,15 @@ public class Enemy : MonoBehaviour
        
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other) // if tower is located enemy will change to attackstate and add the tower to it's list so it can go to the other once it has killed the fromer 
     {
         if (other.CompareTag("Tower"))
         {
             enemyStates.ChangeState(this, TowerState);
-            enemyStates.EnterState(this);
+            enemyStates.EnterState(this);  // enemy will change state to attack main tower state if radius is close to main tower
         }
 
-        else if (other.CompareTag("DefenceTower"))
+        else if (other.CompareTag("DefenceTower"))  // if tower is located enemy will change to attackstate and add the tower to it's list so it can go to the other once it has killed the fromer
         {
             StartCoroutine(SeesEnemy(other.gameObject));
         }
@@ -136,7 +137,7 @@ public class Enemy : MonoBehaviour
     }
 
 
-    void DecreaseHealth(float dam)
+    void DecreaseHealth(float dam)  // decreases enemy health
     {
         if (Health > 0)
         {
@@ -159,15 +160,15 @@ public class Enemy : MonoBehaviour
        
     }
     
-    IEnumerator EnemyUI()
+    IEnumerator EnemyUI() // HealthUI changes if enemies health has decreased 
     {
         HealthCanvas.SetActive(true);
         HealthUI.fillAmount = Health / maxHealth;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f); 
         HealthCanvas.SetActive(false);
     }
 
-    public void KillEnemy()
+    public void KillEnemy() // destorys the enemy and gives the player money so they can use it to buy turrets 
     {
         float money = Money;
         GameManagerEvent giveMoney = new GameManagerEvent(money, StatsChange.MonenyGained);
