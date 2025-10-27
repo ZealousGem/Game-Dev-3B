@@ -1,0 +1,395 @@
+{
+  "names": [
+    "Commander Rex",
+    "Tech Sergeant",
+    "Forward Scout",
+    "Heavy Gunner",
+    "The Engineer"
+  ],
+  "image": [
+    "commander_rex.png",
+    "tech_sergeant.png",
+    "forward_scout.png",
+    "heavy_gunner.png",
+    "the_engineer.png"
+  ],
+  "pictureOfCharacter": {
+    "type": [
+      {
+        "wavesID": 1,
+        "condition": [
+          {
+            "conditions": "Tower_Health_Less_Than_50",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "The main defenses are buckling! Press the advantage!" }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "Focus everything on that south wall. Crack it open!" }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "They are retreating. Their core is ours for the taking." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "Victory is within our grasp. Show them no mercy." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "Initiate phase two: targeted elimination of their command staff." }
+                ]
+              }
+            ]
+          },
+          {
+            "conditions": "Tower_Health_Equals_100",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "Report! The defenses are fully restored. Unacceptable!" }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "Fall back and regroup. We underestimated their resilience." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "Change of plan. Target their energy supply first." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "Hold position, maintain cover. We await the signal for a second strike." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "The first attack failed. I want an explanation, and a better strategy!" }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "wavesID": 2,
+        "condition": [
+          {
+            "conditions": "Tower_Health_Less_Than_50",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "Their power conduits are rupturing! Maintain suppression fire!" }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "I'm rerouting our energy to bypass their shields completely." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "The internal network is ours. Shutting down their cooling systems now." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "Diagnostic complete: structural integrity at critical low. One more hit!" }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "The shields are gone! We are clear to deploy the main shock troops." }
+                ]
+              }
+            ]
+          },
+          {
+            "conditions": "Tower_Health_Equals_100",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "Their signal is too strong! We cannot breach their network." }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "My jamming sequence failed. They've countered the frequency." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "All systems are locked down tight. We need a physical breach." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "Their defenses are flawless. I can't find a single vulnerability." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "Report the status of the firewall. It's impenetrable!" }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "wavesID": 3,
+        "condition": [
+          {
+            "conditions": "Tower_Health_Less_Than_50",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "I'm inside the perimeter! The breach is clear for the main force!" }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "Confirmed: I've planted the beacon directly on the core chamber." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "They're too slow. The command center is exposed and panicking." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "Setting charges on the reactor supports. Countdown initiated." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "The resistance is collapsing. They don't know we're already behind them." }
+                ]
+              }
+            ]
+          },
+          {
+            "conditions": "Tower_Health_Equals_100",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "Their patrols are too tight. I can't find a gap in the perimeter." }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "The outer wall is fully reinforced. Mission aborted, extracting now." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "They anticipated the route. We need a new infiltration point." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "They have high-grade sensors. They see everything we do." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "The scout line is compromised. Withdraw before they pin us down." }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "wavesID": 4,
+        "condition": [
+          {
+            "conditions": "Tower_Health_Less_Than_50",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "That blast took out half their defensive guns! We have air superiority!" }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "Keep feeding the railgun! We're breaching the secondary shield." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "Ammunition reserves are running low, requesting emergency resupply." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "Weapon systems are hot! Nothing can withstand this firepower!" }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "I've got a lock on the reactor dome! Preparing final shot!" }
+                ]
+              }
+            ]
+          },
+          {
+            "conditions": "Tower_Health_Equals_100",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "My cannon overheated. The blast shields held firm!" }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "Wasting ammo. We need specialized ordinance for this armor." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "We can't get past their point defense. Retreat to a safe range." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "The tower absorbed the payload without a scratch. This is futile." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "Dammit, they fixed the breach instantly! This is going nowhere!" }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "wavesID": 5,
+        "condition": [
+          {
+            "conditions": "Tower_Health_Less_Than_50",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "The structure is failing exactly as predicted. It's time to pull the trigger." }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "I've reversed the polarity on their own shield generators. Enjoy the feedback!" }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "The pressure regulators are about to blow. Stand back!" }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "Their life support is offline. Watch them struggle." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "Initiating self-destruct sequence on the captured utility bots!" }
+                ]
+              }
+            ]
+          },
+          {
+            "conditions": "Tower_Health_Equals_100",
+            "waves": [
+              {
+                "DialogueID": 1,
+                "Narration": [
+                  { "lines": "My sabotage attempts have been nullified. Their systems are too secure." }
+                ]
+              },
+              {
+                "DialogueID": 2,
+                "Narration": [
+                  { "lines": "I can't bypass the primary firewall. They've updated their encryption." }
+                ]
+              },
+              {
+                "DialogueID": 3,
+                "Narration": [
+                  { "lines": "The core is running too efficiently. We can't introduce a fault." }
+                ]
+              },
+              {
+                "DialogueID": 4,
+                "Narration": [
+                  { "lines": "We need a level-4 clearance code. None of my bypasses are working." }
+                ]
+              },
+              {
+                "DialogueID": 5,
+                "Narration": [
+                  { "lines": "Abort all demolition charges. The structural integrity is too high." }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
