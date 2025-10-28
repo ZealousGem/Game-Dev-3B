@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,11 +26,13 @@ public class DialogueManager : MonoBehaviour
 
     public List<string> dialogue = new List<string>();
 
+    public DialogueSystem dialgoueSystem;
+
     GameCondition cond;
 
     public string names;
 
-    public  string Picture;
+    public string Picture;
 
     void Start()
     {
@@ -53,7 +56,7 @@ public class DialogueManager : MonoBehaviour
                 String[] conditionRand = { GameCondition.Tower_Health_Less_Than_50.ToString(), GameCondition.Tower_Health_Equals_100.ToString() };
                 System.Random random = new System.Random();
                 string temp = conditionRand[random.Next(conditionRand.Length)];
-               // Debug.Log(temp);
+                // Debug.Log(temp);
                 LoadNarrative(temp);
 
 
@@ -71,18 +74,18 @@ public class DialogueManager : MonoBehaviour
     void LoadNarrative(string _cond)
     {
         bool dialougeloaded = false;
-        if (waveCounter > 20)
+        if (waveCounter > 5)
         {
 
             return;
         }
 
-       // List<Condition> lines = new List<Condition>();
-      //   List<LineEvent>wavetypes = new List<LineEvent>();
+        // List<Condition> lines = new List<Condition>();
+        //   List<LineEvent>wavetypes = new List<LineEvent>();
 
-      string targetConditionString = _cond.ToString();
+        string targetConditionString = _cond.ToString();
 
-       List<LineEvent>  wavetypes = Characters.pictureOfCharacter.type;
+        List<LineEvent> wavetypes = Characters.pictureOfCharacter.type;
 
         for (int i = 0; i < wavetypes.Count; i++)
         {
@@ -92,7 +95,7 @@ public class DialogueManager : MonoBehaviour
 
                 for (int j = 0; j < lines.Count; j++)
                 {
-                  //  Debug.Log(lines[j].conditions);
+                    //  Debug.Log(lines[j].conditions);
                     if (lines[j].conditions.ToString() == targetConditionString)
                     {
                         LoadDialogue(lines[j].waves);
@@ -105,11 +108,11 @@ public class DialogueManager : MonoBehaviour
                 break;
             }
         }
-        
+
         if (!dialougeloaded)
-       {
-        Debug.Log("No matching dialogue condition was found for wave " + waveCounter + " and condition " + _cond.ToString());
-       }
+        {
+            Debug.Log("No matching dialogue condition was found for wave " + waveCounter + " and condition " + _cond.ToString());
+        }
 
 
     }
@@ -127,7 +130,7 @@ public class DialogueManager : MonoBehaviour
         int num = UnityEngine.Random.Range(0, integer.Count);
 
         List<DialogueLines> tempL = _dialogue[num].Narration;
-      //  Debug.Log(tempL[0].lines);
+        //  Debug.Log(tempL[0].lines);
 
         foreach (DialogueLines i in tempL)
         {
@@ -135,9 +138,9 @@ public class DialogueManager : MonoBehaviour
         }
 
 
-       Debug.Log($"Dialogue loaded for wave {waveCounter}. Speaker: {names}. Line: {dialogue[0]}");
+       // Debug.Log($"Dialogue loaded for wave {waveCounter}. Speaker: {names}. Line: {dialogue[0]}");
 
-         
+        dialgoueSystem.StartDialogue(names, Picture, dialogue);
     }
 
     // Update is called once per frame
@@ -156,5 +159,34 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    public void NextButton()
+    {
+        waveCounter++;
+        String[] conditionRand = { GameCondition.Tower_Health_Less_Than_50.ToString(), GameCondition.Tower_Health_Equals_100.ToString() };
+        System.Random random = new System.Random();
+        string temp = conditionRand[random.Next(conditionRand.Length)];
+                // Debug.Log(temp);
+        LoadNarrative(temp);
 
+    }
+
+
+}
+
+ [CustomEditor(typeof(DialogueManager))]
+
+ public class Button : Editor
+{
+    
+    public override void OnInspectorGUI()
+    {
+        DialogueManager land = (DialogueManager)target;
+     
+
+        DrawDefaultInspector();
+        if (GUILayout.Button("Generate"))
+        {
+            land.NextButton();
+        }
+    }
 }
