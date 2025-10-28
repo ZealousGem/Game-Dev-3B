@@ -21,71 +21,41 @@
           {
             "conditions": "Tower_Health_Less_Than_50",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "The main defenses are buckling! Press the advantage!" }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "Focus everything on that south wall. Crack it open!" }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "They are retreating. Their core is ours for the taking." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "Victory is within our grasp. Show them no mercy." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "Initiate phase two: targeted elimination of their command staff." }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "Our first assault cut deep! The tower is vulnerable, Commander." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Their shield emitters are failing already. This is working!" } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Send in the shock troops! We must capitalize on this structural damage." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "We have the momentum. Press them to the breaking point before they can repair." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "First wave success! Maintain pressure, the enemy is panicking." } ] }
             ]
           },
           {
             "conditions": "Tower_Health_Equals_100",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "Report! The defenses are fully restored. Unacceptable!" }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "Fall back and regroup. We underestimated their resilience." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "Change of plan. Target their energy supply first." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "Hold position, maintain cover. We await the signal for a second strike." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "The first attack failed. I want an explanation, and a better strategy!" }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "Initial assault failed to scratch the paint. Their defenses are too strong." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "No structural damage reported. We need a new vector, stat." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Fall back and re-evaluate our ordinance. This standard payload won't cut it." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "We underestimated their defenses. The first wave was a total loss." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "The enemy didn't even flinch. We must change our entire strategy for Wave 2." } ] }
+            ]
+          },
+          {
+            "conditions": "Lots_Of_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "Excellent raid! We are rich. Upgrade the turret defenses immediately." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "With this budget, we can double our research speed. Go for the advanced tech." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Financial reports look stellar. Buy every mercenary unit available!" } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "Keep that resource line secured! We are operating at peak economic power." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Our spending power alone is terrifying. Let's make it count." } ] }
+            ]
+          },
+          {
+            "conditions": "Not_alotOf_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "Warning! Reserves are low. We must be highly selective with our next deployment." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Austerity measures are now in effect. Conserve every shot, Commander." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "No new construction this wave. We must survive on pure grit and skill." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "Scraping the barrel. Focus fire on the enemy's gold transporters!" } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "We're fighting broke. Prioritize survival and securing a single resource point." } ] }
             ]
           }
         ]
@@ -96,71 +66,41 @@
           {
             "conditions": "Tower_Health_Less_Than_50",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "Their power conduits are rupturing! Maintain suppression fire!" }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "I'm rerouting our energy to bypass their shields completely." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "The internal network is ours. Shutting down their cooling systems now." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "Diagnostic complete: structural integrity at critical low. One more hit!" }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "The shields are gone! We are clear to deploy the main shock troops." }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "Wave 2 is maintaining the breach! Their repair crews can't keep up." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "I'm rerouting our fire through the new weak point. Direct hit incoming!" } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "The tower's cooling systems are exposed. Target them for maximum damage." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "Their counter-fire is weakening. We have them on the ropes now." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "The siege is going perfectly. They are now committed to a losing fight." } ] }
             ]
           },
           {
             "conditions": "Tower_Health_Equals_100",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "Their signal is too strong! We cannot breach their network." }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "My jamming sequence failed. They've countered the frequency." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "All systems are locked down tight. We need a physical breach." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "Their defenses are flawless. I can't find a single vulnerability." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "Report the status of the firewall. It's impenetrable!" }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "They fully recovered from our last push. It's like we never attacked." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Wave 2 is encountering reinforced shielding. We're hitting a brick wall." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "My sensor arrays can't find a single vulnerability. This is frustrating." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "We're wasting forces. Recommend immediate retreat and re-planning." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "They’ve adapted too quickly. This wave's objective is now survival, not offense." } ] }
+            ]
+          },
+          {
+            "conditions": "Lots_Of_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "The war machine is well-oiled! Buying heavy armor for the next offensive." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "We’ve secured a second resource node. Time to upgrade our command structure." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Our spending is intimidating the enemy! Psychological warfare through pure wealth." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "I see a resource surplus! Let's build redundant defenses, just in case." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Money is our shield and our sword. Keep the banks happy." } ] }
+            ]
+          },
+          {
+            "conditions": "Not_alotOf_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "We are still dangerously poor. The enemy's economy is crushing ours." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Our units are under-equipped. Focus on hit-and-run tactics." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "The repair bill is massive, and we can't afford it. Minimize unit loss!" } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "We need to capture that center market or this ends now." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "I'm rationing energy and ammo. We must endure this shortage." } ] }
             ]
           }
         ]
@@ -171,71 +111,41 @@
           {
             "conditions": "Tower_Health_Less_Than_50",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "I'm inside the perimeter! The breach is clear for the main force!" }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "Confirmed: I've planted the beacon directly on the core chamber." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "They're too slow. The command center is exposed and panicking." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "Setting charges on the reactor supports. Countdown initiated." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "The resistance is collapsing. They don't know we're already behind them." }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "Wave 3 has achieved an internal breach! The tower is compromised!" } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "I've planted a thermal charge directly on the core chamber. Incoming explosion!" } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Their defensive grid is offline! We have free reign to target vital systems." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "They are sending in desperate, disorganized units. The end is near." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "The structural failure is irreversible. Prepare for the collapse sequence." } ] }
             ]
           },
           {
             "conditions": "Tower_Health_Equals_100",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "Their patrols are too tight. I can't find a gap in the perimeter." }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "The outer wall is fully reinforced. Mission aborted, extracting now." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "They anticipated the route. We need a new infiltration point." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "They have high-grade sensors. They see everything we do." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "The scout line is compromised. Withdraw before they pin us down." }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "Their repair systems are miraculously effective. The tower is still perfect." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Wave 3 has retreated. We need a weapon that deals sustained, heavy damage." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "We've been locked out of every access point. Total defensive mastery." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "The cost of breaking through is too high. We need a sneak attack." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Their integrity is 100%. We are failing to establish a foothold." } ] }
+            ]
+          },
+          {
+            "conditions": "Lots_Of_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "Cash reserves are at a record high! Time to buy the map control." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "We're flooding the area with high-tier units. No expense spared!" } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Authorize the purchase of all rare resources. Our tech must be unrivaled." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "The enemy is suffering from economic anxiety. Use our wealth as a weapon!" } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "This much gold guarantees our victory. It's just a matter of time." } ] }
+            ]
+          },
+          {
+            "conditions": "Not_alotOf_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "We are desperately short on funds. Every decision is high-risk." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "We've lost our mining operation. Our resources are critically low." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "I can only afford basic repairs. We cannot sustain this pressure." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "The enemy's abundance is demoralizing our troops. Find a way to generate income!" } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "We are operating at a financial deficit. This game is slipping away." } ] }
             ]
           }
         ]
@@ -246,71 +156,41 @@
           {
             "conditions": "Tower_Health_Less_Than_50",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "That blast took out half their defensive guns! We have air superiority!" }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "Keep feeding the railgun! We're breaching the secondary shield." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "Ammunition reserves are running low, requesting emergency resupply." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "Weapon systems are hot! Nothing can withstand this firepower!" }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "I've got a lock on the reactor dome! Preparing final shot!" }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "The tower's life support is failing. We’ve turned their home into a tomb!" } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Wave 4 is clearing the way for the final execution payload." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Keep the shield generators suppressed! The enemy is highly vulnerable." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "Our campaign is nearing its glorious conclusion. Hit them one more time!" } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Structural integrity below 20%. The tower is about to go critical." } ] }
             ]
           },
           {
             "conditions": "Tower_Health_Equals_100",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "My cannon overheated. The blast shields held firm!" }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "Wasting ammo. We need specialized ordinance for this armor." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "We can't get past their point defense. Retreat to a safe range." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "The tower absorbed the payload without a scratch. This is futile." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "Dammit, they fixed the breach instantly! This is going nowhere!" }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "We've exhausted our high-damage options. The tower remains pristine." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Wave 4 is failing to inflict any damage. This is a siege we cannot win." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "They are fully anticipating our every move. We have no tactical advantage." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "Recommend a strategic withdrawal. We cannot afford another wasted wave." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Total defensive failure on our part. They have neutralized our entire offense." } ] }
+            ]
+          },
+          {
+            "conditions": "Lots_Of_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "We are funding a war on two fronts! Our economy is unstoppable." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Deploy the experimental units—we can afford the collateral!" } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Every unit lost is instantly replaced. We have the ultimate war of attrition." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "The financial reports are a monument to our victory." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "We will buy this entire area and rebuild it as our forward base." } ] }
+            ]
+          },
+          {
+            "conditions": "Not_alotOf_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "We have no money for reinforcements. We must rely on luck this wave." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "We are now selling defensive structures just to keep the lights on." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "The financial situation is critical. I'm worried about desertion." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "We must gamble everything on a single, cheap, powerful strike." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Report: Our credit is exhausted. We are completely reliant on battlefield scraps." } ] }
             ]
           }
         ]
@@ -321,75 +201,924 @@
           {
             "conditions": "Tower_Health_Less_Than_50",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "The structure is failing exactly as predicted. It's time to pull the trigger." }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "I've reversed the polarity on their own shield generators. Enjoy the feedback!" }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "The pressure regulators are about to blow. Stand back!" }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "Their life support is offline. Watch them struggle." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "Initiating self-destruct sequence on the captured utility bots!" }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "Final push confirmed! The core is exposed and moments from total meltdown." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "This is it, Commander. The final wave of fire will secure our victory!" } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "They're attempting a last-ditch repair! Suppress them immediately!" } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "The enemy forces are in full flight. We have won the siege!" } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Victory is undeniable. Prepare to secure the ruins of the tower." } ] }
             ]
           },
           {
             "conditions": "Tower_Health_Equals_100",
             "waves": [
-              {
-                "DialogueID": 1,
-                "Narration": [
-                  { "lines": "My sabotage attempts have been nullified. Their systems are too secure." }
-                ]
-              },
-              {
-                "DialogueID": 2,
-                "Narration": [
-                  { "lines": "I can't bypass the primary firewall. They've updated their encryption." }
-                ]
-              },
-              {
-                "DialogueID": 3,
-                "Narration": [
-                  { "lines": "The core is running too efficiently. We can't introduce a fault." }
-                ]
-              },
-              {
-                "DialogueID": 4,
-                "Narration": [
-                  { "lines": "We need a level-4 clearance code. None of my bypasses are working." }
-                ]
-              },
-              {
-                "DialogueID": 5,
-                "Narration": [
-                  { "lines": "Abort all demolition charges. The structural integrity is too high." }
-                ]
-              }
+              { "DialogueID": 1, "Narration": [ { "lines": "It's impossible. They rebuilt the tower stronger than before. We must retreat." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "Their integrity is flawless. We have failed the main objective." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "They have total air and ground superiority. Pull back, NOW!" } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "This wave is a complete disaster. We lost too much trying to break through." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "The final attack failed. Recommend preparing for the enemy's inevitable counter-attack." } ] }
+            ]
+          },
+          {
+            "conditions": "Lots_Of_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "We have fully funded the war. The rest is just execution." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "The enemy has no answer for this level of economic power. We win." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "Deploy the most expensive, devastating weapon we have. We can afford it!" } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "Financial victory achieved. Our empire is secure." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "Spend the last of the reserves on a massive morale booster for the troops!" } ] }
+            ]
+          },
+          {
+            "conditions": "Not_alotOf_Gold",
+            "waves": [
+              { "DialogueID": 1, "Narration": [ { "lines": "We are bankrupt. The mission is officially over due to lack of funding." } ] },
+              { "DialogueID": 2, "Narration": [ { "lines": "The final wave of enemy troops has arrived, and we have nothing left to fight them." } ] },
+              { "DialogueID": 3, "Narration": [ { "lines": "We've failed to manage our resources. The consequences are dire." } ] },
+              { "DialogueID": 4, "Narration": [ { "lines": "Total financial collapse. We can only stand and fight with what we have." } ] },
+              { "DialogueID": 5, "Narration": [ { "lines": "This is a failure of logistics. We lost before the fighting even finished." } ] }
             ]
           }
         ]
+      },
+     {
+  "wavesID": 6,
+  "condition": [
+    {
+      "conditions": "Tower_Health_Less_Than_50",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Mid-game report: The primary structural support is now failing across the board." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "The enemy is committing reserves to repair. Ignore them; focus all fire on the exposed reactor." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "We've passed the point of no return. Their tower will fall this phase if we maintain the pressure." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "They are desperate! The defenders are using civilian vehicles for cover." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "Victory is now quantifiable. We are minutes away from total collapse of their defense." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Tower_Health_Equals_100",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Wave 6 is ineffective. They have fully reinforced all weak points we exposed." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "The enemy is adapting faster than we can change tactics. We are hitting a wall." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "I see zero percent damage. They are executing a perfect defense." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "Our reconnaissance was faulty. This tower is far more resilient than expected." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "Recommend a long-range bombardment strategy. Close-quarters assaults are useless." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Lots_Of_Gold",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "We are drowning in gold! Fund two new tech projects immediately." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "Our economy is now self-sustaining. We can afford to ignore all minor losses." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "Purchase the heavy drone fleet. We need to maintain resource security from the air." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "Financial dominance is leading to tactical dominance. Keep the budget high." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "The treasury is so full, we are investing in local infrastructure for future use." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Not_alotOf_Gold",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Critical gold shortage persists. We must cannibalize older equipment for parts." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "We are operating entirely on captured resources now. Scavenge every wreck!" }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "The enemy knows we're weak. Brace for a heavily armored counter-attack we cannot afford to match." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "Hold the repair queue. We can only afford essential survival upgrades this wave." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "Morale is failing due to the resource scarcity. We need a financial miracle." }
+          ]
+        }
+      ]
+    }
+  ]
+},
+    {
+  "wavesID": 7,
+  "condition": [
+    {
+      "conditions": "Tower_Health_Less_Than_50",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "The enemy command is in **chaos**! They're sending out conflicting repair orders." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "Their remaining defenses are totally isolated. Focus fire on the largest cluster!" }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "We are now seeing critical power fluctuations across their entire network. Excellent work." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "They are trying to surrender, Commander. Ignore them and press the advantage!" }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "The defensive line is dissolving. It's now a hunting mission, not a siege." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Tower_Health_Equals_100",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Their **counter-attack is massive**! We need air support immediately or we'll be overrun." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "They've repaired the damage faster than we inflicted it. We're losing ground." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "Wave 7 is a tactical disaster. The enemy has forced us into a full defensive posture." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "They deployed a new layer of armor. Our railguns are useless against it." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "Abort the frontal assault! We are taking unsustainable losses for zero gain." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Lots_Of_Gold",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Our **financial superiority is crushing them**. Purchase and deploy the experimental tank unit." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "The war chest allows for maximum risk. Order a full saturation bombardment, regardless of cost." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "The gold keeps rolling in. We've built an impenetrable wall behind our advancing army." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "We are now buying up the enemy's own contractors. They're fighting their own engineers!" }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "Resource levels are Green. We can commit to the long haul without worry." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Not_alotOf_Gold",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "We're down to **ancient tech** and basic infantry. Conserve ammunition!" }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "I'm cutting power to non-essential units. We need every credit for repairs." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "Financial reports are dire. Our ability to field any new units is zero." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "We must gamble on a high-value target this wave. We need a massive payday." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "The enemy's abundance is humiliating. We are fighting this war with scraps." }
+          ]
+        }
+      ]
+    }
+  ]
+},
+    {
+  "wavesID": 8,
+  "condition": [
+    {
+      "conditions": "Tower_Health_Less_Than_50",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Target the **final shield array**! Once that's down, the core is exposed." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "The structural failure is causing power surges. Use their own energy against them!" }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "We are successfully isolating the remaining defense pockets. This is a rout." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "Enemy engineers are trying frantic, last-minute fixes. Don't give them a second to breathe." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "This is the tipping point. Double all fire on the south flank—it's about to crack." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Tower_Health_Equals_100",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "The new defensive perimeter is too tight. **We can't even get close** without heavy losses." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "Our latest explosive payload had zero effect. Their armor plating is ridiculously thick." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "Tactical retreat is imminent. We are bleeding units for a siege that is clearly unwinnable." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "They are mocking our attempts. The tower stands completely undamaged after eight waves." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "We need extreme, prototype-level firepower. Nothing in our current arsenal can breach this defense." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Lots_Of_Gold",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Send an offer to **buy out the local militia**. We need their intel and their fighters." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "Use the excess funds to build a distraction fortress on the eastern front." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "Our resource gathering is phenomenal. We are now exporting gold back to our home world." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "Buy the new generation of battle-drones. Budget approval is automatic." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "We have the cash to hire a full intelligence network. Find every enemy weakness." }
+          ]
+        }
+      ]
+    },
+    {
+      "conditions": "Not_alotOf_Gold",
+      "waves": [
+        {
+          "DialogueID": 1,
+          "Narration": [
+            { "lines": "Our units are **starving**! We cannot sustain this level of combat without supplies." }
+          ]
+        },
+        {
+          "DialogueID": 2,
+          "Narration": [
+            { "lines": "The remaining gold must be spent entirely on unit maintenance. No new purchases." }
+          ]
+        },
+        {
+          "DialogueID": 3,
+          "Narration": [
+            { "lines": "Logistics failure. We need to secure that captured supply point immediately or face a mutiny." }
+          ]
+        },
+        {
+          "DialogueID": 4,
+          "Narration": [
+            { "lines": "Our only hope is to lure the enemy into an advantageous trap. We can't fight them straight up." }
+          ]
+        },
+        {
+          "DialogueID": 5,
+          "Narration": [
+            { "lines": "I'm issuing outdated gear. We are dangerously close to running out of viable equipment." }
+          ]
+        }
+      ]
+    }
+  ]
+},      
+  {
+    "wavesID": 9,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "The tower is ready to detonate! We just need one more strong push!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Their internal defenses are all offline. Fire the orbital strike now." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Total defensive systems failure detected. It's only a matter of seconds now." } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We are retreating to the perimeter. They've repaired faster than we can hit." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Abort the assault, Commander. We cannot inflict any meaningful damage." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "This is a perfect defense. Our resources are too strained to continue the siege." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Our coffers are inexhaustible. Fund all new unit types immediately!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We are operating at peak war economy. Financial victory is guaranteed." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The spending budget is unlimited. Buy out their support staff!" } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Total resource failure imminent. Prepare for the inevitable counter-attack." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We must secure a resource point or face total bankruptcy this wave." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "I'm rerouting power from defense to offense. It's our only gamble left." } ] }
+        ]
       }
+    ]
+  },
+  {
+    "wavesID": 10,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Halfway, and we own the objective! The enemy is on the run!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Damage is compounding perfectly. We will break them before Wave 15." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Their resilience is gone. Now is the time for maximum aggression." } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Halfway, and we're stalled cold. We need a fundamental change in tactics." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Our current strategy is a failure. We must find an unconventional path." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "They are perfectly defending. We've lost the battle of innovation." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "The bank is open for war. Deploy all experimental technologies!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "With this level of gold, we can weather any storm they throw at us." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Our spending power alone is a military advantage. Keep the funds flowing." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We are officially broke. Every unit lost is a critical blow." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Survival depends on careful unit placement and pure luck." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The enemy is pushing, and we cannot afford to match their power." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 11,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Pushing through the breach! Send the heavy infantry to secure the interior!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The enemy is in full panic mode. Exploit every structural weakness." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Their core is exposed! Begin the final targeting sequence." } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Reinforce the perimeter! We are being hit from every direction!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "They've adapted to our new weaponry. We're back to square one." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The assault is entirely stalled. We cannot afford another failure." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Research complete, deploy it all. This is the power of endless capital!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We're flooding the battlefield with max-tier units. Overkill is the policy." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "There is no weapon we cannot afford. The enemy has no answer for this wealth." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "The budget is frozen. We must make due with whatever we have in storage." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Hold your fire! We have to conserve every single round of ammunition." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Our resource scarcity is now a major strategic liability. Survive, Commander." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 12,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Final push! Their defenses are cracking apart!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Concentrate all fire! This is the window to end the siege!" } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Victory is within our grasp. Don't let their desperate counter-attack succeed." } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We cannot breach the core. Their shield technology is too advanced." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Retreating. We need to focus on defending our own position now." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Their resistance is absolute. We must try to starve them out instead." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Time to buy the victory. Send in the super-heavy units!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Our economy has achieved total battlefield control. Their fate is sealed." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Money talks. We will overwhelm them with sheer spending power." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Critical resource shortage. We are fighting on fumes, Commander." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Every soldier must be cautious. We cannot replace lost units." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We are facing a financial collapse if we don't succeed soon." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 13,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Victory imminent. Send in the final wave of shock troops!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "They are trying to surrender. We accept only total destruction." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The enemy has no structure left to hide behind. Hunt them down!" } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Hold the line! Their last wave is enormous and our attack failed." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We have to abandon our offensive gear and focus on survival." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "They are perfectly entrenched. We cannot proceed further." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Unlimited funding for all projects. Build everything! Deploy everything!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Our wealth is a literal weapon. They are crumbling under our economic weight." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Financial reports confirm we are too rich to lose. The siege continues." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We're running on goodwill. No more supplies are coming." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Our units are rationing fuel and ammo. Morale is dangerously low." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We must secure a new revenue stream, or this mission ends poorly." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 14,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Just a little more pressure! Their shield is flickering!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The defenders are panicking. We are winning this siege decisively." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We have them surrounded. The final breach is a formality." } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "They're pushing us back. This is quickly turning into a full retreat!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The enemy is counter-attacking with superior forces. We need to hold our ground." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We have failed to break their defenses. Recommend a strategic withdrawal." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Deploy the elite forces! We have the money for the very best." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The supply chain is secured. We can sustain this war for years if needed." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Financial power allows us to ignore their tactics and simply overwhelm them." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Every unit is irreplaceable. Fight smart, Commander, we have no backup." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We are down to our core starting units. No more reinforcements are coming." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We are fighting at a severe disadvantage. Find a way to generate income NOW." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 15,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We can taste the defeat! The tower is on its last legs!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The defenders are making their final, hopeless stand." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "In less than three waves, this war will be over. Press the attack!" } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Holding steady, but we have no plan to break through their shields." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "They have total air control. We are being picked apart from above." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "All long-range weapons are useless. We need to get closer, but can't." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Buy their morale. Offer a bounty for every piece of their defense destroyed." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Our resource pools are overflowing. Let's make this siege historic." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We have the budget to deploy the doomsday weapon. Prepare for launch." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Financial audit required. We are out of money and out of options." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We've lost our ability to reinforce. This is our last stand." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We must abandon any unit that requires costly maintenance." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 16,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Nearly over! The enemy is abandoning their posts!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The structural damage is irreversible. Time for the final execution." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "One final, concerted attack will shatter them completely." } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Still locked in combat. We need a tactical genius to find a breach." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "They've sealed every access point. The tower is a fortress." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We are entirely out of options for breaching the main defense line." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Maximum investment phase. Buy the remaining enemy's support units." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The flow of resources is like a tidal wave. We cannot be stopped." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Our superior budget is demoralizing the enemy into submission." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Scarcity breeds genius. Find an ingenious, *cheap* way to defeat them!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We are fighting with repurposed civilian vehicles. This is shameful." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The enemy's wealth is a huge problem. We must disrupt their supply lines." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 17,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Don't let up now! Victory is within arm's reach!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We've disabled their communication arrays. They are blind and broken." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The core systems are overheating. Keep the pressure on the vents!" } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We are struggling here. Their defenses are impenetrable." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The enemy is deploying their ultimate weapon. Brace for impact!" } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "All assaults have failed. We must accept the tactical loss." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Overwhelming force initiated. We're attacking with everything we can buy." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We can afford to lose a hundred units and still deploy another hundred." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The entire war effort is now a testament to our immense wealth." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Every defense must hold. We cannot afford a single repair bill." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We've lost our resource production entirely. This is desperation." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Our units are under-equipped and exhausted. They must fight on courage alone." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 18,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "This is the end for them. The tower is failing catastrophically." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Targeting systems confirm core breach is imminent. Prepare to celebrate." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "The last defenders are fleeing. We have won the battle." } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "The siege will not break us. Their forces are depleted and we stand firm." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "They are out of offensive options. We just need to hold for two more waves." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Perfect defense maintained. We must now prepare for a crushing counter-attack." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We have resources to spare! Launch the full-scale orbital bombardment!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Our war chest is a fortress. They cannot afford to compete." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "No expense is too great for this final victory. Buy whatever is needed." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "The cost of failure is too high. We must win this with extreme prejudice." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We have no money left for survival. Pray our current defenses hold." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We are fighting for every scrap of material. This is a battle for our lives." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 19,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "One more hit and it falls! Prepare for the final breach!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Their structural integrity is at critical zero. Send the demolition payload." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "This wave ends the war. Focus on the core and nothing else!" } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Prepare for their final weapon. They are desperate, but still strong." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Their final push is failing. The siege is almost over, and we survived." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We have successfully defended against all their attempts. A perfect victory is at hand." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "Purchase any unit you want! We will use sheer numbers to win this last wave." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Deploy the most expensive, devastating weapon. We have the budget." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Our resource pools are at maximum. We can fight forever." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "The reserve vault is empty. This is the last wave we can afford to fight." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We must secure a resource point or face defeat next wave." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "No reinforcements. Every unit on the field must survive this wave." } ] }
+        ]
+      }
+    ]
+  },
+  {
+    "wavesID": 20,
+    "condition": [
+      {
+        "conditions": "Tower_Health_Less_Than_50",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "argh, we were so close, you win for now we shall return" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We nearly plundered their treasure, we shall return next time sailor" } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We have lost the war, we must retreat" } ] }
+        ]
+      },
+      {
+        "conditions": "Tower_Health_Equals_100",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "The final assault failed. Their defenses held firm. We must retreat!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The tower's integrity is flawless. This mission is a failure. Pull back all forces." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "They are masters of defense. We must accept defeat this day." } ] }
+        ]
+      },
+      {
+        "conditions": "Lots_Of_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We have bankrupted them! Victory through finance!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "Our gold paid for this victory. Their meager budget crumbled before us." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Economic collapse achieved. The rest is simply mop-up duty." } ] }
+        ]
+      },
+      {
+        "conditions": "Not_alotOf_Gold",
+        "waves": [
+          { "DialogueID": 1, "Narration": [ { "lines": "We are bankrupt. The mission is officially over due to lack of funding." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The final wave has arrived, and we have nothing left to fight them." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "This is a failure of logistics. We lost before the fighting even finished." } ] }
+        ]
+      }
+    ]
+  }
     ]
   }
 }

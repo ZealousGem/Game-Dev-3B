@@ -11,7 +11,11 @@ using UnityEngine.UI;
 public enum GameCondition
 {
     Tower_Health_Less_Than_50,
-    Tower_Health_Equals_100
+    Tower_Health_Equals_100,
+
+    Lots_Of_Gold,
+
+    Not_alotOf_Gold
 }
 
 public class DialogueManager : MonoBehaviour
@@ -74,7 +78,7 @@ public class DialogueManager : MonoBehaviour
     void LoadNarrative(string _cond)
     {
         bool dialougeloaded = false;
-        if (waveCounter > 5)
+        if (waveCounter > 20)
         {
 
             return;
