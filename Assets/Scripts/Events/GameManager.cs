@@ -19,8 +19,10 @@ public enum StatsChange // enums used to call event bus and create specfic event
     EndGame,
 
     PausedGame,
-    
+
     UnPausedGame,
+
+    EnemieLeft,
 
 }
 

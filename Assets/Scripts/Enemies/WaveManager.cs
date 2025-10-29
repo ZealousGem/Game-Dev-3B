@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -48,7 +49,9 @@ public class WaveManager : MonoBehaviour
 
     public List<GameObject> CurrentEnemies = new List<GameObject>();
 
-    public List<GameObject> EnemiesToSpawn = new List<GameObject>(); 
+    public List<GameObject> EnemiesToSpawn = new List<GameObject>();
+
+    public TMP_Text WaveAnnouncer;
 
     List<GameObject> Spawners; // spawners located in map
 
@@ -81,7 +84,11 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        WaveAnnouncer.text = "";
         StartCoroutine(FindSpawerns());
+        SpawnEnemiesCounter = maxbotKilled;
+        EndGameEvent ui = new EndGameEvent(StatsChange.EnemieLeft, maxbotKilled);
+        EventBus.Act(ui);
     }
 
     void OnEnable()
@@ -164,6 +171,8 @@ public class WaveManager : MonoBehaviour
     void IncreaseBotKilledCount(int num)  // increases the enemiy kill count everytime enemy has been killed 
     {
         botskilled += num;
+         EndGameEvent ui = new EndGameEvent(StatsChange.EnemieLeft, maxbotKilled - botskilled);
+         EventBus.Act(ui);
         //Debug.Log(botskilled);
         if (botskilled >= maxbotKilled)
         {
@@ -211,11 +220,25 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log("changed Wave " + currentWave);
-        SpawnEnemiesCounter = 0;
+        SpawnEnemiesCounter = maxbotKilled;
         ChangeWavetype();
         IncreaseStats();
         CalEnemyWieghts();
-        yield return new WaitForSeconds(10f);
+       float currentTime = 10f;
+        while (currentTime >= 1)
+        {
+
+            currentTime -= Time.deltaTime;
+
+
+            WaveAnnouncer.text = " New Wave Starting in " + currentTime.ToString("F0");
+
+
+            yield return null;
+        }
+        EndGameEvent ui = new EndGameEvent(StatsChange.EnemieLeft, maxbotKilled);
+        EventBus.Act(ui);
+        WaveAnnouncer.text = "";
         isFound = true;
     }
 
@@ -269,7 +292,7 @@ public class WaveManager : MonoBehaviour
 
     void SpawnEnemies() //  instates the enemy on the random spawner pciked 
     {
-        if (!Spawned && SpawnEnemiesCounter <= maxbotKilled)
+        if (!Spawned)
         {
             int random = UnityEngine.Random.Range(0, EnemiesToSpawn.Count);
             int randomSpawner = UnityEngine.Random.Range(0, Spawners.Count);
@@ -285,7 +308,7 @@ public class WaveManager : MonoBehaviour
                 script.Money += increaseMoney;
 
             }
-            SpawnEnemiesCounter++;
+            SpawnEnemiesCounter--;
             Spawned = true;
 
         }
@@ -304,7 +327,7 @@ public class WaveManager : MonoBehaviour
     {
 
     
-        if (isFound)
+        if (isFound && SpawnEnemiesCounter != 0)
         {
             counter += Time.deltaTime;
             if (counter >= maxCout)

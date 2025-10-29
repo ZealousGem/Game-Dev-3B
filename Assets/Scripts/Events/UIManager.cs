@@ -27,6 +27,8 @@ public class UIManager : MonoBehaviour
 
     public TMP_Text waveUI;
 
+    public TMP_Text enemyUI;
+
     int WaveCounter = 1;
 
     int amountUI;
@@ -58,9 +60,15 @@ public class UIManager : MonoBehaviour
         switch (data.type)
         {
             case StatsChange.EndGame: EndGame(); break;
-            case StatsChange.ChangeWave: ChangeWaveCounter(); break;    
+            case StatsChange.ChangeWave: ChangeWaveCounter(); break;
+            case StatsChange.EnemieLeft: ChangeEnemyAmount(data.amount); break;
         }
-        
+
+    }
+
+    void ChangeEnemyAmount(int amount)
+    {
+        enemyUI.text = amount.ToString();
     }
 
     void ChangeWaveCounter() // changes the wave counter UI

@@ -82,9 +82,18 @@ public class EndGameEvent : EventData // ends the game if the main tower has bee
 
     public StatsChange type;
 
+    public int amount;
+
     public EndGameEvent(StatsChange _type)
     {
         type = _type;
+
+    }
+
+      public EndGameEvent(StatsChange _type, int _amount)
+    {
+        type = _type;
+        amount = _amount;
 
     }
 
