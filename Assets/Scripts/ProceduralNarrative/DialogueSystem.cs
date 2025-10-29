@@ -145,6 +145,8 @@ public class DialogueSystem : MonoBehaviour
         counter = 0;
         login.Clear();
         Dialogue.SetActive(false);
+        EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
+        EventBus.Act(WaveChange);
     }
 
     

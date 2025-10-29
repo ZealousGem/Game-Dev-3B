@@ -87,8 +87,7 @@ public class WaveManager : MonoBehaviour
         WaveAnnouncer.text = "";
         StartCoroutine(FindSpawerns());
         SpawnEnemiesCounter = maxbotKilled;
-        EndGameEvent ui = new EndGameEvent(StatsChange.EnemieLeft, maxbotKilled);
-        EventBus.Act(ui);
+        //Application.targetFrameRate = 60;
     }
 
     void OnEnable()
@@ -116,6 +115,11 @@ public class WaveManager : MonoBehaviour
         if (data.type == StatsChange.EndGame)
         {
             EndGame();
+        }
+
+        else if(data.type == StatsChange.StartWave)
+        {
+            StartCoroutine(StartWave());
         }
 
     }
@@ -181,7 +185,7 @@ public class WaveManager : MonoBehaviour
             EndGameEvent WaveChange = new EndGameEvent(StatsChange.ChangeWave);
             EventBus.Act(WaveChange);
             currentWave += 1;
-            StartCoroutine(ChangeWave());
+            ChangeWave();
         }
 
         // Debug.Log(botskilled);
@@ -195,7 +199,7 @@ public class WaveManager : MonoBehaviour
             int rand = UnityEngine.Random.Range(ChangeWaveSet + 1, ChangeWaveSet + 4);
             ChangeWaveSet = rand; // random sets wave type variable to create unprediability when enemy types are added 
             waveIndex++;
-            Debug.Log("wave type change :"+ChangeWaveSet);
+            Debug.Log("wave type change :" + ChangeWaveSet);
 
         }
 
@@ -204,8 +208,28 @@ public class WaveManager : MonoBehaviour
             return;
         }
     }
+    
+     IEnumerator StartWave()
+    {
+        float currentTime = 5f;
+        while (currentTime >= 1)
+        {
 
-    IEnumerator ChangeWave() // changes the wave if enemies have reached max amount of enemies killed 
+            currentTime -= Time.deltaTime;
+
+
+            WaveAnnouncer.text = " New Wave Starting in " + currentTime.ToString("F0");
+
+
+            yield return null;
+        }
+        EndGameEvent ui = new EndGameEvent(StatsChange.EnemieLeft, maxbotKilled);
+        EventBus.Act(ui);
+        WaveAnnouncer.text = "";
+        isFound = true;
+    }
+
+    void ChangeWave() // changes the wave if enemies have reached max amount of enemies killed 
     {
         isFound = false;
 
@@ -224,22 +248,9 @@ public class WaveManager : MonoBehaviour
         ChangeWavetype();
         IncreaseStats();
         CalEnemyWieghts();
-       float currentTime = 10f;
-        while (currentTime >= 1)
-        {
-
-            currentTime -= Time.deltaTime;
-
-
-            WaveAnnouncer.text = " New Wave Starting in " + currentTime.ToString("F0");
-
-
-            yield return null;
-        }
-        EndGameEvent ui = new EndGameEvent(StatsChange.EnemieLeft, maxbotKilled);
-        EventBus.Act(ui);
-        WaveAnnouncer.text = "";
-        isFound = true;
+        GameManagerEvent WaveChange = new GameManagerEvent(StatsChange.ChangeWave);
+        EventBus.Act(WaveChange);
+       
     }
 
     void IncreaseStats() // Increases Enemies, Health, damage and money recieved if killed was waves contnue
@@ -275,18 +286,17 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator FindSpawerns() // finds spawners on the terrain 
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(1f);
         string tag = "Enemy";
         Spawners = new List<GameObject>();
         Spawners.AddRange(GameObject.FindGameObjectsWithTag(tag));
-        isFound = true;
+       // isFound = true;
         CurrentEnemies = EnemyPrefabs[0].Enemies;
         waveIndex++;
         ChangeWaveSet = 3;
-        //ChangeWaveSet = 2;
         Debug.Log("Wave type: " + ChangeWaveSet);
         CalEnemyWieghts();
-        SpawnEnemies();
+       
 
     }
 

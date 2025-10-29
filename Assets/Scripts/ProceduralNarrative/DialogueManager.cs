@@ -32,8 +32,6 @@ public class DialogueManager : MonoBehaviour
 
     public DialogueSystem dialgoueSystem;
 
-    GameCondition cond;
-
     public string names;
 
     public string Picture;
@@ -41,6 +39,30 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(LoadCharacters());
+    }
+
+     void OnEnable()
+    {
+        EventBus.Subscribe<DialogueEvent>(getData);
+    }
+
+    void OnDisable()
+    {
+         EventBus.Unsubscribe<DialogueEvent>(getData);
+
+    }
+
+    
+    void getData(DialogueEvent data)
+    {
+        switch (data.type)
+        {
+            case GameCondition.Lots_Of_Gold: LoadNarrative(data.type.ToString()); waveCounter++; break;
+            case GameCondition.Not_alotOf_Gold: LoadNarrative(data.type.ToString()); waveCounter++;break;
+            case GameCondition.Tower_Health_Equals_100:LoadNarrative(data.type.ToString()); waveCounter++;break;
+            case GameCondition.Tower_Health_Less_Than_50:LoadNarrative(data.type.ToString()); waveCounter++;break; 
+
+        }
     }
 
     public IEnumerator LoadCharacters()
@@ -80,7 +102,8 @@ public class DialogueManager : MonoBehaviour
         bool dialougeloaded = false;
         if (waveCounter > 20)
         {
-
+            EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
+            EventBus.Act(WaveChange);
             return;
         }
 

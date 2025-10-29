@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using System.Collections;
+using Unity.VisualScripting;
 
 
 public class UIManager : MonoBehaviour
@@ -39,19 +40,30 @@ public class UIManager : MonoBehaviour
 
     bool isGameover = false;
 
+    bool dialogueisOn = false;
 
+    
+    
     void OnEnable()
     {
         EventBus.Subscribe<AmountEvent>(getData);
         EventBus.Subscribe<GameManagerEvent>(getDataUI);
         EventBus.Subscribe<EndGameEvent>(getEndDate);
+        EventBus.Subscribe<DialogueEvent>(getData);
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<AmountEvent>(getData);
-        EventBus.Unsubscribe<GameManagerEvent>(getDataUI); 
+        EventBus.Unsubscribe<GameManagerEvent>(getDataUI);
         EventBus.Unsubscribe<EndGameEvent>(getEndDate);
+        EventBus.Unsubscribe<DialogueEvent>(getData);
+    }
+    
+    void getData(DialogueEvent data)
+    {
+        DisplayinGameUI(false);
+        Debug.Log("testing dialogue");
     }
 
     void getEndDate(EndGameEvent data)
@@ -62,6 +74,7 @@ public class UIManager : MonoBehaviour
             case StatsChange.EndGame: EndGame(); break;
             case StatsChange.ChangeWave: ChangeWaveCounter(); break;
             case StatsChange.EnemieLeft: ChangeEnemyAmount(data.amount); break;
+            case StatsChange.StartWave: DisplayinGameUI(true); break;
         }
 
     }
@@ -94,6 +107,12 @@ public class UIManager : MonoBehaviour
         isGameover = true;
     }
 
+    void DisplayinGameUI(bool determine)
+    {
+      //  inGameUI.SetActive(determine);
+        dialogueisOn = !determine; 
+    }
+
     void getData(AmountEvent data)
     {
         ChangeGoldUI((int)data.changed);
@@ -115,6 +134,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        DisplayinGameUI(false);
         TowerUI.SetActive(false);
         GameOverUI.SetActive(false);
         PauseMenuUI.SetActive(false);
@@ -124,7 +144,7 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (!isGameover)
+        if (!isGameover && !dialogueisOn)
         {
             if (Input.GetKeyDown(KeyCode.Escape))  // pauses the game based on the bool, true game is pasued , false game is not paused 
             {

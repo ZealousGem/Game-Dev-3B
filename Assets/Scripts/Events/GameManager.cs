@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -24,6 +26,9 @@ public enum StatsChange // enums used to call event bus and create specfic event
 
     EnemieLeft,
 
+
+    StartWave,
+
 }
 
 public class GameManager : MonoBehaviour
@@ -34,7 +39,12 @@ public class GameManager : MonoBehaviour
 
     public int Money = 50;
 
-    public GameObject explosion; // main tower explosion effect 
+    public GameObject explosion;
+
+    void Start()
+    {
+        
+    } // main tower explosion effect 
 
     void OnEnable()
     {
@@ -56,10 +66,42 @@ public class GameManager : MonoBehaviour
             case StatsChange.Health: DecreaseTowerHealth(data.changed); break;
             case StatsChange.MonenyGained: IncreaseMoney(data.changed); break;
             case StatsChange.MoneyLost: DecreaseMoney(data.changed); break;
-            
+            case StatsChange.ChangeWave: if (MainTowerHealth > 0) { DisplayDialogue(); } break;
+
 
 
         }
+    }
+    
+    void DisplayDialogue()
+    {
+        List<GameCondition> lists = new List<GameCondition>();
+        if (MainTowerHealth > 100f)
+        {
+            lists.Add(GameCondition.Tower_Health_Equals_100);
+        }
+
+        if (MainTowerHealth < 100f)
+        {
+            lists.Add(GameCondition.Tower_Health_Less_Than_50);
+        }
+
+        if (Money > 100)
+        {
+            lists.Add(GameCondition.Lots_Of_Gold);
+        }
+
+        if (Money < 100)
+        {
+            lists.Add(GameCondition.Not_alotOf_Gold);
+        }
+
+       
+        System.Random random = new System.Random();
+        GameCondition temp = lists[random.Next(lists.Count)];
+        DialogueEvent dialogue = new DialogueEvent(temp);
+        EventBus.Act(dialogue);
+             
     }
 
     void DecreaseTowerHealth(float Damage) // decreases the main towers health evertyime enemy has reached it 

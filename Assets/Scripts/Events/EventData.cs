@@ -60,6 +60,12 @@ public class GameManagerEvent : EventData // migrates data from game manager to 
 
     }
 
+     public GameManagerEvent(StatsChange _type)
+    {
+        type = _type;
+
+    }
+
 }
 
 public class AmountEvent : EventData // used for the defence UI script to know how much player has whether they can spend money to get a turret 
@@ -90,11 +96,28 @@ public class EndGameEvent : EventData // ends the game if the main tower has bee
 
     }
 
-      public EndGameEvent(StatsChange _type, int _amount)
+    public EndGameEvent(StatsChange _type, int _amount)
     {
         type = _type;
         amount = _amount;
 
     }
+
+}
+
+public class DialogueEvent : EventData // ends the game if the main tower has been destoryed 
+{
+
+    public GameCondition type;
+
+    
+
+    public DialogueEvent(GameCondition _type)
+    {
+        type = _type;
+
+    }
+
+     
 
 }
