@@ -12,8 +12,6 @@ public class Weaponary : MonoBehaviour
 
     float maxHealth = 0f; 
 
-    float currentHealth;
-
     public float Speed = 10f;
 
     public float MaxcoolDown = 3f;
@@ -32,7 +30,11 @@ public class Weaponary : MonoBehaviour
 
     public GameObject Explosion; // explosion effect when tower health is at 0 
 
+    [HideInInspector]
+    public int counter = 0;
     bool IsOver = false;
+
+   
 
     
 
@@ -60,12 +62,18 @@ public class Weaponary : MonoBehaviour
         }
     }
 
-     void getDamage(DamageObjectEvent data)
+    void getDamage(DamageObjectEvent data)
     {
         if (data.name == gameObject.GetInstanceID())
         {
-            DecreaseHealth(data.Damage);  
+            DecreaseHealth(data.Damage);
         }
+    }
+    
+    public void getHealth(float newHealth)
+    {
+        maxHealth += newHealth;
+        Health = maxHealth;
     }
 
     void OnTriggerEnter(Collider other)

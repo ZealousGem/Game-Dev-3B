@@ -128,6 +128,10 @@ public class UIManager : MonoBehaviour
 
     void UpdateHealthUI(float health) // updates HealthUI
     {
+        if (health > MaxTowerHealth)
+        {
+            MaxTowerHealth = 400f;
+        }
         TowerHealth.fillAmount = health / MaxTowerHealth;
        // Debug.Log("UI Health" + TowerHealth.fillAmount);
     }

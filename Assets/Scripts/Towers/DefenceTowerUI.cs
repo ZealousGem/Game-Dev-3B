@@ -35,13 +35,13 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
     void OnEnable()
     {
         EventBus.Subscribe<AmountEvent>(getData);
-         EventBus.Subscribe<EndGameEvent>(getData2); 
+        EventBus.Subscribe<EndGameEvent>(getData2); 
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<AmountEvent>(getData);
-          EventBus.Unsubscribe<EndGameEvent>(getData2);
+        EventBus.Unsubscribe<EndGameEvent>(getData2);
     }
 
     void getData2(EndGameEvent data)
