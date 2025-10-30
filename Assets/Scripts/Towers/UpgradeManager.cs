@@ -90,25 +90,22 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
         if (turret.CompareTag("DefenceTower"))
         {
             getTurret(turret);
-            foreach (GameObject but in Turretbuttons)
-            {
-                but.SetActive(true);
-            }
+            MainTowerButtons(false);
+            TurretButtons(true);
         }
 
         else if (turret.CompareTag("Tower"))
         {
             getMainTower(turret);
-            foreach (GameObject but in MainTowerButton)
-            {
-                but.SetActive(true);
-            }
+            MainTowerButtons(true);
+            TurretButtons(false);
         }
     }
     
     public void CloseTab()
     {
-        HideButtons();
+        MainTowerButtons(false);
+        TurretButtons(false);
         UpgradeUI.SetActive(false);
         
     }
@@ -221,22 +218,28 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
 
     }
 
-    void HideButtons()
+    void TurretButtons(bool cond)
     {
-         foreach (GameObject but in Turretbuttons)
+        foreach (GameObject but in Turretbuttons)
         {
-            but.SetActive(false);
+            but.SetActive(cond);
         }
 
-        foreach (GameObject but in MainTowerButton)
+       
+    }
+    
+    void MainTowerButtons(bool cond)
+    {
+         foreach (GameObject but in MainTowerButton)
         {
-            but.SetActive(false);
+            but.SetActive(cond);
         }
     }
 
     void Start()
     {
-        HideButtons();
+        MainTowerButtons(false);
+        TurretButtons(false);
         UpgradeUI.SetActive(false);
        
     }
