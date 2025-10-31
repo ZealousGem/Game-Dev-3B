@@ -13,7 +13,7 @@ public enum UpgradeType
 }
 
 
-public class UpgradeManager : MonoBehaviour, IPointerDownHandler
+public class UpgradeManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
@@ -196,8 +196,6 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
 
         if (currentTurret == null)
         {
-            CloseTab();
-            radius.SetActive(false);
             return;
         }
 
@@ -218,8 +216,6 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
     {
         if (currentTurret == null)
         {
-            CloseTab();
-            radius.SetActive(false);
             return;
         }
 
@@ -339,12 +335,6 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
                     OpenTab(ob);
                 }
 
-                else
-                {
-                    CloseTab();
-                    radius.SetActive(false);
-                }
-
             }
 
             else
@@ -364,9 +354,5 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
 
     // Update is called once per frame
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-      //  throw new System.NotImplementedException();
-      
-    }
+    
 }

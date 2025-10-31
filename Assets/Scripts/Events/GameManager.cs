@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 
 public enum StatsChange // enums used to call event bus and create specfic event 
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+
     } // main tower explosion effect 
 
     void OnEnable()
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     void OnDisable()
     {
-      EventBus.Unsubscribe<GameManagerEvent>(getData);
+        EventBus.Unsubscribe<GameManagerEvent>(getData);
     }
 
 
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
 
         }
     }
-    
+
     void DisplayDialogue()
     {
         List<GameCondition> lists = new List<GameCondition>();
@@ -96,15 +97,15 @@ public class GameManager : MonoBehaviour
             lists.Add(GameCondition.Not_alotOf_Gold);
         }
 
-       
+
         System.Random random = new System.Random();
         GameCondition temp = lists[random.Next(lists.Count)];
         DialogueEvent dialogue = new DialogueEvent(temp);
         EventBus.Act(dialogue);
-             
+
     }
 
-    void DecreaseTowerHealth(float Damage) // decreases the main towers health evertyime enemy has reached it 
+    public void DecreaseTowerHealth(float Damage) // decreases the main towers health evertyime enemy has reached it 
     {
         if (MainTowerHealth > 0)
         {
@@ -121,7 +122,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(MainTowerHealth);
     }
 
-   public void DecreaseMoney(float newAmount) // decreases the money player has once they have purchased a turret 
+    public void DecreaseMoney(float newAmount) // decreases the money player has once they have purchased a turret 
     {
         if (Money > 0)
         {
@@ -132,9 +133,9 @@ public class GameManager : MonoBehaviour
         {
             Money = 0;
         }
-        
-         AmountEvent money = new AmountEvent(Money);
-         EventBus.Act(money);
+
+        AmountEvent money = new AmountEvent(Money);
+        EventBus.Act(money);
         //ShowMoney();
         //Debug.Log(Money);
     }
@@ -150,7 +151,7 @@ public class GameManager : MonoBehaviour
         AmountEvent money = new AmountEvent(Money);
         EventBus.Act(money);
         // ShowMoney();
-       // Debug.Log(Money);
+        // Debug.Log(Money);
     }
 
     void EndGame()  // ends the game if the main towers health is 0 
@@ -162,13 +163,31 @@ public class GameManager : MonoBehaviour
         if (obj != null)
         {
             Instantiate(explosion, obj.gameObject.transform.position, quaternion.identity);
-            Destroy(obj);  
+            Destroy(obj);
         }
-    
-      
+
+
 
 
     }
 
 
+}
+
+ [CustomEditor(typeof(GameManager))]
+
+ public class EndButton : Editor
+{
+    
+    public override void OnInspectorGUI()
+    {
+        GameManager land = (GameManager)target;
+     
+
+        DrawDefaultInspector();
+        if (GUILayout.Button("Generate"))
+        {
+            land.DecreaseTowerHealth(200);
+        }
+    }
 }
