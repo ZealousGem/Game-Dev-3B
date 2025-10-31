@@ -30,6 +30,8 @@ public enum StatsChange // enums used to call event bus and create specfic event
 
     StartWave,
 
+    hideUpgrades,
+
 }
 
 public class GameManager : MonoBehaviour

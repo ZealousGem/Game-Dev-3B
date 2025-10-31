@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,10 @@ public enum UpgradeType
     Speed,
 
     Damage,
+
+    MainTowerHealth,
+
+    MainTowerDamage, 
 }
 
 
@@ -28,6 +33,10 @@ public class UpgradeManager : MonoBehaviour
 
     public GameObject radius;
 
+    public TMP_Text info;
+
+    public Material HealthText;
+
     GameManager MainTower;
 
     GameObject Curturret;
@@ -44,8 +53,6 @@ public class UpgradeManager : MonoBehaviour
 
     string oldMeshname = "OldMesh";
 
-  //   string TowerCannons = "LittleCannons";
-
     int ignoredLayer;
 
     int Gold = 0;
@@ -58,16 +65,27 @@ public class UpgradeManager : MonoBehaviour
     void OnEnable()
     {
         EventBus.Subscribe<AmountEvent>(getData);
+        EventBus.Subscribe<GameManagerEvent>(getData);
     }
 
     void OnDisable()
     {
         EventBus.Unsubscribe<AmountEvent>(getData);
+        EventBus.Unsubscribe<GameManagerEvent>(getData);
     }
-    
+
     void getData(AmountEvent data)
     {
         Gold = (int)data.changed;
+        Debug.Log(Gold);
+    }
+    
+     void getData(GameManagerEvent data)
+    {
+        if (StatsChange.hideUpgrades == data.type)
+        {
+            HideUI();
+        }
     }
 
     void getTurret(GameObject turret)
@@ -96,7 +114,7 @@ public class UpgradeManager : MonoBehaviour
      //   Vector3 newPosition = new Vector3(coord.x, 10.0f, coord.z);
         radius.transform.position = coord;
     
-    radius.SetActive(cond);
+        radius.SetActive(cond);
     }
 
     void getMainTower(GameObject turret)
@@ -110,10 +128,12 @@ public class UpgradeManager : MonoBehaviour
 
         currentTurret = turret;
         TowerName.text = currentTurret.name.Replace("(Clone)", "");
+        SpawnRadius(turret.transform.position, true);
     }
 
     void OpenTab(GameObject turret)
     {
+        info.text = "";
         if (turret == null)
         {
             Debug.Log("destroyed");
@@ -138,13 +158,20 @@ public class UpgradeManager : MonoBehaviour
             TurretButtons(false);
         }
     }
-    
+
     public void CloseTab()
     {
         MainTowerButtons(false);
         TurretButtons(false);
         UpgradeUI.SetActive(false);
-        
+
+    }
+    
+    IEnumerator DispalyUI(string text)
+    {
+        info.text = text;
+        yield return new WaitForSeconds(1f);
+        info.text = "";
     }
 
     public void UpgradeTower(Weaponary Currentturret, GameObject newMesh, GameObject oldMesh, UpgradeType upgrade, int price)
@@ -160,35 +187,77 @@ public class UpgradeManager : MonoBehaviour
 
         if (newMesh == null)
         {
-            Debug.Log("could not find new mesh");
+            StartCoroutine(DispalyUI("Already Upgraded"));
+            // Debug.Log("could not find new mesh");
             return;
         }
 
         if (oldMesh == null)
         {
-             Debug.Log("could not find old mesh");
+            StartCoroutine(DispalyUI("Already Upgraded"));
+            //  Debug.Log("could not find old mesh");
             return;
         }
 
         switch (upgrade)
         {
             case UpgradeType.Health: Currentturret.getHealth(Health); break;
-            case UpgradeType.Damage:  Currentturret.Damage += Damage;break;
-            case UpgradeType.Speed:  Currentturret.MaxcoolDown -= CoolDown;break;
+            case UpgradeType.Damage: Currentturret.Damage += Damage; break;
+            case UpgradeType.Speed: Currentturret.MaxcoolDown -= CoolDown; break;
         }
 
         if (Currentturret.counter <= finalUpgrade)
         {
+            StartCoroutine(DispalyUI(newMesh.name + " Upgraded"));
             Currentturret.counter++;
             oldMesh.SetActive(false);
             Destroy(oldMesh);
             newMesh.SetActive(true);
             newMesh.name = oldMeshname;
-            
+
         }
 
-         MainTower.DecreaseMoney(price);
+        MainTower.DecreaseMoney(price);
 
+    }
+    
+    void UpgradeMainTower(GameObject newMesh, GameObject oldMesh, UpgradeType upgrade, int price)
+    {
+        if (newMesh == null)
+        {
+            StartCoroutine(DispalyUI("Already Upgraded"));
+            // Debug.Log("could not find new mesh");
+            return;
+        }
+
+        if (oldMesh == null)
+        {
+            StartCoroutine(DispalyUI("Already Upgraded"));
+            //  Debug.Log("could not find old mesh");
+            return;
+        }
+
+        if (upgrade == UpgradeType.MainTowerDamage)
+        {
+            StartCoroutine(DispalyUI("Cannons Upgraded"));
+            oldMesh.SetActive(false);
+            Destroy(oldMesh);
+            newMesh.SetActive(true);
+        }
+
+        else if (upgrade == UpgradeType.MainTowerHealth)
+        {
+            MainTower.MainTowerHealth = 400f;
+            GameManagerEvent HealthUI = new GameManagerEvent(MainTower.MainTowerHealth, StatsChange.HealthUI);
+            EventBus.Act(HealthUI);
+
+            StartCoroutine(DispalyUI("Health Upgraded"));
+            oldMesh.SetActive(false);
+            Destroy(oldMesh);
+            newMesh.SetActive(true);
+        }
+        
+          MainTower.DecreaseMoney(price);
     }
 
     public void UpgradeDamage()
@@ -201,6 +270,7 @@ public class UpgradeManager : MonoBehaviour
 
         if (Gold < DamagePrice)
         {
+             StartCoroutine(DispalyUI("Not Enough Gold"));
              return;
         }
 
@@ -221,6 +291,7 @@ public class UpgradeManager : MonoBehaviour
 
         if (Gold < SpeedPrice)
         {
+             StartCoroutine(DispalyUI("Not Enough Gold"));
              return;
         }
 
@@ -241,10 +312,12 @@ public class UpgradeManager : MonoBehaviour
         
             return;
         }
-
+       
 
         if (Gold < HealthPrice)
         {
+            
+            StartCoroutine(DispalyUI("Not Enough Gold"));
             return;
         }
        
@@ -257,28 +330,44 @@ public class UpgradeManager : MonoBehaviour
 
     public void MainUpgradeTower()
     {
-        if (currentTurret == null || Gold < MainTowerDamagePrice)
+        if (currentTurret == null)
         {
             return;
         }
 
+        if (Gold < MainTowerDamagePrice)
+        {
+            Debug.Log(Gold);
+            StartCoroutine(DispalyUI("Not Enough Gold"));
+            return;
+        }
 
-       
-       MainTower.DecreaseMoney(MainTowerDamagePrice);
+        UpgradeMainTower(currentTurret.transform.Find("BigCannons")?.gameObject,
+        currentTurret.transform.Find("LittleCannons")?.gameObject,
+        UpgradeType.MainTowerDamage, MainTowerDamagePrice);
+
+      //  currentTurret.transform.Find("Health")?.gameObject;
+      
 
     }
 
     public void HealTower()
     {
-        if (currentTurret == null || Gold < MainTowerHealthPrice)
+        if (currentTurret == null)
         {
+           
             return;
         }
 
-        MainTower.DecreaseMoney(MainTowerDamagePrice);
-        MainTower.MainTowerHealth = 400f;
-        GameManagerEvent HealthUI = new GameManagerEvent(MainTower.MainTowerHealth, StatsChange.HealthUI);
-        EventBus.Act(HealthUI);
+         if (Gold < MainTowerHealthPrice)
+        {
+            StartCoroutine(DispalyUI("Not Enough Gold"));
+            return;
+        }
+
+        UpgradeMainTower(currentTurret.transform.Find("HealthTower")?.gameObject,
+        currentTurret.transform.Find("Tower")?.gameObject,
+        UpgradeType.MainTowerHealth, MainTowerHealthPrice);
 
     }
 
@@ -303,12 +392,42 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         ignoredLayer = LayerMask.NameToLayer("islands");
-         layerMask = ~ (1 << ignoredLayer);
+        layerMask = ~(1 << ignoredLayer);
         MainTower = GetComponent<GameManager>();
         MainTowerButtons(false);
         TurretButtons(false);
         UpgradeUI.SetActive(false);
+        Gold = MainTower.Money;
 
+    }
+
+    void HideUI()
+    {
+        CloseTab();
+        radius.SetActive(false);
+    }
+    
+    void FindTurret(RaycastHit hit)
+    {
+      
+       if (hit.transform.CompareTag("DefenceTower"))
+        {
+            GameObject ob = hit.collider.gameObject;
+            TowerHealth tower = ob.GetComponent<TowerHealth>();
+            Curturret = tower.Parent;
+             //  Debug.Log("clicked");
+            OpenTab(tower.Parent);
+        }
+
+        else if (hit.transform.CompareTag("Tower"))
+        {
+            GameObject ob = hit.collider.gameObject;
+            Curturret = ob;
+            OpenTab(ob);
+         }
+
+        
+            
     }
 
     void Update()
@@ -317,38 +436,16 @@ public class UpgradeManager : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
             if (Physics.Raycast(ray, out hit, float.MaxValue, layerMask))
             {
-                if (hit.transform.CompareTag("DefenceTower"))
-                {
-                    GameObject ob = hit.collider.gameObject;
-                    TowerHealth tower = ob.GetComponent<TowerHealth>();
-                    Curturret = tower.Parent;
-                    //  Debug.Log("clicked");
-                    OpenTab(tower.Parent);
-                }
-
-                else if (hit.transform.CompareTag("Tower"))
-                {
-                    GameObject ob = hit.collider.gameObject;
-                    OpenTab(ob);
-                }
-
+                FindTurret(hit);
             }
-
-            else
-            {
-                radius.SetActive(false);
-            }
-
 
         }
 
         if (Curturret == null)
         {
-              CloseTab();
-              radius.SetActive(false);
+            HideUI();
         }
     }
 

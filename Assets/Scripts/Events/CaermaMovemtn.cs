@@ -60,6 +60,8 @@ public class CaermaMovemtn : MonoBehaviour
     void EndGame() // makes the camera stop mivng 
     {
         isGameEnd = true;
+         GameManagerEvent ev = new GameManagerEvent(StatsChange.hideUpgrades);
+         EventBus.Act(ev);
        
     }
 
@@ -76,6 +78,8 @@ public class CaermaMovemtn : MonoBehaviour
             if (Mouse.current.leftButton.wasPressedThisFrame)
             {
                 origin = FindWorldPosition(Mouse.current.position.ReadValue());
+                GameManagerEvent ev = new GameManagerEvent(StatsChange.hideUpgrades);
+                EventBus.Act(ev);
                 dragging = true;
             }
             else if (Mouse.current.leftButton.wasReleasedThisFrame)
@@ -94,7 +98,6 @@ public class CaermaMovemtn : MonoBehaviour
 
     void LateUpdate()
     {
-
 
 
         if (dragging) // caluclates the mouses location moves the camera based on the mouses movement and changed location  
