@@ -26,26 +26,49 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
 
     public TMP_Text TowerName;
 
-    public GameManager MainTower;
+    public GameObject radius;
+
+    GameManager MainTower;
+
+    GameObject Curturret;
 
     float Damage = 2f;
 
-    float CoolDown = 0.5f;
+    float CoolDown = 0.1f;
 
     float Health = 50f;
 
     int finalUpgrade = 3;
 
+    int layerMask;
+
     string oldMeshname = "OldMesh";
+
+  //   string TowerCannons = "LittleCannons";
+
+    int ignoredLayer;
 
     int Gold = 0;
 
     int HealthPrice = 50, DamagePrice = 60, SpeedPrice = 80,
      MainTowerDamagePrice = 250, MainTowerHealthPrice = 250;
 
-    GameObject fullUpgradeMesh;
-
     GameObject currentTurret;
+
+    void OnEnable()
+    {
+        EventBus.Subscribe<AmountEvent>(getData);
+    }
+
+    void OnDisable()
+    {
+        EventBus.Unsubscribe<AmountEvent>(getData);
+    }
+    
+    void getData(AmountEvent data)
+    {
+        Gold = (int)data.changed;
+    }
 
     void getTurret(GameObject turret)
     {
@@ -58,8 +81,22 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
 
         currentTurret = turret;
         TowerName.text = currentTurret.name.Replace("(Clone)", "");
-        fullUpgradeMesh = currentTurret.transform.Find("full")?.gameObject;
+        SpawnRadius(turret.transform.position, true);
 
+
+    }
+    
+    void SpawnRadius(Vector3 coord, bool cond)
+    {
+        if (coord == null)
+        {
+
+            return;
+        }
+     //   Vector3 newPosition = new Vector3(coord.x, 10.0f, coord.z);
+        radius.transform.position = coord;
+    
+    radius.SetActive(cond);
     }
 
     void getMainTower(GameObject turret)
@@ -110,13 +147,27 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
         
     }
 
-    public void UpgradeTower(Weaponary Currentturret, GameObject newMesh, GameObject oldMesh, UpgradeType upgrade)
+    public void UpgradeTower(Weaponary Currentturret, GameObject newMesh, GameObject oldMesh, UpgradeType upgrade, int price)
     {
-        if (Currentturret == null || fullUpgradeMesh == null || newMesh == null || oldMesh == null || newMesh.name == oldMesh.name)
+        if (Currentturret == null)
         {
+            CloseTab();
+            radius.SetActive(false);
             Debug.Log("turret desotroyed or turret fully upgraded");
             return;
 
+        }
+
+        if (newMesh == null)
+        {
+            Debug.Log("could not find new mesh");
+            return;
+        }
+
+        if (oldMesh == null)
+        {
+             Debug.Log("could not find old mesh");
+            return;
         }
 
         switch (upgrade)
@@ -130,66 +181,81 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
         {
             Currentturret.counter++;
             oldMesh.SetActive(false);
+            Destroy(oldMesh);
             newMesh.SetActive(true);
             newMesh.name = oldMeshname;
             
         }
 
-        else
-        {
-            oldMesh.SetActive(false);
-            newMesh.SetActive(false);
-            fullUpgradeMesh.SetActive(true);
-        }
-
+         MainTower.DecreaseMoney(price);
 
     }
 
     public void UpgradeDamage()
     {
 
-        if (currentTurret == null || Gold < DamagePrice)
+        if (currentTurret == null)
         {
+            CloseTab();
+            radius.SetActive(false);
             return;
         }
 
-        Gold -= DamagePrice;
+        if (Gold < DamagePrice)
+        {
+             return;
+        }
+
+       
         UpgradeTower(currentTurret.GetComponent<Weaponary>(),
         currentTurret.transform.Find("Damage")?.gameObject,
         currentTurret.transform.Find(oldMeshname)?.gameObject,
-        UpgradeType.Damage);
+        UpgradeType.Damage, DamagePrice);
 
     }
 
     public void UpgradeSpeed()
     {
-        if (currentTurret == null || Gold < SpeedPrice)
+        if (currentTurret == null)
         {
-            Debug.Log("turret destroyed");
+            CloseTab();
+            radius.SetActive(false);
             return;
         }
 
-        Gold -= SpeedPrice;
+        if (Gold < SpeedPrice)
+        {
+             return;
+        }
+
+        
+       
         UpgradeTower(currentTurret.GetComponent<Weaponary>(),
         currentTurret.transform.Find("Speed")?.gameObject,
         currentTurret.transform.Find(oldMeshname)?.gameObject,
-        UpgradeType.Speed);
+        UpgradeType.Speed, SpeedPrice);
 
     }
 
      public void UpgradeHealth()
     {
 
-        if (currentTurret == null || Gold < HealthPrice)
+        if (currentTurret == null)
         {
+        
             return;
         }
 
-         Gold -= HealthPrice;
+
+        if (Gold < HealthPrice)
+        {
+            return;
+        }
+       
          UpgradeTower(currentTurret.GetComponent<Weaponary>(),
          currentTurret.transform.Find("Health")?.gameObject,
          currentTurret.transform.Find(oldMeshname)?.gameObject,
-         UpgradeType.Health);
+         UpgradeType.Health, HealthPrice);
 
     }
 
@@ -201,7 +267,9 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
         }
 
 
-        Gold -= MainTowerDamagePrice;
+       
+       MainTower.DecreaseMoney(MainTowerDamagePrice);
+
     }
 
     public void HealTower()
@@ -211,7 +279,7 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
             return;
         }
 
-        Gold -= MainTowerHealthPrice;
+        MainTower.DecreaseMoney(MainTowerDamagePrice);
         MainTower.MainTowerHealth = 400f;
         GameManagerEvent HealthUI = new GameManagerEvent(MainTower.MainTowerHealth, StatsChange.HealthUI);
         EventBus.Act(HealthUI);
@@ -227,10 +295,10 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
 
        
     }
-    
+
     void MainTowerButtons(bool cond)
     {
-         foreach (GameObject but in MainTowerButton)
+        foreach (GameObject but in MainTowerButton)
         {
             but.SetActive(cond);
         }
@@ -238,10 +306,60 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
 
     void Start()
     {
+        ignoredLayer = LayerMask.NameToLayer("islands");
+         layerMask = ~ (1 << ignoredLayer);
+        MainTower = GetComponent<GameManager>();
         MainTowerButtons(false);
         TurretButtons(false);
         UpgradeUI.SetActive(false);
-       
+
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, float.MaxValue, layerMask))
+            {
+                if (hit.transform.CompareTag("DefenceTower"))
+                {
+                    GameObject ob = hit.collider.gameObject;
+                    TowerHealth tower = ob.GetComponent<TowerHealth>();
+                    Curturret = tower.Parent;
+                    //  Debug.Log("clicked");
+                    OpenTab(tower.Parent);
+                }
+
+                else if (hit.transform.CompareTag("Tower"))
+                {
+                    GameObject ob = hit.collider.gameObject;
+                    OpenTab(ob);
+                }
+
+                else
+                {
+                    CloseTab();
+                    radius.SetActive(false);
+                }
+
+            }
+
+            else
+            {
+                radius.SetActive(false);
+            }
+
+
+        }
+
+        if (Curturret == null)
+        {
+              CloseTab();
+              radius.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -249,22 +367,6 @@ public class UpgradeManager : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
       //  throw new System.NotImplementedException();
-      if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
-            {
-            if (hit.transform.CompareTag("DefenceTower") ||  hit.transform.CompareTag("Tower"))
-            {
-                GameObject ob = hit.collider.gameObject;
-                OpenTab(ob);
-            }
-            
-            }
-            
-
-        }
+      
     }
 }

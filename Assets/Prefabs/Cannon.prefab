@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 203692327835208705}
   - component: {fileID: 6309417153555955660}
   - component: {fileID: 1138926308172975255}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cannon
   m_TagString: DefenceTower
   m_Icon: {fileID: 0}
@@ -209,6 +209,7 @@ MonoBehaviour:
   HealthUI: {fileID: 2544043843481692181}
   HealthCanvas: {fileID: 416739163281117575}
   Explosion: {fileID: 4084799107439287626, guid: 9ee90419511414542bc1485c26789b18, type: 3}
+  counter: 0
 --- !u!1 &7320640786377548663
 GameObject:
   m_ObjectHideFlags: 0

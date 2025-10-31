@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(MainTowerHealth);
     }
 
-    void DecreaseMoney(float newAmount) // decreases the money player has once they have purchased a turret 
+   public void DecreaseMoney(float newAmount) // decreases the money player has once they have purchased a turret 
     {
         if (Money > 0)
         {

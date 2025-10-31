@@ -26,9 +26,11 @@ public class Weaponary : MonoBehaviour
 
     public Image HealthUI;
 
-    public GameObject HealthCanvas; 
+    public GameObject HealthCanvas;
 
     public GameObject Explosion; // explosion effect when tower health is at 0 
+
+     
 
     [HideInInspector]
     public int counter = 0;
@@ -46,7 +48,9 @@ public class Weaponary : MonoBehaviour
         EventBus.Subscribe<EndGameEvent>(getEndDate);
         maxHealth = Health;
         HealthCanvas.SetActive(false);
+       
     }
+
 
     void OnDisable()
     {
