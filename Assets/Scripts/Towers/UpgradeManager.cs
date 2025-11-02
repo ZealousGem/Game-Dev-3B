@@ -77,7 +77,7 @@ public class UpgradeManager : MonoBehaviour
     void getData(AmountEvent data)
     {
         Gold = (int)data.changed;
-        Debug.Log(Gold);
+        //Debug.Log(Gold);
     }
     
      void getData(GameManagerEvent data)
