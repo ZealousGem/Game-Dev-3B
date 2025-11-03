@@ -237,6 +237,7 @@ MonoBehaviour:
   Speed: 10
   MaxcoolDown: 1.5
   Damage: 30
+  ShotEffect: {fileID: 7439068176480514150, guid: 2b5f2ae3577d7844b8cff156cf71d1eb, type: 3}
   Projectile: {fileID: 7741784476874204772, guid: 30925c697f41df94eb01ab821272517a, type: 3}
   locations:
   - {fileID: 355258864622322070}

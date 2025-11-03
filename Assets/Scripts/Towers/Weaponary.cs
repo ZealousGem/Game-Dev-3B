@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class Weaponary : MonoBehaviour
     public float Damage = 20f;
 
     float coolDown = 0f;
+
+    public GameObject ShotEffect; 
 
     public GameObject Projectile;  // bomb that tower will shoot 
 
@@ -125,20 +128,28 @@ public class Weaponary : MonoBehaviour
                 for (int i = 0; i < locations.Count; i++)
                 {
                     GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation, gameObject.transform);
+                    GameObject Effect = Instantiate(ShotEffect, locations[i].position, locations[i].rotation, gameObject.transform);
                     Rigidbody r = temp.GetComponent<Rigidbody>(); // spawns the projectile and instatiate the damage on to the bomb then it adds force to the direction of the target 
-                     if (temp.GetComponent<Bombs>())
+                    if (temp.GetComponent<Bombs>())
                     {
                         Bombs b = temp.GetComponent<Bombs>();
-                        b.Damage = Damage; 
+                        b.Damage = Damage;
                     }
 
                     Vector3 direction = (currentTarget.transform.position - locations[i].position).normalized;
                     r.AddForce(direction * Speed, ForceMode.Impulse);
+                    StartCoroutine(shotDeath(Effect));
                 }
 
                 coolDown = 0f;
             }
         }
+    }
+    
+    IEnumerator shotDeath(GameObject Effect)
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(Effect);
     }
     void EndTurret() // bool will set true of no more enemies in radius 
     {
