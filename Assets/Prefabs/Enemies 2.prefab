@@ -143,6 +143,7 @@ MonoBehaviour:
   Damage: 20
   TowerDamage: 20
   Money: 12
+  MoneyGiven: 1
   Towers: []
   HealthUI: {fileID: 2273259711771222807}
   HealthCanvas: {fileID: 6304242352011462441}
@@ -222,6 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 25
   MaxcoolDown: 1
+  ShotEffect: {fileID: 7308968709124665528, guid: bcaeea2ae7f507f4ba4949c65b32120d, type: 3}
   Projectile: {fileID: 4979482060260821086, guid: 88de23f90fb7a7e4e974716448bb428d, type: 3}
   locations:
   - {fileID: 8551749322456761142}

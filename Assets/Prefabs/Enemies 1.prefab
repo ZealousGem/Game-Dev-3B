@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   MaxcoolDown: 1
+  ShotEffect: {fileID: 7308968709124665528, guid: bcaeea2ae7f507f4ba4949c65b32120d, type: 3}
   Projectile: {fileID: 4979482060260821086, guid: 88de23f90fb7a7e4e974716448bb428d, type: 3}
   locations:
   - {fileID: 6794242504671411888}

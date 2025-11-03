@@ -5088,7 +5088,7 @@ GameObject:
   - component: {fileID: 123450111277021862}
   - component: {fileID: 939229804177142422}
   m_Layer: 0
-  m_Name: Tower
+  m_Name: MainTower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5481,6 +5481,10 @@ PrefabInstance:
       propertyPath: Damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2242970781909245080, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5384104242126177414, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -5571,6 +5575,14 @@ PrefabInstance:
       propertyPath: Damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2242970781909245080, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 3763414442488566611, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5384104242126177414, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -5635,6 +5647,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 5969604556060326827, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128711733843304453, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5660,6 +5680,10 @@ PrefabInstance:
     - target: {fileID: 1138926308172975255, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
       propertyPath: Damage
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242970781909245080, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5384104242126177414, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
       propertyPath: m_LocalScale.x
@@ -5960,6 +5984,10 @@ PrefabInstance:
     - target: {fileID: 1138926308172975255, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
       propertyPath: Damage
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242970781909245080, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5384104242126177414, guid: 88c1e1b15bd24db4d9dc745e13c27e05, type: 3}
       propertyPath: m_LocalScale.x

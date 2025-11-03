@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class AttackDefenceTowers : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class AttackDefenceTowers : MonoBehaviour
     float coolDown = 0f;
 
     float Damage; // damage the projectile or bomb will inflict
+
+    public GameObject ShotEffect; 
 
     public GameObject Projectile; // the bomb enemy will shoot 
 
@@ -60,17 +63,19 @@ public class AttackDefenceTowers : MonoBehaviour
                 for (int i = 0; i < locations.Count; i++)
                 {
 
-                    
+
                     GameObject temp = Instantiate(Projectile, locations[i].position, locations[i].rotation, gameObject.transform);
+                    GameObject Effect = Instantiate(ShotEffect, locations[i].position, locations[i].rotation, gameObject.transform);
                     Rigidbody r = temp.GetComponent<Rigidbody>();
                     if (temp.GetComponent<Bombs>())  // sets the projectiles damagae at the tower 
                     {
                         Bombs b = temp.GetComponent<Bombs>();
-                        b.Damage = Damage; 
+                        b.Damage = Damage;
                     }
                     Vector3 Cannon = new Vector3(currentTarget.transform.position.x, currentTarget.transform.position.y + 1, currentTarget.transform.position.z);
                     Vector3 direction = (Cannon - locations[i].position).normalized;
                     r.AddForce(direction * Speed, ForceMode.Impulse); //adds the force to create speed to the projectile once spawned 
+                    StartCoroutine(shotDeath(Effect));
                 }
 
                 coolDown = 0f;
@@ -81,8 +86,14 @@ public class AttackDefenceTowers : MonoBehaviour
         {
             NoMoreEnemies();
         }
-            
-           
+
+
+    }
+    
+    IEnumerator shotDeath(GameObject Effect)
+    {
+        yield return new WaitForSeconds(1f);
+        Destroy(Effect);
     }
 
     // Update is called once per frame
