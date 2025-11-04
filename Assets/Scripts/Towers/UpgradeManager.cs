@@ -35,8 +35,6 @@ public class UpgradeManager : MonoBehaviour
 
     public TMP_Text info;
 
-    public Material HealthText;
-
     GameManager MainTower;
 
     GameObject Curturret;
