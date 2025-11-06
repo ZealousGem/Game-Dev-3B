@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -200,20 +199,20 @@ public class DialogueManager : MonoBehaviour
 
 }
 
- [CustomEditor(typeof(DialogueManager))]
+//  [CustomEditor(typeof(DialogueManager))]
 
- public class Button : Editor
-{
+//  public class Button : Editor
+// {
     
-    public override void OnInspectorGUI()
-    {
-        DialogueManager land = (DialogueManager)target;
+//     public override void OnInspectorGUI()
+//     {
+//         DialogueManager land = (DialogueManager)target;
      
 
-        DrawDefaultInspector();
-        if (GUILayout.Button("Generate"))
-        {
-            land.NextButton();
-        }
-    }
-}
+//         DrawDefaultInspector();
+//         if (GUILayout.Button("Generate"))
+//         {
+//             land.NextButton();
+//         }
+//     }
+// }

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using NUnit.Framework;
 using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 
 public enum StatsChange // enums used to call event bus and create specfic event 
@@ -176,20 +174,20 @@ public class GameManager : MonoBehaviour
 
 }
 
- [CustomEditor(typeof(GameManager))]
+//  [CustomEditor(typeof(GameManager))]
 
- public class EndButton : Editor
-{
+//  public class EndButton : Editor
+// {
     
-    public override void OnInspectorGUI()
-    {
-        GameManager land = (GameManager)target;
+//     public override void OnInspectorGUI()
+//     {
+//         GameManager land = (GameManager)target;
      
 
-        DrawDefaultInspector();
-        if (GUILayout.Button("Generate"))
-        {
-            land.DecreaseTowerHealth(200);
-        }
-    }
-}
+//         DrawDefaultInspector();
+//         if (GUILayout.Button("Generate"))
+//         {
+//             land.DecreaseTowerHealth(200);
+//         }
+//     }
+// }

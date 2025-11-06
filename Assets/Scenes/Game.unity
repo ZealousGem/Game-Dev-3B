@@ -7318,7 +7318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainTowerHealth: 200
-  Money: 2000
+  Money: 100
   explosion: {fileID: 4084799107439287626, guid: 40d9d61f529e9bb44bcdc2f6e190cec4, type: 3}
 --- !u!114 &1658828610
 MonoBehaviour:
