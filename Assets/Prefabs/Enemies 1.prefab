@@ -372,6 +372,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9038477545125715215}
     m_Modifications:
+    - target: {fileID: -8768133303093192197, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 19ecd40edec7ef44e810bb2590b1f7bf, type: 2}
     - target: {fileID: -8679921383154817045, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.20381865
@@ -428,6 +432,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveBarrell (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b597e4e777de7c742ac4c58c692bd3d0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -446,6 +454,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9038477545125715215}
     m_Modifications:
+    - target: {fileID: -8768133303093192197, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 19ecd40edec7ef44e810bb2590b1f7bf, type: 2}
     - target: {fileID: -8679921383154817045, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.20381865
@@ -502,6 +514,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveBarrell
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b597e4e777de7c742ac4c58c692bd3d0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -520,6 +536,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9038477545125715215}
     m_Modifications:
+    - target: {fileID: -8768133303093192197, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 19ecd40edec7ef44e810bb2590b1f7bf, type: 2}
     - target: {fileID: -8679921383154817045, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.20381865
@@ -576,6 +596,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveBarrell (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b597e4e777de7c742ac4c58c692bd3d0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -646,6 +670,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 41ec9c41e3b3839488499ee164aa6b5e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e8c354be28cce934e8dc26c5fa46d027, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 41ec9c41e3b3839488499ee164aa6b5e, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a74c4f7d8afb8649b9ca8cf36848144, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 41ec9c41e3b3839488499ee164aa6b5e, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7a74c4f7d8afb8649b9ca8cf36848144, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 41ec9c41e3b3839488499ee164aa6b5e, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8dd94541cf6cd70498b74911c9e0a391, type: 2}
     - target: {fileID: 919132149155446097, guid: 41ec9c41e3b3839488499ee164aa6b5e, type: 3}
       propertyPath: m_Name
       value: EnemyShip2
@@ -749,6 +789,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9038477545125715215}
     m_Modifications:
+    - target: {fileID: -8768133303093192197, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 19ecd40edec7ef44e810bb2590b1f7bf, type: 2}
     - target: {fileID: -8679921383154817045, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.20381865
@@ -805,6 +849,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExplosiveBarrell (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: d7a22b77e4e14b947b96f22ba7c2b0ff, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b597e4e777de7c742ac4c58c692bd3d0, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -879,6 +927,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCannon (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7071182760956848314, guid: db127d5053f20eb4dba4075918c111ea, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 895be02ba329b4048b0c472f67d8556e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -8700617353114198275, guid: db127d5053f20eb4dba4075918c111ea, type: 3}

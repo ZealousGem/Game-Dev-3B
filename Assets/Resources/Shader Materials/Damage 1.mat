@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BombTexture 1
+  m_Name: Damage 1
   m_Shader: {fileID: -6465566751694194690, guid: 79e04c7b4428fae44b0c566cc9f3133f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 46944844cbdcf7744af052e9de550816, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -49,11 +49,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 46944844cbdcf7744af052e9de550816, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Map:
-        m_Texture: {fileID: 2800000, guid: 46944844cbdcf7744af052e9de550816, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -89,7 +89,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _AmbientStrength: 0.3
+    - _AmbientStrength: 0.5
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -99,7 +99,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Diffuse_Colour: 0.59
+    - _Diffuse_Colour: -0.16
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -108,7 +108,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Lighting_Cutoof: 0.24
+    - _Lighting_Cutoof: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -124,15 +124,15 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _BaseColor: {r: 0.5188679, g: 0.070977226, b: 0.070977226, a: 1}
+    - _Color: {r: 0.51886785, g: 0.07097719, b: 0.07097719, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Colour: {r: 0.8773585, g: 0.09518514, b: 0.09518514, a: 0}
+    - _Fresnel_Colour: {r: 1, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Specular_Colour: {r: 1, g: 0, b: 0, a: 0}
+    - _Specular_Colour: {r: 0.6509434, g: 0.07062123, b: 0.07062123, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &7703506363694519455
+--- !u!114 &20873226675493787
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -89,7 +89,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _AmbientStrength: 0.62
+    - _AmbientStrength: 0.32
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -99,16 +99,16 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Diffuse_Colour: 0.14
+    - _Diffuse_Colour: 0.09
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FalloffAmount: 0.1
-    - _FrenselSize: 0.19
+    - _FalloffAmount: 0.54
+    - _FrenselSize: 0.33
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Lighting_Cutoof: 0.08
+    - _Lighting_Cutoof: 0.87
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -127,9 +127,9 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Fresnel_Colour: {r: 0.5283019, g: 0.48593807, b: 0.50711995, a: 0}
+    - _Fresnel_Colour: {r: 0.21698111, g: 0.21103688, b: 0.20572266, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Specular_Colour: {r: 0.6415094, g: 0.50679845, b: 0.46297613, a: 0}
+    - _Specular_Colour: {r: 0.066037714, g: 0.06296216, b: 0.06198823, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1598838557264653671
