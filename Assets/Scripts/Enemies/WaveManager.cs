@@ -86,7 +86,6 @@ public class WaveManager : MonoBehaviour
     {
         WaveAnnouncer.text = "";
         StartCoroutine(FindSpawerns());
-        SpawnEnemiesCounter = maxbotKilled;
         //Application.targetFrameRate = 60;
     }
 
@@ -170,6 +169,7 @@ public class WaveManager : MonoBehaviour
     void EndGame()
     {
         isFound = false;
+      
     }
 
     void IncreaseBotKilledCount(int num)  // increases the enemiy kill count everytime enemy has been killed 
@@ -226,6 +226,7 @@ public class WaveManager : MonoBehaviour
         EndGameEvent ui = new EndGameEvent(StatsChange.EnemieLeft, maxbotKilled);
         EventBus.Act(ui);
         WaveAnnouncer.text = "";
+        SpawnEnemiesCounter = maxbotKilled;
         isFound = true;
     }
 
@@ -244,7 +245,6 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log("changed Wave " + currentWave);
-        SpawnEnemiesCounter = maxbotKilled;
         ChangeWavetype();
         IncreaseStats();
         CalEnemyWieghts();
@@ -302,6 +302,12 @@ public class WaveManager : MonoBehaviour
 
     void SpawnEnemies() //  instates the enemy on the random spawner pciked 
     {
+
+        if (SpawnEnemiesCounter <= 0) 
+        {
+        Debug.Log("Wave Finished Spawning.");
+        return;
+        }
         if (!Spawned)
         {
             int random = UnityEngine.Random.Range(0, EnemiesToSpawn.Count);
@@ -319,6 +325,7 @@ public class WaveManager : MonoBehaviour
 
             }
             SpawnEnemiesCounter--;
+          //  Debug.Log(SpawnEnemiesCounter);
             Spawned = true;
 
         }
@@ -336,20 +343,20 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
 
-    
-        if (isFound && SpawnEnemiesCounter != 0)
+
+        if (!isFound || SpawnEnemiesCounter == 0)
         {
-            counter += Time.deltaTime;
+            return;
+
+        }
+        
+        counter += Time.deltaTime;
             if (counter >= maxCout)
             {
                 Spawned = false;
                 counter = 0f;
                 SpawnEnemies();
             }
-
-
-
-        }
 
     }
 }
