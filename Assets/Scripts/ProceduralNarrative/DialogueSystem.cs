@@ -27,17 +27,23 @@ public class DialogueSystem : MonoBehaviour
     public int counter = 0;
     public bool end;
     public float Speed;
+
+    public GameObject WonScreen;
+
+    int currentWaveCounter = 0;
+    int MaxWave = 20;
    
 
     private void Start()
     {
+        WonScreen.SetActive(false);
         Dialogue.SetActive(false);
         lines = new Queue<string>(); // creates a Queue string for the dialogue 
         end = true;
 
     }
 
-    public void StartDialogue(string ChacterName, string Image, List<string> Lines) // method that will start the dialogue using the characters name in the string array from diaslogue manager
+    public void StartDialogue(string ChacterName, string Image, List<string> Lines, int counter) // method that will start the dialogue using the characters name in the string array from diaslogue manager
     {
         
         Dialogue.SetActive(true);
@@ -54,7 +60,8 @@ public class DialogueSystem : MonoBehaviour
 
         images = LoadSprite(Image); // finds the file path of image
 
-        names = ChacterName;  
+        names = ChacterName;
+        currentWaveCounter = counter;
 
         DisplayNextSentence(); // this will activate to start the elemtns to be removed from the queue
 
@@ -134,19 +141,37 @@ public class DialogueSystem : MonoBehaviour
         {
             Button.SetActive(true);
         }
-       
+
+    }
+    
+    public void ConitueButton()
+    {
+        WonScreen.SetActive(false);
+        EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
+        EventBus.Act(WaveChange);
     }
 
     void EndDialogue() // will end the dialogue by setting bool to false allowing the for loop in dialogue manager to move the i to the next position
     {
+        
         Charname.text = "";
         description.text = "";
         end = true;
         counter = 0;
         login.Clear();
         Dialogue.SetActive(false);
-        EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
-        EventBus.Act(WaveChange);
+        
+        if (MaxWave == currentWaveCounter)
+        {
+            WonScreen.SetActive(true);
+        }
+
+        else
+        {
+            EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
+            EventBus.Act(WaveChange);
+        }
+       
     }
 
     

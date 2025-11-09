@@ -1088,33 +1088,33 @@
       {
         "conditions": "Tower_Health_Less_Than_50",
         "waves": [
-          { "DialogueID": 1, "Narration": [ { "lines": "argh, we were so close, you win for now we shall return" } ] },
-          { "DialogueID": 2, "Narration": [ { "lines": "We nearly plundered their treasure, we shall return next time sailor" } ] },
-          { "DialogueID": 3, "Narration": [ { "lines": "We have lost the war, we must retreat" } ] }
+          { "DialogueID": 1, "Narration": [ { "lines": "Our tower is battered, but we held the line! A hard-fought, dramatic victory!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "We survived by the skin of our teeth! The tower stands, and we are the winners!" } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "Against all odds, we defended our home. Victory is ours, even if it cost us dearly." } ] }
         ]
       },
       {
         "conditions": "Tower_Health_Equals_100",
         "waves": [
-          { "DialogueID": 1, "Narration": [ { "lines": "The final assault failed. Their defenses held firm. We must retreat!" } ] },
-          { "DialogueID": 2, "Narration": [ { "lines": "The tower's integrity is flawless. This mission is a failure. Pull back all forces." } ] },
-          { "DialogueID": 3, "Narration": [ { "lines": "They are masters of defense. We must accept defeat this day." } ] }
+          { "DialogueID": 1, "Narration": [ { "lines": "Flawless defense! Our tower took zero damage, and the enemy is routed. A perfect win!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The tower's integrity is flawless. Not a scratch! This is a complete and total victory." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "They couldn't even touch us. We are masters of defense! Complete victory achieved." } ] }
         ]
       },
       {
         "conditions": "Lots_Of_Gold",
         "waves": [
-          { "DialogueID": 1, "Narration": [ { "lines": "We have bankrupted them! Victory through finance!" } ] },
-          { "DialogueID": 2, "Narration": [ { "lines": "Our gold paid for this victory. Their meager budget crumbled before us." } ] },
-          { "DialogueID": 3, "Narration": [ { "lines": "Economic collapse achieved. The rest is simply mop-up duty." } ] }
+          { "DialogueID": 1, "Narration": [ { "lines": "Our huge reserves paid off! Victory through finance and overwhelming resources!" } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The vaults are full, and the enemy is defeated. A rich and resounding success!" } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "We dominated the economy. Prosperity and victory achieved simultaneously." } ] }
         ]
       },
       {
         "conditions": "Not_alotOf_Gold",
         "waves": [
-          { "DialogueID": 1, "Narration": [ { "lines": "We are bankrupt. The mission is officially over due to lack of funding." } ] },
-          { "DialogueID": 2, "Narration": [ { "lines": "The final wave has arrived, and we have nothing left to fight them." } ] },
-          { "DialogueID": 3, "Narration": [ { "lines": "This is a failure of logistics. We lost before the fighting even finished." } ] }
+          { "DialogueID": 1, "Narration": [ { "lines": "We managed our funds perfectly! Despite low gold, we achieved a brilliant tactical victory." } ] },
+          { "DialogueID": 2, "Narration": [ { "lines": "The final wave is defeated, and we won with nothing left! A resourceful victory by pure skill." } ] },
+          { "DialogueID": 3, "Narration": [ { "lines": "A victory of clever management over brute force. We won before running out of funds. Bravo!" } ] }
         ]
       }
     ]

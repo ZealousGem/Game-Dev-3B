@@ -23,6 +23,8 @@ public class DialogueManager : MonoBehaviour
 
     int waveCounter = 1;
 
+    int lastWave = 20;
+
     List<string> CharacterNames = new List<string>();
 
     Characters Characters = new Characters();
@@ -37,6 +39,7 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
+       
         StartCoroutine(LoadCharacters());
     }
 
@@ -83,6 +86,7 @@ public class DialogueManager : MonoBehaviour
                 string temp = conditionRand[random.Next(conditionRand.Length)];
                 // Debug.Log(temp);
                 LoadNarrative(temp);
+                waveCounter++;
 
 
             }
@@ -99,10 +103,11 @@ public class DialogueManager : MonoBehaviour
     void LoadNarrative(string _cond)
     {
         bool dialougeloaded = false;
-        if (waveCounter > 20)
+        Debug.Log(waveCounter);
+        if (waveCounter > lastWave)
         {
-            EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
-            EventBus.Act(WaveChange);
+            StartCoroutine(StartWave());
+          //  Debug.Log("here");
             return;
         }
 
@@ -137,10 +142,18 @@ public class DialogueManager : MonoBehaviour
 
         if (!dialougeloaded)
         {
+            StartCoroutine(StartWave());
             Debug.Log("No matching dialogue condition was found for wave " + waveCounter + " and condition " + _cond.ToString());
         }
 
 
+    }
+
+    IEnumerator StartWave()
+    {
+        yield return new WaitForSeconds(0.1f);
+        EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
+        EventBus.Act(WaveChange);
     }
 
     void LoadDialogue(List<Dialogue> _dialogue)
@@ -166,7 +179,7 @@ public class DialogueManager : MonoBehaviour
 
        // Debug.Log($"Dialogue loaded for wave {waveCounter}. Speaker: {names}. Line: {dialogue[0]}");
 
-        dialgoueSystem.StartDialogue(names, Picture, dialogue);
+        dialgoueSystem.StartDialogue(names, Picture, dialogue, waveCounter);
     }
 
     // Update is called once per frame

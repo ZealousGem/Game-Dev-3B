@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
     void getData(DialogueEvent data)
     {
         DisplayinGameUI(false);
-        Debug.Log("testing dialogue");
+      //  Debug.Log("testing dialogue");
     }
 
     void getEndDate(EndGameEvent data)
@@ -109,7 +109,8 @@ public class UIManager : MonoBehaviour
 
     void DisplayinGameUI(bool determine)
     {
-      //  inGameUI.SetActive(determine);
+        //  inGameUI.SetActive(determine);
+       // Debug.Log(determine);
         dialogueisOn = !determine; 
     }
 

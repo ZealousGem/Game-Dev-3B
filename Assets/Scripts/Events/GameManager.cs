@@ -76,6 +76,10 @@ public class GameManager : MonoBehaviour
 
     void DisplayDialogue()
     {
+        if (MainTowerHealth <= 0)
+        {
+            return;
+        }
         List<GameCondition> lists = new List<GameCondition>();
         if (MainTowerHealth > 100f)
         {
