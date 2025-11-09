@@ -53,6 +53,10 @@ public class TutorialScript : MonoBehaviour
     {
         PlayerInView = true;
         button.SetActive(false);
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound("but");  
+         }
     }
 
     public void UpdateImage()
@@ -75,6 +79,10 @@ public class TutorialScript : MonoBehaviour
 
     public void NextLine()
     {
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound("but");  
+        }
         button.SetActive(false);
         if (element < dialouge.Length - 1)
         {

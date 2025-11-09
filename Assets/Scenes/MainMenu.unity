@@ -2643,6 +2643,20 @@ MonoBehaviour:
     maxvol: 0
     loop: 0
     isPlaying: 0
+  - nameClip: but
+    clip: {fileID: 8300000, guid: fecb844a565468044b44e9d1549a62bd, type: 3}
+    volume: 0.5
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    isPlaying: 0
+  - nameClip: gold
+    clip: {fileID: 8300000, guid: 973a6165643d15e4cb444a1b0d099a02, type: 3}
+    volume: 0.5
+    pitch: 1
+    maxvol: 0
+    loop: 0
+    isPlaying: 0
 --- !u!4 &890277738
 Transform:
   m_ObjectHideFlags: 0

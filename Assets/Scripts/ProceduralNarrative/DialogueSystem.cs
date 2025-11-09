@@ -150,6 +150,10 @@ public class DialogueSystem : MonoBehaviour
     
     public void ConitueButton()
     {
+        if (SoundManager.Instance != null)
+          {
+             SoundManager.Instance.PlaySound("but");  
+          }
         WonScreen.SetActive(false);
         EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
         EventBus.Act(WaveChange);

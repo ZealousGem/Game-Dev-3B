@@ -137,12 +137,17 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                 {
                     if (currentAmount >= Towers[i].reqAmount) // checks if player has enough money to buy the turret
                     {
+                        if (SoundManager.Instance != null)
+                        {
+                         SoundManager.Instance.PlaySound("but");  
+                        }
                         tempTower = ob.GetComponent<Image>();
                         it = ori[i];
                         newTower = Towers[i];
                         //  Debug.Log(it);
                         tempTower.raycastTarget = false;
                         Amount = Towers[i].reqAmount;
+
                         break;
                     }
 
@@ -197,7 +202,10 @@ public class DefenceTowerUI : MonoBehaviour, IPointerDownHandler, IDragHandler, 
                 
 
 
-                
+                if (SoundManager.Instance != null)
+                {
+                         SoundManager.Instance.PlaySound("gold");  
+                }
                 GameObject tempObj = newTower.Prefab; // if the ray cast has hit the island mesh and the player has enough money to purchase then the tower will spawn on the mouse location
                 Vector3 coord = new Vector3(hit.point.x, islandHeight, hit.point.z);
                 Instantiate(tempObj, coord, quaternion.identity); 

@@ -10,6 +10,10 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+         if (SoundManager.Instance != null)
+          {
+             SoundManager.Instance.PlaySound("but");  
+          }
         SoundManager.Instance.StopMusic("theme");
         SoundManager.Instance.PlaySound("game");
         SoundManager.Instance.PlaySound("waves");
@@ -18,21 +22,30 @@ public class MainMenu : MonoBehaviour
 
     public void Options()
     {
-       
+         if (SoundManager.Instance != null)
+          {
+             SoundManager.Instance.PlaySound("but");  
+          }
         startMenu.SetActive(false);
         OptionsMenu.SetActive(true);
     }
 
     public void BackToStart()
     {
-     
+         if (SoundManager.Instance != null)
+          {
+             SoundManager.Instance.PlaySound("but");  
+          }
         startMenu.SetActive(true);
         OptionsMenu.SetActive(false);
     }
 
     public void OnApplicationQuit()
     {
-        
+         if (SoundManager.Instance != null)
+          {
+             SoundManager.Instance.PlaySound("but");  
+          }
         Application.Quit();
     }
 }

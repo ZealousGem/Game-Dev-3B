@@ -138,7 +138,10 @@ public class UpgradeManager : MonoBehaviour
             return;
         }
         
-        
+         if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound("but");  
+        }
         UpgradeUI.SetActive(true);
 
 
@@ -214,6 +217,10 @@ public class UpgradeManager : MonoBehaviour
             newMesh.name = oldMeshname;
 
         }
+        if (SoundManager.Instance != null)
+         {
+               SoundManager.Instance.PlaySound("gold");  
+         }
 
         MainTower.DecreaseMoney(price);
 
@@ -254,7 +261,10 @@ public class UpgradeManager : MonoBehaviour
             Destroy(oldMesh);
             newMesh.SetActive(true);
         }
-        
+          if (SoundManager.Instance != null)
+         {
+               SoundManager.Instance.PlaySound("gold");  
+         }
           MainTower.DecreaseMoney(price);
     }
 

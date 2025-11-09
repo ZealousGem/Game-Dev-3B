@@ -98,6 +98,11 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1f;
             isPaused = false;
         }
+
+         if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound("but");  
+        }
     }
 
     void EndGame()  // dsiaplys game over UI
@@ -186,6 +191,7 @@ public class UIManager : MonoBehaviour
             SoundManager.Instance.StopMusic("game");
             SoundManager.Instance.StopMusic("waves");
             SoundManager.Instance.PlaySound("theme");
+            SoundManager.Instance.PlaySound("but");
             
         }
         
@@ -202,7 +208,10 @@ public class UIManager : MonoBehaviour
 
     public void Resume()// hides pausemenu, dispalys ingame UI and unpauses game
     { 
-
+         if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound("but");  
+        }
         inGameUI.SetActive(true);
         PauseMenuUI.SetActive(false);
         isPaused = false;
@@ -216,6 +225,11 @@ public class UIManager : MonoBehaviour
 
     public void ShowTowerUI() // if button is clicked TowerUI will pop up allowing the player to buy turrets , true dispalyed, false hidden 
     {
+         if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound("but");  
+        }
+
         if (Displayed)
         {
 
