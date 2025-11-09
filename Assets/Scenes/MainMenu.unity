@@ -1331,7 +1331,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1162261672}
+        m_TargetAssemblyTypeName: ScreenResolution, Assembly-CSharp
+        m_MethodName: FullScreen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
 --- !u!1 &385094142
 GameObject:
@@ -1511,7 +1523,19 @@ MonoBehaviour:
       m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1162261672}
+        m_TargetAssemblyTypeName: ScreenResolution, Assembly-CSharp
+        m_MethodName: setSize
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!114 &411128752
 MonoBehaviour:
@@ -3125,6 +3149,7 @@ GameObject:
   - component: {fileID: 1162261667}
   - component: {fileID: 1162261670}
   - component: {fileID: 1162261671}
+  - component: {fileID: 1162261672}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -3245,6 +3270,19 @@ MonoBehaviour:
   - {fileID: 32900000, guid: a5510ed3daff93d45ae341f29edc4f46, type: 3}
   - {fileID: 32900000, guid: c26127a32063c6549993596399e2b18a, type: 3}
   renderTexture: {fileID: 8400000, guid: 7a6f03b1209c7a145a52adce4557e332, type: 2}
+--- !u!114 &1162261672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162261666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff969356587f5a4b85f82670356f426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 411128751}
 --- !u!1 &1198464337
 GameObject:
   m_ObjectHideFlags: 0
