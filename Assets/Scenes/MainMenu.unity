@@ -291,7 +291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 504.26923, y: -435}
+  m_AnchoredPosition: {x: 3, y: -435}
   m_SizeDelta: {x: 118.015, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &110220917
@@ -3073,12 +3073,16 @@ MonoBehaviour:
   dialouge:
   - hahaha
   - Funny
+  - Turrets
+  - Protect Main Tower
   Speed: 0.1
   rawImage: {fileID: 1046882160}
   videoPlayer: {fileID: 1320959967}
   videoClips:
-  - {fileID: 32900000, guid: 0dfea6a6617869049866806992891437, type: 3}
+  - {fileID: 32900000, guid: c7c74c7c9fc7abe4d8c1f86d6e2f4bc3, type: 3}
   - {fileID: 32900000, guid: a5510ed3daff93d45ae341f29edc4f46, type: 3}
+  - {fileID: 32900000, guid: 79cba90a1bb868346b576435f99c98bd, type: 3}
+  - {fileID: 32900000, guid: c26127a32063c6549993596399e2b18a, type: 3}
   renderTexture: {fileID: 8400000, guid: 7a6f03b1209c7a145a52adce4557e332, type: 2}
 --- !u!1 &1198464337
 GameObject:
@@ -3263,7 +3267,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tutorial
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cdd81e06d9c850d4f99dabc0cdb6dfce, type: 2}
   m_sharedMaterial: {fileID: -5931648262066137225, guid: cdd81e06d9c850d4f99dabc0cdb6dfce, type: 2}
