@@ -179,6 +179,16 @@ public class UIManager : MonoBehaviour
             Time.timeScale = 1f;
             isPaused = false;
         }
+
+        if (SoundManager.Instance != null)
+        {
+
+            SoundManager.Instance.StopMusic("game");
+            SoundManager.Instance.StopMusic("waves");
+            SoundManager.Instance.PlaySound("theme");
+            
+        }
+        
     }
 
     public IEnumerator PauseGame()  // pauses game and displays pasue menu 

@@ -124,6 +124,10 @@ public class DialogueSystem : MonoBehaviour
 
     public IEnumerator TypeDialogue(string sentence)
     {
+        if (SoundManager.Instance != null)
+        {
+           SoundManager.Instance.PlaySound("yar");  
+        }
         description.text = "";
         foreach (var T in sentence.ToCharArray()) // will loop the text string through it's characters
         {

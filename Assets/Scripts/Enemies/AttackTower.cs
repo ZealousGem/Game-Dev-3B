@@ -12,6 +12,10 @@ public class AttackTower : MonoBehaviour
 
         GameManagerEvent decreaseHealth = new GameManagerEvent(Damage, StatsChange.Health);
         EventBus.Act(decreaseHealth);
+        if (SoundManager.Instance != null)
+          {
+             SoundManager.Instance.PlaySound("damage");  
+          }
         Instantiate(Explosion, this.gameObject.transform.position, quaternion.identity);
         Destroy(this.gameObject);
 

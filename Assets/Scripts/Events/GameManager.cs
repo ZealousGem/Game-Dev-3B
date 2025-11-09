@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+
 public enum StatsChange // enums used to call event bus and create specfic event 
 {
 
@@ -164,6 +165,10 @@ public class GameManager : MonoBehaviour
         EndGameEvent end = new EndGameEvent(StatsChange.EndGame);
         EventBus.Act(end);
         GameObject obj = GameObject.FindGameObjectWithTag("Tower");
+         if (SoundManager.Instance != null)
+          {
+             SoundManager.Instance.PlaySound("gameover");  
+          }
         if (obj != null)
         {
             Instantiate(explosion, obj.gameObject.transform.position, quaternion.identity);

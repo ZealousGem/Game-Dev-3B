@@ -10,7 +10,9 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
-       
+        SoundManager.Instance.StopMusic("theme");
+        SoundManager.Instance.PlaySound("game");
+        SoundManager.Instance.PlaySound("waves");
         SceneManager.LoadScene("Game");
     }
 

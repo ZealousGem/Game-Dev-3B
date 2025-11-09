@@ -175,6 +175,10 @@ public class Enemy : MonoBehaviour
         GameManagerEvent EnemyKilled = new GameManagerEvent(1, StatsChange.EnemyDead);
         EventBus.Act(giveMoney);
         EventBus.Act(EnemyKilled);
+         if (SoundManager.Instance != null)
+        {
+           SoundManager.Instance.PlaySound("expo");  
+        }
         Instantiate(Explosion, this.gameObject.transform.position, quaternion.identity);
         Destroy(this.gameObject);
        

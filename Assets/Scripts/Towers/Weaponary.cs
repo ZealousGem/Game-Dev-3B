@@ -140,6 +140,10 @@ public class Weaponary : MonoBehaviour
                     r.AddForce(direction * Speed, ForceMode.Impulse);
                     StartCoroutine(shotDeath(Effect));
                 }
+                if (SoundManager.Instance != null)
+                {
+                  SoundManager.Instance.PlaySound("fire");  
+                }
 
                 coolDown = 0f;
             }
@@ -197,6 +201,10 @@ public class Weaponary : MonoBehaviour
 
     public void KillTower() // destorys Tower if health is 0 
     {
+        if (SoundManager.Instance != null)
+        {
+           SoundManager.Instance.PlaySound("dead");  
+        }
         Instantiate(Explosion, this.gameObject.transform.position, quaternion.identity);
         Destroy(this.gameObject);
         //Debug.Log("death"); 
