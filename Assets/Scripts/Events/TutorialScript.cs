@@ -52,6 +52,7 @@ public class TutorialScript : MonoBehaviour
     public void ActivateButton()
     {
         PlayerInView = true;
+        button.SetActive(false);
     }
 
     public void UpdateImage()

@@ -388,6 +388,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 110220915}
   m_CullTransparentMesh: 1
+--- !u!1 &111785275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 111785276}
+  m_Layer: 0
+  m_Name: Point Onew
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &111785276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111785275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.92, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &112308988
 GameObject:
   m_ObjectHideFlags: 0
@@ -868,6 +899,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211539723}
+  m_CullTransparentMesh: 1
+--- !u!1 &231025569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 231025570}
+  - component: {fileID: 231025572}
+  - component: {fileID: 231025571}
+  m_Layer: 0
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &231025570
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231025569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.973392, y: 4.973392, z: 4.973392}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1588663320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 18, y: 279.6157}
+  m_SizeDelta: {x: 208.881, y: 102.987}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &231025571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231025569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.4433962, g: 0.22529678, b: 0.056470275, a: 0.7607843}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &231025572
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231025569}
   m_CullTransparentMesh: 1
 --- !u!1 &254981555
 GameObject:
@@ -1725,6 +1831,7 @@ GameObject:
   - component: {fileID: 647469977}
   - component: {fileID: 647469976}
   - component: {fileID: 647469979}
+  - component: {fileID: 647469980}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1850,6 +1957,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &647469980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 647469975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fb523ef78ec8f4f94b4a7b11884f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos1: {fileID: 111785276}
+  pos2: {fileID: 1075136939}
+  Speed: 1
 --- !u!1 &650765658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2198,7 +2320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.50102353, g: 0.764151, b: 0.7501282, a: 1}
+  m_Color: {r: 0.32306874, g: 0.5660378, b: 0.55153215, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2959,6 +3081,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1046882158}
   m_CullTransparentMesh: 1
+--- !u!1 &1075136938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1075136939}
+  m_Layer: 0
+  m_Name: Point Onew (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1075136939
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075136938}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.23, y: 1, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1162261666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3071,17 +3224,25 @@ MonoBehaviour:
   button: {fileID: 110220915}
   DialogueText: {fileID: 1228470141}
   dialouge:
-  - hahaha
-  - Funny
-  - Turrets
-  - Protect Main Tower
-  Speed: 0.1
+  - Welcome to Plunder Valley, a place filled with treasure and peril. You, lucky
+    sailor, managed to find some gold, but now you must defend it from the other
+    pirates in the valley.
+  - To place a defense tower, click the Tower button (top right) and then drag the
+    chosen cannon to the map. You may upgrade the cannon if you have enough money.
+    Watch your gold closely so you don't run out too soon.
+  - 'After each attack wave finishes, your fellow sailors will tell you how much
+    money you have, how good your defenses are, and how much longer you need to last
+    to survive the attacks. '
+  - To survive each wave, keep an eye on your main tower, since that is where the
+    gold is located. If the main tower reaches 0, the gold will be sunk into the
+    depths of the ocean. Good luck, sailor, don't become part of Davy Jones' Locker.
+  Speed: 0.04
   rawImage: {fileID: 1046882160}
   videoPlayer: {fileID: 1320959967}
   videoClips:
   - {fileID: 32900000, guid: c7c74c7c9fc7abe4d8c1f86d6e2f4bc3, type: 3}
-  - {fileID: 32900000, guid: a5510ed3daff93d45ae341f29edc4f46, type: 3}
   - {fileID: 32900000, guid: 79cba90a1bb868346b576435f99c98bd, type: 3}
+  - {fileID: 32900000, guid: a5510ed3daff93d45ae341f29edc4f46, type: 3}
   - {fileID: 32900000, guid: c26127a32063c6549993596399e2b18a, type: 3}
   renderTexture: {fileID: 8400000, guid: 7a6f03b1209c7a145a52adce4557e332, type: 2}
 --- !u!1 &1198464337
@@ -3625,7 +3786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0, y: 285}
+  m_AnchoredPosition: {x: -20.649998, y: 285}
   m_SizeDelta: {x: 163.651, y: 109.137}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1301798932
@@ -4252,6 +4413,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444745364}
   m_CullTransparentMesh: 1
+--- !u!1 &1452157667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1452157668}
+  - component: {fileID: 1452157670}
+  - component: {fileID: 1452157669}
+  m_Layer: 0
+  m_Name: Image (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1452157668
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452157667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.5337944, y: 4.5337944, z: 4.5337944}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1588663320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 18.000004, y: 279.6157}
+  m_SizeDelta: {x: 208.881, y: 102.987}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1452157669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452157667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.1509434, g: 0.076539695, b: 0.017799927, a: 0.7607843}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1452157670
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452157667}
+  m_CullTransparentMesh: 1
 --- !u!1 &1454702483
 GameObject:
   m_ObjectHideFlags: 0
@@ -4771,6 +5007,8 @@ RectTransform:
   - {fileID: 1925138575}
   - {fileID: 1444745365}
   - {fileID: 112308989}
+  - {fileID: 231025570}
+  - {fileID: 1452157668}
   - {fileID: 1301798931}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5561,3 +5799,5 @@ SceneRoots:
   - {fileID: 1241431025}
   - {fileID: 1496322258}
   - {fileID: 823707179}
+  - {fileID: 111785276}
+  - {fileID: 1075136939}

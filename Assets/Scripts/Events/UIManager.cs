@@ -173,7 +173,12 @@ public class UIManager : MonoBehaviour
 
     public void QuitGame() // quits application 
     {
-        Application.Quit();
+        SceneManager.LoadScene("MainMenu");
+        if (isPaused)
+        {
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
     }
 
     public IEnumerator PauseGame()  // pauses game and displays pasue menu 
