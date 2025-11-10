@@ -36,7 +36,11 @@ public class DialogueSystem : MonoBehaviour
 
     private void Start()
     {
-        WonScreen.SetActive(false);
+        if (WonScreen != null)
+        {
+            WonScreen.SetActive(false);
+        }
+        
         Dialogue.SetActive(false);
         lines = new Queue<string>(); // creates a Queue string for the dialogue 
         end = true;
@@ -169,7 +173,7 @@ public class DialogueSystem : MonoBehaviour
         login.Clear();
         Dialogue.SetActive(false);
         
-        if (MaxWave == currentWaveCounter)
+        if (MaxWave == currentWaveCounter && WonScreen != null)
         {
             WonScreen.SetActive(true);
         }

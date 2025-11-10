@@ -25,21 +25,22 @@ public class UpgradeManager : MonoBehaviour
 
     public GameObject UpgradeUI;
 
-    public List<GameObject> Turretbuttons;
+    public List<GameObject> Turretbuttons; 
 
     public List<GameObject> MainTowerButton;
 
-    public TMP_Text TowerName;
+    public TMP_Text TowerName; // name of the specific tower
 
-    public GameObject radius;
+    public GameObject radius; // vertex shader that will be dispalyed when turret is selected
 
     public TMP_Text info;
 
-    GameManager MainTower;
+    GameManager MainTower; // contains main tower logic
 
-    GameObject Curturret;
+    GameObject Curturret; // current tower selected 
 
-    float Damage = 2f;
+      // stats that will be increased
+    float Damage = 2f; 
 
     float CoolDown = 0.1f;
 
@@ -47,16 +48,22 @@ public class UpgradeManager : MonoBehaviour
 
     int finalUpgrade = 3;
 
+    // stats that will be increased
+
     int layerMask;
 
     string oldMeshname = "OldMesh";
 
     int ignoredLayer;
 
-    int Gold = 0;
+    int Gold = 0; // current gold player has
 
+
+    // prices of each upgrade
     int HealthPrice = 50, DamagePrice = 60, SpeedPrice = 80,
      MainTowerDamagePrice = 250, MainTowerHealthPrice = 250;
+     
+     // prices of each upgrade
 
     GameObject currentTurret;
 
@@ -86,7 +93,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    void getTurret(GameObject turret)
+    void getTurret(GameObject turret) // checks if the turret exisit in the map 
     {
         if (turret == null)
         {
@@ -97,25 +104,25 @@ public class UpgradeManager : MonoBehaviour
 
         currentTurret = turret;
         TowerName.text = currentTurret.name.Replace("(Clone)", "");
-        SpawnRadius(turret.transform.position, true);
+        SpawnRadius(turret.transform.position, true); 
 
 
     }
     
-    void SpawnRadius(Vector3 coord, bool cond)
+    void SpawnRadius(Vector3 coord, bool cond) // moves the UI radius to current turret
     {
         if (coord == null)
         {
 
             return;
         }
-     //   Vector3 newPosition = new Vector3(coord.x, 10.0f, coord.z);
+     
         radius.transform.position = coord;
     
         radius.SetActive(cond);
     }
 
-    void getMainTower(GameObject turret)
+    void getMainTower(GameObject turret) // gets the main Tower
     {
          if (turret == null)
         {
@@ -129,7 +136,7 @@ public class UpgradeManager : MonoBehaviour
         SpawnRadius(turret.transform.position, true);
     }
 
-    void OpenTab(GameObject turret)
+    void OpenTab(GameObject turret) // displays the upgrade UI and displays depending on the type of turret
     {
         info.text = "";
         if (turret == null)
@@ -160,7 +167,7 @@ public class UpgradeManager : MonoBehaviour
         }
     }
 
-    public void CloseTab()
+    public void CloseTab() // Hides Upgrade UI
     {
         MainTowerButtons(false);
         TurretButtons(false);
@@ -168,16 +175,16 @@ public class UpgradeManager : MonoBehaviour
 
     }
     
-    IEnumerator DispalyUI(string text)
+    IEnumerator DispalyUI(string text) // displays text ui to tell player what they boughot, also tells them if they dont have ennough gold or has already upgraded the tower
     {
         info.text = text;
         yield return new WaitForSeconds(1f);
         info.text = "";
     }
 
-    public void UpgradeTower(Weaponary Currentturret, GameObject newMesh, GameObject oldMesh, UpgradeType upgrade, int price)
+    public void UpgradeTower(Weaponary Currentturret, GameObject newMesh, GameObject oldMesh, UpgradeType upgrade, int price) // upgrades the current defence tower
     {
-        if (Currentturret == null)
+        if (Currentturret == null) // checks if turret still exists 
         {
             CloseTab();
             radius.SetActive(false);
@@ -186,28 +193,28 @@ public class UpgradeManager : MonoBehaviour
 
         }
 
-        if (newMesh == null)
+        if (newMesh == null) // checks if turret has the upgrade already
         {
             StartCoroutine(DispalyUI("Already Upgraded"));
             // Debug.Log("could not find new mesh");
             return;
         }
 
-        if (oldMesh == null)
+        if (oldMesh == null) 
         {
             StartCoroutine(DispalyUI("Already Upgraded"));
             //  Debug.Log("could not find old mesh");
             return;
         }
 
-        switch (upgrade)
+        switch (upgrade) // upgrades turret based on which button the player has pressed 
         {
             case UpgradeType.Health: Currentturret.getHealth(Health); break;
             case UpgradeType.Damage: Currentturret.Damage += Damage; break;
             case UpgradeType.Speed: Currentturret.MaxcoolDown -= CoolDown; break;
         }
 
-        if (Currentturret.counter <= finalUpgrade)
+        if (Currentturret.counter <= finalUpgrade) // changes the turrests mesh 
         {
             StartCoroutine(DispalyUI(newMesh.name + " Upgraded"));
             Currentturret.counter++;
@@ -222,26 +229,28 @@ public class UpgradeManager : MonoBehaviour
                SoundManager.Instance.PlaySound("gold");  
          }
 
-        MainTower.DecreaseMoney(price);
+        MainTower.DecreaseMoney(price); // decreases the gold 
 
     }
     
     void UpgradeMainTower(GameObject newMesh, GameObject oldMesh, UpgradeType upgrade, int price)
     {
-        if (newMesh == null)
+        if (newMesh == null)  // checks if Main Tower still exists 
         {
             StartCoroutine(DispalyUI("Already Upgraded"));
             // Debug.Log("could not find new mesh");
             return;
         }
 
-        if (oldMesh == null)
+        if (oldMesh == null) // checks if MainTower has the upgrade already
         {
             StartCoroutine(DispalyUI("Already Upgraded"));
             //  Debug.Log("could not find old mesh");
             return;
         }
 
+
+        // determines which upgrade player has selected and changes the tower mesh
         if (upgrade == UpgradeType.MainTowerDamage)
         {
             StartCoroutine(DispalyUI("Cannons Upgraded"));
@@ -265,10 +274,10 @@ public class UpgradeManager : MonoBehaviour
          {
                SoundManager.Instance.PlaySound("gold");  
          }
-          MainTower.DecreaseMoney(price);
+          MainTower.DecreaseMoney(price); // decreases gold 
     }
 
-    public void UpgradeDamage()
+    public void UpgradeDamage() // Upgrades Defence Turrets Damage
     {
 
         if (currentTurret == null)
@@ -290,7 +299,7 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    public void UpgradeSpeed()
+    public void UpgradeSpeed() // Upgrades Defence Turrets Speed
     {
         if (currentTurret == null)
         {
@@ -312,7 +321,7 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-     public void UpgradeHealth()
+     public void UpgradeHealth() // Upgrades Defence Turrets Health and Heals it as well
     {
 
         if (currentTurret == null)
@@ -336,7 +345,7 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    public void MainUpgradeTower()
+    public void MainUpgradeTower() // upgrades Main towers Damage
     {
         if (currentTurret == null)
         {
@@ -359,7 +368,7 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    public void HealTower()
+    public void HealTower() // Upgrades Main Towers Health and Heals Main Tower
     {
         if (currentTurret == null)
         {
@@ -379,7 +388,7 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    void TurretButtons(bool cond)
+    void TurretButtons(bool cond) // displays the defence turret upgrade UI
     {
         foreach (GameObject but in Turretbuttons)
         {
@@ -389,7 +398,7 @@ public class UpgradeManager : MonoBehaviour
        
     }
 
-    void MainTowerButtons(bool cond)
+    void MainTowerButtons(bool cond) // displays the Main Tower upgrade UI
     {
         foreach (GameObject but in MainTowerButton)
         {
@@ -409,13 +418,13 @@ public class UpgradeManager : MonoBehaviour
 
     }
 
-    void HideUI()
+    void HideUI() // closes all upgrade UI
     {
         CloseTab();
         radius.SetActive(false);
     }
     
-    void FindTurret(RaycastHit hit)
+    void FindTurret(RaycastHit hit) // finds the slected Turret in the map using the raycast system
     {
       
        if (hit.transform.CompareTag("DefenceTower"))

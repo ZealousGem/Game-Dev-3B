@@ -21,21 +21,21 @@ public class DialogueManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    int waveCounter = 1;
+    int waveCounter = 1; // counter that will check which wave game is on to find dialogue for that wave
 
-    int lastWave = 20;
+    int lastWave = 20; // final wave gialogue
 
-    List<string> CharacterNames = new List<string>();
+    List<string> CharacterNames = new List<string>(); // will contain all character names from the json file
 
-    Characters Characters = new Characters();
+    Characters Characters = new Characters(); // contains the all dialogue from json file
 
-    public List<string> dialogue = new List<string>();
+    public List<string> dialogue = new List<string>(); // contain the current line of the current wave
 
-    public DialogueSystem dialgoueSystem;
+    public DialogueSystem dialgoueSystem; // where dialogue will be displayed
 
     public string names;
 
-    public string Picture;
+    public string Picture; // picture of the pirate character t hat will be displayed 
 
     void Start()
     {
@@ -57,7 +57,7 @@ public class DialogueManager : MonoBehaviour
     
     void getData(DialogueEvent data)
     {
-        switch (data.type)
+        switch (data.type) // depeding on the players action one of the condition will be chosen to display that dialogue of the players actions
         {
             case GameCondition.Lots_Of_Gold: LoadNarrative(data.type.ToString()); waveCounter++; break;
             case GameCondition.Not_alotOf_Gold: LoadNarrative(data.type.ToString()); waveCounter++;break;
@@ -69,24 +69,24 @@ public class DialogueManager : MonoBehaviour
 
     public IEnumerator LoadCharacters()
     {
-        string filepath = Path.Combine(Application.streamingAssetsPath, "Narrative.txt");
+        string filepath = Path.Combine(Application.streamingAssetsPath, "Narrative.txt"); // will find Json file through the streaming assets folder 
         yield return null;
 
         if (File.Exists(filepath))
         {
-            string tempData = File.ReadAllText(filepath);
+            string tempData = File.ReadAllText(filepath);  // checks if the the josn file exisits
 
-            if (!string.IsNullOrEmpty(tempData))
+            if (!string.IsNullOrEmpty(tempData))  // will check if data in josn file isn't null
             {
-                Characters = JsonUtility.FromJson<Characters>(tempData);
-                // FindCharacter(Characters);
-                RandomiseCharacter();
-                String[] conditionRand = { GameCondition.Tower_Health_Less_Than_50.ToString(), GameCondition.Tower_Health_Equals_100.ToString() };
+                Characters = JsonUtility.FromJson<Characters>(tempData);  // converts the json data to the variables in Characters
+             
+                RandomiseCharacter(); // randomly gnerates a character name
+                String[] conditionRand = { GameCondition.Tower_Health_Less_Than_50.ToString(), GameCondition.Tower_Health_Equals_100.ToString() }; // finds a random condition since it is the start of the game
                 System.Random random = new System.Random();
                 string temp = conditionRand[random.Next(conditionRand.Length)];
-                // Debug.Log(temp);
-                LoadNarrative(temp);
-                waveCounter++;
+              
+                LoadNarrative(temp); // will load the first narrative dialogue in the game  
+                waveCounter++; // increases the wave counter once dialogue is finished
 
 
             }
@@ -100,19 +100,17 @@ public class DialogueManager : MonoBehaviour
         yield return null;
     }
 
-    void LoadNarrative(string _cond)
+    void LoadNarrative(string _cond) // this will find the specfic dialogue based on the characters actions 
     {
         bool dialougeloaded = false;
         Debug.Log(waveCounter);
-        if (waveCounter > lastWave)
+        if (waveCounter > lastWave) // if the wavecounter is bigger than the final wave id then the wave will automaitcally start
         {
             StartCoroutine(StartWave());
-          //  Debug.Log("here");
             return;
         }
 
-        // List<Condition> lines = new List<Condition>();
-        //   List<LineEvent>wavetypes = new List<LineEvent>();
+       
 
         string targetConditionString = _cond.ToString();
 
@@ -127,9 +125,9 @@ public class DialogueManager : MonoBehaviour
                 for (int j = 0; j < lines.Count; j++)
                 {
                     //  Debug.Log(lines[j].conditions);
-                    if (lines[j].conditions.ToString() == targetConditionString)
+                    if (lines[j].conditions.ToString() == targetConditionString) // checks if the condition is equal to the player action
                     {
-                        LoadDialogue(lines[j].waves);
+                        LoadDialogue(lines[j].waves); // loads the dialogue
                         dialougeloaded = true;
                         break;
                     }
@@ -149,14 +147,14 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    IEnumerator StartWave()
+    IEnumerator StartWave() // starts the wave automatically
     {
         yield return new WaitForSeconds(0.1f);
         EndGameEvent WaveChange = new EndGameEvent(StatsChange.StartWave);
         EventBus.Act(WaveChange);
     }
 
-    void LoadDialogue(List<Dialogue> _dialogue)
+    void LoadDialogue(List<Dialogue> _dialogue) // finds t he specific line from the condition 
     {
         dialogue.Clear();
 
@@ -177,14 +175,14 @@ public class DialogueManager : MonoBehaviour
         }
 
 
-       // Debug.Log($"Dialogue loaded for wave {waveCounter}. Speaker: {names}. Line: {dialogue[0]}");
+      
 
-        dialgoueSystem.StartDialogue(names, Picture, dialogue, waveCounter);
+        dialgoueSystem.StartDialogue(names, Picture, dialogue, waveCounter); // transfers line to the dialogue system so it can be displayed to the player
     }
 
     // Update is called once per frame
 
-    void RandomiseCharacter()
+    void RandomiseCharacter() // randomly genreates a character name 
     {
         CharacterNames = Characters.names;
         int num = UnityEngine.Random.Range(0, CharacterNames.Count);
@@ -198,7 +196,7 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void NextButton()
+    public void NextButton() // custom editor then for debugging 
     {
         waveCounter++;
         String[] conditionRand = { GameCondition.Tower_Health_Less_Than_50.ToString(), GameCondition.Tower_Health_Equals_100.ToString() };
